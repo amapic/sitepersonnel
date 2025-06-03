@@ -85,7 +85,9 @@ canvas.webgl
   justify-content: space-evenly
   align-items: center
   width: 100%
-  min-height: calc(100vh - 7rem)
+  position: relative
+  
+  min-height: calc(100vh)
   padding: 8rem 
   
   @media (max-width: 64em)
@@ -111,8 +113,10 @@ canvas.webgl
     @media (max-width: 64em)
       flex-direction: column
 
-      .section__paragraph
-        align-self: flex-start
+   
+
+
+      
 
   &__title
     text-align: left
@@ -181,3 +185,19 @@ canvas.webgl
     height: .5rem
     width: 100%
     text-align: center
+
+.grid-mask
+  position: relative
+ 
+
+// .grid-image
+//   mask-image: repeating-linear-gradient(0deg, #000, #000 15px, transparent 15px, transparent 30px), repeating-linear-gradient(90deg, #000, #000 15px, transparent 15px, transparent 30px)
+//   mask-size: 30px 30px
+//   mask-position: 15px 15px
+//   -webkit-mask-image: repeating-linear-gradient(0deg, #000, #000 15px, transparent 15px, transparent 30px), repeating-linear-gradient(90deg, #000, #000 15px, transparent 15px, transparent 30px)
+//   -webkit-mask-size: 30px 30px
+//   -webkit-mask-position: 15px 15px
+
+
+
+

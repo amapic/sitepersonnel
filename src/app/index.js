@@ -174,6 +174,9 @@ class ScrollStage {
         })
       }
     }
+
+    //ajout perso
+   
   }
 
   /**
@@ -264,5 +267,3 @@ class ScrollStage {
 }
 
 new ScrollStage()
-
-console.log('%c Made by ꜰᴀʙᴏᴏʟᴇᴀ → https://twitter.com/faboolea', 'background: black; color: white; padding: 1ch 2ch; border-radius: 2rem;')

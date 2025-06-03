@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *,
 *::after,
 *::before {
@@ -181,3 +185,17 @@ a:focus-visible {
 		height: 100vh;
 	}
 }
+
+/* .section__paragraph2{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	top: 25vh;
+	width: 50vw;
+	height: 75vh;
+	position: absolute;
+	bottom: 50vh;
+	left: 100vw;
+	/* background-color: red; */
+
