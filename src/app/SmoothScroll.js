@@ -7,6 +7,15 @@ export default class {
     this.viewport = viewport;
     this.scroll = scroll;
     this.animationPlayed = false;
+    this.easedScroll = this.scroll.soft;
+    this.isMobile = window.innerWidth <= 768;
+
+    // Si c'est un mobile, on désactive le smooth scroll
+    if (this.isMobile) {
+      this.element.style.position = 'relative';
+      this.element.style.transform = 'none';
+      return;
+    }
 
     this.elements = {
       scrollContent: this.element.querySelector(".scroll__content"),
@@ -93,21 +102,112 @@ export default class {
       image.style.maskSize = image.style.webkitMaskSize;
       image.style.maskPosition = image.style.webkitMaskPosition;
     });
+
+    // Définition des plages de scroll et leurs actions associées
+    this.scrollRanges = [
+      {
+        min: 0,
+        max: window.innerHeight,
+        action: () => {
+          return `translateY(${-this.scroll.soft}px)`;
+        }
+      },
+      {
+        min: window.innerHeight,
+        max: 1.5 * window.innerHeight,
+        action: () => {
+          
+          const progress = (this.scroll.soft - window.innerHeight) / (0.5 * window.innerHeight);
+          const translateX = -progress * window.innerHeight;
+          // console.log("1",translateX,window.innerHeight)
+          return `translateX(${translateX}px) translateY(${-window.innerHeight}px)`;
+        }
+      },
+      {
+        min: 1.5 * window.innerHeight,
+        max: 2 * window.innerHeight,
+        action: (scrollValue) => {
+          const div = document.querySelector('#movingsquareprojet1');
+          const progress = (scrollValue - 1.5 * window.innerHeight) / (0.5 * window.innerHeight);
+          const backgroundX = progress * 500;
+          
+          if (div) {
+            div.style.left = `${-backgroundX}px`;
+          }
+          
+          const translateX = -window.innerHeight;
+          const translateY = -window.innerHeight;
+          // console.log("2",translateX,window.innerHeight)
+          return `translateX(${translateX}px) translateY(${translateY}px)`;
+        }
+      },
+      {
+        min: 2 * window.innerHeight,
+        max: 2.5 * window.innerHeight,
+        action: (scrollValue) => {
+          
+          // Progress normal pour backgroundX (sur toute la section)
+          const progress = (scrollValue - 2 * window.innerHeight) / (0.5 * window.innerHeight);
+          const div = document.querySelector('#movingsquareprojet1');
+          const backgroundX = 500 * (1 - progress);
+          
+          // Progress modifié pour translateX (uniquement sur la dernière moitié)
+          const translateProgress = Math.max(0, (scrollValue - 2.4 * window.innerHeight) / (0.1 * window.innerHeight));
+          const translateX = -window.innerHeight * (1 - translateProgress);
+          
+          const sectiondroite1 = document.querySelector('#sectiondroite1');
+          const translateY = -window.innerHeight * (1 - translateProgress);
+          
+          if (sectiondroite1) {
+            // Crée une courbe en cloche pour translateX
+            const translateXProgress = Math.sin(translateProgress * Math.PI); // Crée une courbe qui va de 0 à 1 puis retourne à 0
+            const maxTranslateX = -10 * window.innerHeight / 100; // -10vh converti en px
+            const translateX = maxTranslateX * translateXProgress;
+            
+            // sectiondroite1.style.transform = `translate(${translateX}px)`;
+          }
+          
+          if (div) {
+            div.style.left = `${-backgroundX}px`;
+          }
+          // console.log("3",-this.scroll.soft)
+          return `translateX(${translateX}px) translateY(${-window.innerHeight}px)`;
+        }
+      },
+      {
+        min: 2.5 * window.innerHeight,
+        max: Infinity,
+        action: () => {
+          // console.log("4",-this.scroll.soft + 0.5*window.innerHeight)
+          return `translateY(${-this.scroll.soft +1.5* window.innerHeight}px)`;
+        }
+      }
+    ];
   }
 
   setSizes() {
     this.scroll.height =
       this.elements.scrollContent.getBoundingClientRect().height +
-      2 * window.innerHeight;
+      2.5 * window.innerHeight + 0.1*window.innerHeight;
     this.scroll.limit =
       this.elements.scrollContent.clientHeight -
       this.viewport.height +
-      3 * window.innerHeight;
+      3.5 * window.innerHeight + 0.1*window.innerHeight;
 
     document.body.style.height = `${this.scroll.height}px`;
   }
 
+  // Fonction d'easing
+  ease(current, target, factor = 0.1) {
+    return current + (target - current) * factor;
+  }
+
   update() {
+    // Si c'est un mobile, on ne fait pas d'update
+    if (this.isMobile) {
+      return;
+    }
+
     this.scroll.hard = window.scrollY;
     this.scroll.hard = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.hard);
     this.scroll.soft = GSAP.utils.interpolate(
@@ -120,30 +220,26 @@ export default class {
       this.scroll.soft = 0;
     }
     // console.log(this.scroll.soft,window.scrollY,window.innerHeight)
-    if (
-      this.scroll.soft > window.innerHeight &&
-      this.scroll.soft < 1.5 * window.innerHeight
-    ) {
-      const progress =
-        (this.scroll.soft - window.innerHeight) / (0.5 * window.innerHeight);
-      const translateX = -progress * window.innerHeight;
-      this.elements.scrollContent.style.transform = `translateX(${translateX}px) translateY(${-window.innerHeight}px)`;
-    } else if (
-      this.scroll.soft > 1.5 * window.innerHeight &&
-      this.scroll.soft < 2 * window.innerHeight
-    ) {
-      const progress =
-        (this.scroll.soft - 1.5 * window.innerHeight) /
-        (0.5 * window.innerHeight);
-      const translateX = -(1 - progress) * window.innerHeight;
-      this.elements.scrollContent.style.transform = `translateX(${translateX}px) translateY(${-window.innerHeight}px)`;
-    } else if (this.scroll.soft > 2 * window.innerHeight) {
-      this.elements.scrollContent.style.transform = `translateY(${
-        -this.scroll.soft + window.innerHeight
-      }px)`;
+    
+    // Lisse la valeur de scroll autour de la transition
+    const transitionPoint = 2 * window.innerHeight;
+    const transitionRange = 0.3 * window.innerHeight; // Zone de transition
+
+    if (Math.abs(this.scroll.soft - transitionPoint) < transitionRange) {
+      this.easedScroll = this.ease(this.easedScroll, this.scroll.soft);
     } else {
-      this.elements.scrollContent.style.transform = `translateY(${-this.scroll
-        .soft}px)`;
+      this.easedScroll = this.scroll.soft;
+    }
+
+    // Trouve la plage correspondante
+    const currentRange = this.scrollRanges.find(
+      range => this.easedScroll > range.min && this.easedScroll <= range.max
+    );
+
+    // Applique la transformation correspondante
+    if (currentRange) {
+      const action = currentRange.action.bind(this);
+      this.elements.scrollContent.style.transform = action(this.easedScroll);
     }
 
     //ajout perso

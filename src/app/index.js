@@ -153,6 +153,14 @@ class ScrollStage {
    * SCROLL BASED ANIMATIONS
    */
   updateScrollAnimations() {
+
+    const element = document.querySelector('#canvas-container2')
+    if (element) {
+      if (this.smoothScroll.scroll.soft/window.innerHeight >3) {
+        // console.log("ok")
+       return;
+      }
+    }
     this.scroll.running = false
     this.scroll.normalized = (this.scroll.hard / this.scroll.limit).toFixed(1)
     
@@ -175,7 +183,6 @@ class ScrollStage {
       }
     }
 
-    //ajout perso
    
   }
 
@@ -249,7 +256,10 @@ class ScrollStage {
    */
   update() {
     const elapsedTime = this.clock.getElapsedTime()
+
     this.mesh.rotation.y = elapsedTime * .05
+    
+    
 
     this.smoothScroll.update()
 
