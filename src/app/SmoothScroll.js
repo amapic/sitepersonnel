@@ -1,5 +1,9 @@
 import GSAP from "gsap";
 import { SplitText } from "gsap/SplitText";
+import {
+  playProjectAnimation,
+  playProjectAnimation2,
+} from "./animations/projectAnimations";
 GSAP.registerPlugin(SplitText);
 export default class {
   constructor({ element, viewport, scroll }) {
@@ -7,18 +11,29 @@ export default class {
     this.viewport = viewport;
     this.scroll = scroll;
     this.animationPlayed = false;
+    this.animationPlayed2 = false;
     this.easedScroll = this.scroll.soft;
     this.isMobile = window.innerWidth <= 768;
+    this.ticking = false;
+    this.lastScrollTime = Date.now();
+    this.scrollThreshold = 16; // ~60fps
 
     // Si c'est un mobile, on désactive le smooth scroll
-    if (this.isMobile) {
-      this.element.style.position = 'relative';
-      this.element.style.transform = 'none';
-      return;
-    }
+    // if (this.isMobile) {
+    //   this.element.style.position = "relative";
+    //   this.element.style.transform = "none";
+    //   return;
+    // }
 
-    this.elements = {
+    // Cache des éléments DOM fréquemment utilisés
+    this.cachedElements = {
       scrollContent: this.element.querySelector(".scroll__content"),
+      movingSquares: {
+        square1: document.querySelector("#movingsquareprojet1"),
+        square2: document.querySelector("#movingsquareprojet2"),
+        square3: document.querySelector("#movingsquareprojet3")
+      },
+      reactRoot:window.innerWidth <= 768?document.querySelector("#react-root2"):document.querySelector("#react-root1")
     };
 
     const sectionDroite1 = document.getElementById("sectiondroite1");
@@ -27,173 +42,274 @@ export default class {
     const arrow = sectionDroite1.querySelector(".arrow-path");
 
     // Animation au hover
-    sectionDroite1.addEventListener("mouseenter", () => {
-      GSAP.to(fillCircle, {
-        attr: { r: 19 },
-        duration: 0.3,
-        ease: "power2.out",
-      });
-      GSAP.to(arrow, {
-        scale: 0,
-        fill: "black",
-        transformOrigin: "center",
-        duration: 0.3,
-        ease: "power2.out",
-      })
-        .then(() => {
-          GSAP.to(arrow, {
-            x: -10,
-            y: 10,
-            scale: 1,
-            duration: 0.0,
-            ease: "power2.out",
-          });
-        })
-        .then(() => {
-          GSAP.to(arrow, {
-            x: 0,
-            y: 0,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
-    });
+    // sectionDroite1.addEventListener("mouseenter", () => {
+      // GSAP.to(fillCircle, {
+        // attr: { r: 19 },
+        // duration: 0.3,
+        // ease: "power2.out",
+      // });
+      // GSAP.to(arrow, {
+        // scale: 0,
+        // fill: "black",
+        // transformOrigin: "center",
+        // duration: 0.3,
+        // ease: "power2.out",
+      // })
+        // .then(() => {
+          // GSAP.to(arrow, {
+            // x: -10,
+            // y: 10,
+            // scale: 1,
+            // duration: 0.0,
+            // ease: "power2.out",
+          // });
+        // })
+        // .then(() => {
+          // GSAP.to(arrow, {
+            // x: 0,
+            // y: 0,
+            // duration: 0.3,
+            // ease: "power2.out",
+          // });
+        // });
+    // });
 
     // Animation au unhover
-    sectionDroite1.addEventListener("mouseleave", () => {
-      GSAP.to(fillCircle, {
-        attr: { r: 0 },
-        duration: 0.5,
-        ease: "power2.in",
-      });
+    // sectionDroite1.addEventListener("mouseleave", () => {
+      // GSAP.to(fillCircle, {
+        // attr: { r: 0 },
+        // duration: 0.5,
+        // ease: "power2.in",
+      // });
 
-      GSAP.to(arrow, {
-        scale: 1,
-        transformOrigin: "center",
-        fill: "white",
-        duration: 0.3,
-        ease: "power2.in",
-      });
-    });
+      // GSAP.to(arrow, {
+        // scale: 1,
+        // transformOrigin: "center",
+        // fill: "white",
+        // duration: 0.3,
+        // ease: "power2.in",
+      // });
+    // });
 
-    const image = document.querySelector('.grid-image');
+    // const sectionDroite2 = document.getElementById("sectiondroite2");
+    // const circle2 = sectionDroite2.querySelector(".arrow-circle");
+    // const fillCircle2 = sectionDroite2.querySelector(".fill-circle");
+    // const arrow2 = sectionDroite2.querySelector(".arrow-path");
+
+    // Animation au hover
+    // sectionDroite2.addEventListener("mouseenter", () => {
+      // GSAP.to(fillCircle2, {
+        // attr: { r: 19 },
+        // duration: 0.3,
+        // ease: "power2.out",
+      // });
+      // GSAP.to(arrow2, {
+        // scale: 0,
+        // fill: "black",
+        // transformOrigin: "center",
+        // duration: 0.3,
+        // ease: "power2.out",
+      // })
+        // .then(() => {
+          // GSAP.to(arrow2, {
+            // x: -10,
+            // y: 10,
+            // scale: 1,
+            // duration: 0.0,
+            // ease: "power2.out",
+          // });
+        // })
+        // .then(() => {
+          // GSAP.to(arrow2, {
+            // x: 0,
+            // y: 0,
+            // duration: 0.3,
+            // ease: "power2.out",
+          // });
+        // });
+    // });
+
+    // Animation au unhover
+    // sectionDroite2.addEventListener("mouseleave", () => {
+      // GSAP.to(fillCircle2, {
+        // attr: { r: 0 },
+        // duration: 0.5,
+        // ease: "power2.in",
+      // });
+
+      // GSAP.to(arrow2, {
+        // scale: 1,
+        // transformOrigin: "center",
+        // fill: "white",
+        // duration: 0.3,
+        // ease: "power2.in",
+      // });
+    // });
+
+    const image = document.querySelector(".grid-image");
 
     // Attendre que l'image soit chargée pour avoir ses dimensions réelles
-    image.addEventListener('load', () => {
+    image.addEventListener("load", () => {
       const imageWidth = image.offsetWidth;
       const imageHeight = image.offsetHeight;
-      
+
       // Taille des points et espacement
       const pointSize = 15;
       const spacing = 30;
-      
+
       // Calculer le décalage pour centrer le motif
       const offsetX = (imageWidth % spacing) / 2;
       const offsetY = (imageHeight % spacing) / 2;
-      
+
       // Appliquer le masque avec le décalage calculé
-      image.style.webkitMaskImage = `repeating-linear-gradient(0deg, #000, #000 ${pointSize}px, transparent ${pointSize}px, transparent ${spacing}px), 
-                                    repeating-linear-gradient(90deg, #000, #000 ${pointSize}px, transparent ${pointSize}px, transparent ${spacing}px)`;
-      image.style.webkitMaskSize = `${spacing}px ${spacing}px`;
-      image.style.webkitMaskPosition = `${offsetX}px ${offsetY}px`;
-      
-      // Pour les navigateurs non-webkit
-      image.style.maskImage = image.style.webkitMaskImage;
-      image.style.maskSize = image.style.webkitMaskSize;
-      image.style.maskPosition = image.style.webkitMaskPosition;
+      // image.style.webkitMaskImage = `repeating-linear-gradient(0deg, #000, #000 ${pointSize}px, transparent ${pointSize}px, transparent ${spacing}px),
+      //                               repeating-linear-gradient(90deg, #000, #000 ${pointSize}px, transparent ${pointSize}px, transparent ${spacing}px)`;
+      // image.style.webkitMaskSize = `${spacing}px ${spacing}px`;
+      // image.style.webkitMaskPosition = `${offsetX}px ${offsetY}px`;
+
+      // // Pour les navigateurs non-webkit
+      // image.style.maskImage = image.style.webkitMaskImage;
+      // image.style.maskSize = image.style.webkitMaskSize;
+      // image.style.maskPosition = image.style.webkitMaskPosition;
     });
+
+    // Pré-calcul des valeurs fréquemment utilisées
+    this.constants = {
+      decalMax: this.viewport.width <= 360 ? 10 : this.viewport.width / 5,
+      halfWidth: this.viewport.width / 2,
+      viewportMultipliers: {
+        height2x: this.viewport.height * 2,
+        height3x: this.viewport.height * 3,
+        height4x: this.viewport.height * 4
+      }
+    };
 
     // Définition des plages de scroll et leurs actions associées
     this.scrollRanges = [
       {
         min: 0,
-        max: window.innerHeight,
+        max: this.viewport.height,
         action: () => {
+          const progress = (this.scroll.soft - 0) / (1 * this.viewport.height);
           return `translateY(${-this.scroll.soft}px)`;
-        }
+        },
       },
       {
-        min: window.innerHeight,
-        max: 1.5 * window.innerHeight,
+        min: this.viewport.height,
+        max: 1.5 * this.viewport.height,
         action: () => {
-          
-          const progress = (this.scroll.soft - window.innerHeight) / (0.5 * window.innerHeight);
-          const translateX = -progress * window.innerHeight;
-          // console.log("1",translateX,window.innerHeight)
-          return `translateX(${translateX}px) translateY(${-window.innerHeight}px)`;
-        }
+          const progress = (this.scroll.soft - this.viewport.height) / (0.5 * this.viewport.height);
+          return `translateX(${-progress * this.constants.halfWidth}px) translateY(${-this.viewport.height}px)`;
+        },
       },
       {
-        min: 1.5 * window.innerHeight,
-        max: 2 * window.innerHeight,
+        min: 1.5 * this.viewport.height,
+        max: 2 * this.viewport.height,
         action: (scrollValue) => {
-          const div = document.querySelector('#movingsquareprojet1');
-          const progress = (scrollValue - 1.5 * window.innerHeight) / (0.5 * window.innerHeight);
-          const backgroundX = progress * 500;
-          
+          const div = this.cachedElements.movingSquares.square1;
+          const progress =
+            (scrollValue - 1.5 * this.viewport.height) /
+            (0.5 * this.viewport.height);
+          const decalMax = this.constants.decalMax;
+          // console.log(decalMax)
+          const backgroundX = progress * decalMax;
+
           if (div) {
             div.style.left = `${-backgroundX}px`;
           }
-          
-          const translateX = -window.innerHeight;
-          const translateY = -window.innerHeight;
-          // console.log("2",translateX,window.innerHeight)
+
+          const translateX = -this.constants.halfWidth;
+          // const translateX = 0;
+          const translateY = -this.viewport.height;
+          // console.log("2",div.style.left)
           return `translateX(${translateX}px) translateY(${translateY}px)`;
-        }
+        },
       },
       {
-        min: 2 * window.innerHeight,
-        max: 2.5 * window.innerHeight,
-        action: (scrollValue) => {
-          
-          // Progress normal pour backgroundX (sur toute la section)
-          const progress = (scrollValue - 2 * window.innerHeight) / (0.5 * window.innerHeight);
-          const div = document.querySelector('#movingsquareprojet1');
-          const backgroundX = 500 * (1 - progress);
-          
-          // Progress modifié pour translateX (uniquement sur la dernière moitié)
-          const translateProgress = Math.max(0, (scrollValue - 2.4 * window.innerHeight) / (0.1 * window.innerHeight));
-          const translateX = -window.innerHeight * (1 - translateProgress);
-          
-          const sectiondroite1 = document.querySelector('#sectiondroite1');
-          const translateY = -window.innerHeight * (1 - translateProgress);
-          
-          if (sectiondroite1) {
-            // Crée une courbe en cloche pour translateX
-            const translateXProgress = Math.sin(translateProgress * Math.PI); // Crée une courbe qui va de 0 à 1 puis retourne à 0
-            const maxTranslateX = -10 * window.innerHeight / 100; // -10vh converti en px
-            const translateX = maxTranslateX * translateXProgress;
-            
-            // sectiondroite1.style.transform = `translate(${translateX}px)`;
-          }
-          
-          if (div) {
-            div.style.left = `${-backgroundX}px`;
-          }
-          // console.log("3",-this.scroll.soft)
-          return `translateX(${translateX}px) translateY(${-window.innerHeight}px)`;
-        }
-      },
-      {
-        min: 2.5 * window.innerHeight,
-        max: Infinity,
+        min: 2 * this.viewport.height,
+        max: 3 * this.viewport.height,
         action: () => {
-          // console.log("4",-this.scroll.soft + 0.5*window.innerHeight)
-          return `translateY(${-this.scroll.soft +1.5* window.innerHeight}px)`;
-        }
-      }
+          this.updateMovingSquares([this.cachedElements.movingSquares.square1, this.cachedElements.movingSquares.square2]);
+          return this.getTransform(
+            -this.constants.halfWidth,
+            -this.viewport.height - this.scroll.soft + 2 * this.viewport.height
+          );
+        },
+      },
+      {
+        min: 3 * this.viewport.height,
+        max: 4 * this.viewport.height,
+        action: () => {
+          this.updateMovingSquares([
+            this.cachedElements.movingSquares.square1,
+            this.cachedElements.movingSquares.square2,
+            this.cachedElements.movingSquares.square3
+          ]);
+          
+          const translateX = -this.constants.halfWidth;
+          // const translateX = 0;
+          const translateY = -this.viewport.height - this.scroll.soft + 2 * this.viewport.height;
+          return `translateX(${translateX}px) translateY(${translateY}px)`;
+        },
+      },
+      {
+        min: 4 * this.viewport.height,
+        max:Infinity,
+        // max: 5.1 * this.viewport.height,
+        action: () => {
+          const decalMax = this.constants.decalMax;
+          const div1 = this.cachedElements.movingSquares.square1;
+          if (div1) {
+            div1.style.left = `${-decalMax}px`;
+          }
+          const div2 = this.cachedElements.movingSquares.square2;
+          if (div2) {
+            div2.style.left = `${-decalMax}px`;
+          }
+          const div3 = this.cachedElements.movingSquares.square3;
+          if (div3) {
+            div3.style.left = `${-decalMax}px`;
+          }
+
+          const div = this.cachedElements.reactRoot;
+
+          if (div) {
+            const position = window.getComputedStyle(div).position;
+            // console.log(4 * this.viewport.height,-this.scroll.soft)
+            // if (position !== "absolute") {
+              // div.style.position = "fixed";
+              div.style.top = `${8 * this.viewport.height - this.scroll.soft}px`;
+              div.style.left = `${this.viewport.width/2}px`;
+              div.style.width = `${this.viewport.width}px`;
+              div.style.height = `${this.viewport.height}px`;
+            // }
+          }
+          // console.log("5",-this.viewport.height,this.viewport.height-this.scroll.soft)
+          // absolute top-0 left-0 w-full h-full
+          return `translateX(${-this.constants.halfWidth}px) translateY(${
+            // -this.viewport.height - this.scroll.soft + 2 * this.viewport.height
+            -3 * this.viewport.height 
+          }px)`;
+        },
+      },
     ];
+
+    // Optimisation des calculs de scroll
+    this.scrollRanges = this.scrollRanges.map(range => ({
+      ...range,
+      heightMin: range.min * this.viewport.height,
+      heightMax: range.max * this.viewport.height
+    }));
   }
 
   setSizes() {
-    this.scroll.height =
-      this.elements.scrollContent.getBoundingClientRect().height +
-      2.5 * window.innerHeight + 0.1*window.innerHeight;
-    this.scroll.limit =
-      this.elements.scrollContent.clientHeight -
-      this.viewport.height +
-      3.5 * window.innerHeight + 0.1*window.innerHeight;
-
+	
+	  this.scroll.height =this.isMobile?6.1* this.viewport.height:
+	  this.cachedElements.scrollContent.getBoundingClientRect().height +
+      4 * this.viewport.height +
+      0.1 * this.viewport.height;
+    this.scroll.limit =this.isMobile?5.1* this.viewport.height:5.1 * this.viewport.height;
+ 
     document.body.style.height = `${this.scroll.height}px`;
   }
 
@@ -203,95 +319,68 @@ export default class {
   }
 
   update() {
-    // Si c'est un mobile, on ne fait pas d'update
-    if (this.isMobile) {
-      return;
-    }
+    const now = Date.now();
+    if (!this.ticking && (now - this.lastScrollTime) >= this.scrollThreshold) {
+      requestAnimationFrame(() => {
+        this.scroll.hard = window.scrollY;
+        this.scroll.hard = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.hard);
+        this.scroll.soft = GSAP.utils.interpolate(
+          this.scroll.soft,
+          this.scroll.hard,
+          this.scroll.ease
+        );
 
-    this.scroll.hard = window.scrollY;
-    this.scroll.hard = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.hard);
-    this.scroll.soft = GSAP.utils.interpolate(
-      this.scroll.soft,
-      this.scroll.hard,
-      this.scroll.ease
-    );
+        if (this.scroll.soft < 0.01) {
+          this.scroll.soft = 0;
+        }
 
-    if (this.scroll.soft < 0.01) {
-      this.scroll.soft = 0;
-    }
-    // console.log(this.scroll.soft,window.scrollY,window.innerHeight)
-    
-    // Lisse la valeur de scroll autour de la transition
-    const transitionPoint = 2 * window.innerHeight;
-    const transitionRange = 0.3 * window.innerHeight; // Zone de transition
+        // Trouve la plage correspondante
+        const currentRange = this.scrollRanges.find(
+          (range) => this.scroll.soft > range.min && this.scroll.soft <= range.max
+        );
 
-    if (Math.abs(this.scroll.soft - transitionPoint) < transitionRange) {
-      this.easedScroll = this.ease(this.easedScroll, this.scroll.soft);
-    } else {
-      this.easedScroll = this.scroll.soft;
-    }
+        // Applique la transformation correspondante
+        if (currentRange && !this.isMobile) {
+          const action = currentRange.action.bind(this);
+          this.cachedElements.scrollContent.style.transform = action(this.scroll.soft);
+        }else{
+          this.cachedElements.scrollContent.style.transform = `translateY(${-this.scroll.soft}px)`
+        }
 
-    // Trouve la plage correspondante
-    const currentRange = this.scrollRanges.find(
-      range => this.easedScroll > range.min && this.easedScroll <= range.max
-    );
+        //ajout perso
 
-    // Applique la transformation correspondante
-    if (currentRange) {
-      const action = currentRange.action.bind(this);
-      this.elements.scrollContent.style.transform = action(this.easedScroll);
-    }
+        if (this.scroll.soft > 1.1 * this.viewport.height) {
+          const voici = document.querySelector("#voici");
+          GSAP.to(voici, {
+            opacity: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
 
-    //ajout perso
-    if (this.scroll.soft > 1.2 * window.innerHeight && !this.animationPlayed) {
-      this.animationPlayed = true;
+        if (this.scroll.soft < 1.1 * this.viewport.height) {
+          const voici = document.querySelector("#voici");
+          GSAP.to(voici, {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
 
-      GSAP.to(document.getElementsByClassName("ligneProjet1"), {
-        color: "red",
-        scaleX: 1,
-        transformOrigin: "left",
-        duration: 1.5,
-        ease: "ease",
+        if (this.scroll.soft > 1.2 * this.viewport.height && !this.animationPlayed) {
+          this.animationPlayed = true;
+          playProjectAnimation();
+        }
+
+        if (this.scroll.soft > 2.2 * this.viewport.height && !this.animationPlayed2) {
+          this.animationPlayed2 = true;
+          playProjectAnimation2();
+        }
+
+        this.ticking = false;
+        this.lastScrollTime = now;
       });
-
-      const text = new SplitText(document.getElementById("titreprojet1"), {
-        type: "chars",
-        charsClass: "char",
-      });
-
-      // const text2 = new SplitText(document.getElementById("texteprojet1"), {
-      //   type: "chars",
-      //   charsClass: "char"
-      // });
-
-      GSAP.from(text.chars, {
-        y: 100,
-        opacity: 0,
-        duration: 0.8,
-        stagger: {
-          amount: 1.0,
-          from: "start",
-        },
-        ease: "power4.out",
-      });
-
-      GSAP.from(document.getElementById("texteprojet1"), {
-        y: 100,
-        opacity: 0,
-        autoAlpha: 0,
-        stagger: 0.2,
-        duration: 1.6,
-      },'<.3');
-
-      GSAP.from(document.getElementById("visitezleprojet1"), {
-        y: 100,
-        opacity: 0,
-        autoAlpha: 0,
-        stagger: 0.2,
-        duration: 1.6,
-      },'<.3');
-
-
+      this.ticking = true;
     }
   }
 
@@ -301,6 +390,24 @@ export default class {
       height: window.innerHeight,
     };
 
+    this.constants = {
+      decalMax: this.viewport.width <= 360 ? 10 : this.viewport.width / 5,
+      halfWidth: this.viewport.width / 2
+    };
+
     this.setSizes();
+  }
+
+  // Créer une fonction utilitaire pour les carrés mobiles
+  updateMovingSquares(squares) {
+    const decalMax = this.constants.decalMax;
+    squares.forEach(square => {
+      if (square) square.style.left = `${-decalMax}px`;
+    });
+  }
+
+  // Créer une fonction utilitaire pour générer la transformation
+  getTransform(x, y) {
+    return `translateX(${x}px) translateY(${y}px)`;
   }
 }

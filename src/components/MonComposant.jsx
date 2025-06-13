@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { useRef, useMemo, useEffect, useState } from "react";
 import { debounce } from "lodash";
 
@@ -11,58 +11,97 @@ import CustomShaderMaterial from "three-custom-shader-material";
 import vertexShader from "../app/shaders/vertexbulk.glsl";
 import fragmentShader from "../app/shaders/fragmentbulk.glsl";
 import html2canvas from "html2canvas";
-import { Canvas } from '@react-three/fiber'
+import { Canvas } from "@react-three/fiber";
+
 export default function MonComposant() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div id="canvas-container2" className="w-full h-[110vh] bg-red-500 z-10">
-      <Canvas
-        dpr={[1, 2]}
-        gl={{
-          antialias: true,
-          preserveDrawingBuffer: true,
-        }}
-        camera={{
-          fov: 55,
-          near: 0.1,
-          far: 200,
-        }}
-      >
-        <Scene />
-      </Canvas>
-      <div className="relative w-full h-[0vh]">
-						<div class="z-[1000] pb-4 flex flex-row items-center justify-center absolute h-[40vh] -top-[21vh] left-0 w-full h-full ">
-							<span class="text-4xl w-full h-full text-center">
-              Développement web <br />
-              Hébergement <br />
-              Animation 3D <br />
+    <>
+      <div id="canvas-container2" className="w-full h-[110vh] z-10">
+        {isMobile ? (
+          <div className="w-full h-[110vh] z-10 bg-gray-500">
+            <div className="dom-element">
+              <p className="flex flex-col pt-0">
+                <br />
+                <br />
+                QUAND <br />
+                M'APPELEZ <br />
+                VOUS ? <br />
+              </p>
+            </div>
+          </div>
+        ) : (
+          <Canvas
+            dpr={[1, 2]}
+            gl={{
+              antialias: true,
+              preserveDrawingBuffer: true,
+            }}
+            camera={{
+              fov: 55,
+              near: 0.1,
+              far: 200,
+            }}
+          >
+            <Scene />
+          </Canvas>
+        )}
+
+        <div className="relative w-full h-[0vh]">
+          {/* grande taille */}
+          <div className="z-[1000] pb-4 flex flex-col md:flex-row items-center justify-center absolute h-[10vh] -top-[11vh] left-0 right-0 w-full h-full ">
+            <span id="contact_tel" className="w-full text-center"><a href="tel:+33688918019">06 88 91 80 19</a> </span>
+            <span  className="w-full text-center">Lyon 6 </span>
+            <span id="contact_mail" className="w-full text-center"> <a href="mailto:amaurypichat@gmail.com">amaury.pichat@gmail.com</a></span>
+            <span className="w-full text-center">
+              <span className="border-b-2 border-dotted border-current inline-block leading-none cursor-pointer">
+                <a href="/mentions-legales.html" target="_blank" rel="noopener noreferrer">
+                  mentions-legales
+                </a>
+                </span>
+            </span>
+            <span className="w-full text-center">
+              <span className="border-b-2 border-dotted border-current inline-block leading-none cursor-pointer">
+                  politique de confidentialité</span>
+            </span>
+          </div>
+
+          <div className="absolute -top-[50vh] xl:-top-[75vh] right-0  h-[25vh] z-[1000] flex flex-col items-center justify-left pr-8">
+            <span className="text-4xl w-full h-full text-center z-[1000] text-right">
+              Développement web
+            </span>
+            <span className="text-4xl w-full h-full text-center z-[1000] text-right">
+              Prise de photo et intégration
+            </span>
+            <span className="text-4xl w-full h-full text-center z-[1000] text-right">
+              Animation 3D
+            </span>
+            <span className="text-4xl w-full h-full text-center z-[1000] text-right">
               Suivi et maintenance
-
-              </span>
-							{/* <span class="text-4xl w-full h-full text-center border-x-2 border-white">M</span> */}
-							<span class="text-4xl w-full h-full text-center">
-
-                06 88 91 80 19 <br />
-                Lyon 6 <br />
-                amaury.pichat@gmail.com <br />
-                mentions-legales <br />
-                politique de confidentialité
-
-              </span>
-							
-						</div>
-					</div>
-    </div>
-  )
+            </span>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
-
-
 
 const useDomToCanvas = (domEl) => {
   const [texture, setTexture] = useState();
   useEffect(() => {
     if (!domEl) return;
     const convertDomToCanvas = async () => {
-      const canvas = await html2canvas(domEl, { backgroundColor: null });
+      const canvas = await html2canvas(domEl, { backgroundColor: null,scale: 4 });
       setTexture(new THREE.CanvasTexture(canvas));
     };
 
@@ -91,7 +130,7 @@ function Lights() {
     intensity: 30,
     distance: 12,
     decay: 1,
-    position: [2, 4, 6]
+    position: [2, 4, 6],
   };
   return <pointLight ref={pointLightRef} {...config} />;
 }
@@ -103,16 +142,16 @@ function Scene() {
   const [containerRatio, setContainerRatio] = useState(1);
 
   useEffect(() => {
-    const container = document.getElementById('canvas-container2');
+    const container = document.getElementById("canvas-container2");
     if (container) {
       const updateRatio = () => {
         const ratio = container.clientWidth / container.clientHeight;
         setContainerRatio(ratio);
       };
-      
+
       updateRatio();
-      window.addEventListener('resize', updateRatio);
-      return () => window.removeEventListener('resize', updateRatio);
+      window.addEventListener("resize", updateRatio);
+      return () => window.removeEventListener("resize", updateRatio);
     }
   }, []);
 
@@ -120,7 +159,6 @@ function Scene() {
   const textureDOM = useDomToCanvas(domEl);
 
   const uniforms = useMemo(
-    
     () => ({
       uTexture: { value: textureDOM },
       uMouse: { value: new THREE.Vector2(0, 0) },
@@ -133,9 +171,16 @@ function Scene() {
 
   useFrame((state, delta) => {
     const mouse = state.mouse;
-    console.log(mouse)
-    mouseLerped.current.x = THREE.MathUtils.lerp(mouseLerped.current.x, mouse.x, 0.1);
-    mouseLerped.current.y = THREE.MathUtils.lerp(mouseLerped.current.y, mouse.y, 0.1);
+    mouseLerped.current.x = THREE.MathUtils.lerp(
+      mouseLerped.current.x,
+      mouse.x,
+      0.1
+    );
+    mouseLerped.current.y = THREE.MathUtils.lerp(
+      mouseLerped.current.y,
+      mouse.y,
+      0.1
+    );
     materialRef.current.uniforms.uMouse.value.x = mouseLerped.current.x;
     materialRef.current.uniforms.uMouse.value.y = mouseLerped.current.y;
   });
@@ -144,11 +189,12 @@ function Scene() {
     <>
       <Html zIndexRange={[-1, -10]} prepend fullscreen>
         <div ref={(el) => setDomEl(el)} className="dom-element">
-          <p  className=" pb-12 flex flex-col">
-          <span className="text-4xl pb-24"></span> 
+          <p className="pb-12 flex flex-col">
+            {/* <div className="xl:text-4xl text-4xl pb-24"></div> */}
             QUAND <br />
-            M'APPELLEZ <br />
+            M'APPELEZ <br />
             VOUS ? <br />
+            
             {/* MEET ?<br /> */}
           </p>
         </div>
@@ -162,7 +208,7 @@ function Scene() {
           fragmentShader={fragmentShader}
           uniforms={uniforms}
           flatShading
-          silent
+          // silent
         />
         <Lights />
       </mesh>

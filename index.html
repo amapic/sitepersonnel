@@ -4,30 +4,202 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Shaders on Scroll | Codrops</title>
+	<title>Agence Web Lyon, Création de site internet sur-mesure et personnalisé</title>
 	<meta name="description"
-		content="Smooth WebGL Shader Transformations on Scroll – A handy setup to create a smooth scroll based GLSL animation using Three.js and GSAP. @Faboolea" />
+		content="Agence Web Lyon, Création de site internet sur-mesure et personnalisé" />
 	<meta name="keywords" content="webgl, three.js, on scroll, animation, three.js, gsap, javascript" />
-	<meta name="author" content="ꜰᴀʙᴏᴏʟᴇᴀ for Codrops" />
+	<meta id="i18n-og-url" property="og:url" content="https://amaurypichat.fr">
+	<meta id="i18n-og" property="og:locale" content="fr_fr">
+	<meta id="i18n-og-alt-en-gb" property="og:locale:alternate" content="en_gb">
+	<meta property="og:image" content="https://cdn.sanity.io/images/zvxprgaj/production/fcb11e3b384127be714fa0a12bfddb09e20c08bb-2400x1260.jpg">
+	<meta name="twitter:image" content="https://cdn.sanity.io/images/zvxprgaj/production/fcb11e3b384127be714fa0a12bfddb09e20c08bb-2400x1260.jpg">
+	<meta name="url" content="https://amaurypichat.fr">
+	<meta property="og:url" content="https://amaurypichat.fr">
+	<meta property="og:title" content="Agence web lyon : Création de site internet sur-mesure et personnalisé.">
+	<meta name="twitter:title" content="Agence web lyon : Création de site internet sur-mesure et personnalisé.">
+	<meta property="og:site_name" content="<dev/>">
+	<meta name="description" content="<dev/> est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure. Nous proposons des sites vitrines et e-commerces personnalisés et sur-mesure.">
+	<meta property="og:description" content="<dev/> est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure. Nous proposons des sites vitrines et e-commerces personnalisés et sur-mesure.">
+	<meta name="twitter:description" content="<dev/> est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure. Nous proposons des sites vitrines et e-commerces personnalisés et sur-mesure.">
+	<meta name="twitter:site" content="@Akaru_agency">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="theme-color" content="#FFF">
+
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="stylesheet" type="text/css" href="./src/styles/base.css" />
-	<link rel="stylesheet" type="text/css" href="./src//styles/shaders-on-scroll.sass" />
+	<link rel="stylesheet" type="text/css" href="./src/styles/shaders-on-scroll.sass" />
+	<style>
+		#fps-counter {
+			position: fixed;
+			top: 10px;
+			right: 10px;
+			background: rgba(0, 0, 0, 0.8);
+			color: #fff;
+			padding: 10px;
+			border-radius: 4px;
+			font-family: monospace;
+			z-index: 9999;
+		}
+	</style>
+	<style>
+		/* Styles du curseur personnalisé */
+		.custom-cursor {
+			width: 80px;
+			height: 80px;
+			position: fixed;
+			pointer-events: none;
+			z-index: 9999;
+			transform: translate(-50%, -50%) scale(1);
+			transition: transform 0.3s ease;
+			mix-blend-mode: difference;
+		}
+
+		.custom-cursor.hover {
+			transform: translate(-50%, -50%) scale(1.5);
+		}
+
+		.cursor-hover-area {
+			cursor: none;
+		}
+
+		.cursor-hover-area * {
+			cursor: none;
+		}
+
+		.cursor-circle {
+			fill: rgba(0, 123, 255, 0.2);
+			stroke: #007bff;
+			stroke-width: 1;
+			transition: fill 0.3s ease, stroke 0.3s ease;
+		}
+
+		.cursor-text {
+			fill: #007bff;
+			font-size: 8px;
+			font-family: Arial, sans-serif;
+			transition: fill 0.3s ease;
+		}
+
+		/* Styles pour le curseur en blanc */
+		.custom-cursor.white-mode .cursor-circle {
+			fill: rgba(255, 255, 255, 0.2);
+			stroke: #ffffff;
+		}
+
+		.custom-cursor.white-mode .cursor-text {
+			fill: #ffffff;
+		}
+
+		.custom-cursor.white-mode .cursor-arrow {
+			fill: #ffffff;
+		}
+
+		.custom-cursor.white-mode .cursor-go-text {
+			fill: #ffffff;
+		}
+
+		.rotating-text {
+			animation: rotate 8s linear infinite;
+			transform-origin: center;
+		}
+
+		@keyframes rotate {
+			from { transform: rotate(0deg); }
+			to { transform: rotate(360deg); }
+		}
+
+		.cursor-arrow {
+			fill: #007bff;
+			opacity: 0;
+			transition: opacity 0.3s ease, transform 0.3s ease;
+			transform-origin: center;
+		}
+
+		.cursor-arrow.active {
+			opacity: 1;
+		}
+
+		.cursor-arrow.pointing {
+			transform: rotate(var(--arrow-rotation));
+		}
+
+		.cursor-go-text {
+			fill: #007bff;
+			font-size: 14px;
+			font-family: Arial, sans-serif;
+			opacity: 0;
+			transition: opacity 0.3s ease;
+			text-anchor: middle;
+			dominant-baseline: middle;
+		}
+
+		.cursor-go-text.active {
+			opacity: 1;
+			animation: scrollText 2s linear infinite;
+		}
+
+		@keyframes scrollText {
+			0% {
+				transform: translateX(-20px);
+				opacity: 0;
+			}
+			15% {
+				opacity: 1;
+			}
+			85% {
+				opacity: 1;
+			}
+			100% {
+				transform: translateX(20px);
+				opacity: 0;
+			}
+		}
+
+		@keyframes pulseText {
+			0% { transform: scale(1); }
+			50% { transform: scale(1.2); }
+			100% { transform: scale(1); }
+		}
+	</style>
 </head>
 
 <body class="loading">
+	<div class="custom-cursor">
+		<svg id="svgcursor1" width="80" height="80" viewBox="0 0 80 80">
+			<defs>
+				<mask id="circleMask">
+					<rect width="80" height="80" fill="black"/>
+					<circle cx="40" cy="40" r="20" fill="white"/>
+				</mask>
+			</defs>
+			<circle class="cursor-circle" cx="40" cy="40" r="30" />
+			<path id="curvedPath" fill="none" d="M40,10 A30,30 0 1,1 39.999,10" />
+			<text class="cursor-text rotating-text">
+				<textPath href="#curvedPath" startOffset="0%">LETS GO • LETS GO • LETS GO •</textPath>
+			</text>
+			<path class="cursor-arrow" d="M40,30 L45,40 L35,40 Z" />
+			<g mask="url(#circleMask)">
+				<text class="cursor-go-text" x="40" y="40">GO!!</text>
+			</g>
+		</svg>
+		<svg id="svgcursor2" width="80" height="80" viewBox="0 0 80 80">
+			<circle class="" cx="40" cy="40" r="30" fill="white"/>
+		</svg>
+	</div>
+	<div id="fps-counter">FPS: --</div>
 	<main>
+
 		<div class="frame">
 			<div class="frame__title-wrap">
 				<h1 class="frame__title"></h1>
 			</div>
 			<nav class="frame__links">
-				<a href="https://tympanus.net/Tutorials/MarqueeMenu/">Contact</a>
-				<!-- <a href="https://tympanus.net/codrops/?p=55223">Article</a> -->
-				<!-- <a href="https://github.com/Faboolea/shaders-on-scroll">GitHub</a> -->
+				<!-- <a href="https://tympanus.net/Tutorials/MarqueeMenu/">Contact</a> -->
 			</nav>
 		</div>
-		<div class="content">
-			<div class="scroll__stage">
+		<div class="content hidden md:block">
+			<div class="scroll__stage bg-cover bg-center">
+				<!-- bg-[url('/images/fond2.png')] -->
 				<div class="scroll__content">
 					<section class="section">
 						<div class="section__title">
@@ -42,24 +214,26 @@
 							Amaury PICHAT<br>
 						</p>
 					</section>
-					<section id="sectionprojet1" class="section relative">
+					<section id="sectionprojet1" class="section relative h-screen cursor-hover-area">
 						<div id="movingsquareprojet1" class="moving-square"></div>
-						<div class="section__title">
-							
+						<div
+							class="section__title absolute top-0 right-[20vw] lg:right-[25vw] h-full flex flex-col justify-center items-center">
+
 							<h2 class="section__title-text">Avril</h2>
-							<h1 class="section__title-number">2025</h1>
+							<h1 class="section__title-number">25</h1>
 						</div>
-						<p class="section__paragraph">
+						<p id="voici" class="section__paragraph opacity-1 premier-texte">
 							Voici une liste des projets sur lesquels j'ai travaillé<br>
 						</p>
 
-						<div
-						 id="sectiondroite1"
-							class="absolute flex flex-col items-center justify-around top-0 left-[100vw]  h-full w-[50vw]">
+						<div id="sectiondroite1"
+							class="pt-12 lg:pt-0 px-2 md:px-0 absolute flex flex-col items-center justify-around top-0 left-[100vw]  lg:h-full h-[80vh] w-[50vw]">
 							<p class="w-full px-10 text-6xl bg-blue-500">
-							<h2 id="titreprojet1" class=" text-6xl font-bold">Création d'un site corporate
+							<h2 id="titreprojet1" class="text-2xl xl:text-6xl font-bold"
+								style="word-break: keep-all; word-wrap: normal;">
+								Création d'un site corporate
 
-								<div  class="ligneProjet1 w-full h-[2px] bg-white opacity-1"
+								<div class="ligneProjet1 w-full h-[2px] bg-white opacity-1"
 									style=" transform-origin: left; transform: scaleX(0);">
 									<div class="ligneProjet1 w-full pt-4 h-[2px] bg-white opacity-1"
 										style=" transform-origin: left; transform: scaleX(0);">
@@ -67,78 +241,304 @@
 									</div>
 								</div>
 							</h2>
-							<span id="texteprojet1" class="text-4xl">Des couleurs douces illustrent le site du groupe Leonie<br></span>
+							<span id="texteprojet1" class="lg:text-4xl text-2xl">Des couleurs douces illustrent le site
+								du groupe
+								Leonie<br></span>
 							</p>
-							<div class="w-full h-[2px] bg-white opacity-1"
+							<!-- <div class="w-full h-[2px] bg-white opacity-1"
 								style=" transform-origin: left; transform: scaleX(0);">
+							</div> -->
+							<div class="grid-mask max-h-[50%] w-[60%] flex flex-col justify-center items-center">
+								<img src="/images/groupeleonie.png" alt="logo" class=" grid-image center">
 							</div>
-							<div class="grid-mask pb-32 max-h-[50%] w-[60%]">
-								<img src="/images/groupeleonie.png" alt="logo" class=" grid-image">
-							</div>
-							<div  class="text-white bg-black text-4xl flex items-center gap-4 px-12">
-								<span id="visitezleprojet1">Visitez le site</span>
-								<svg width="80" height="80" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+							<div  class="text-white text-4xl flex items-center gap-4 px-12">
+								<span class="lg:text-4xl text-2xl" id="visitezleprojet1">Visitez le site</span>
+								<svg  id="fleche1" id="fleche1" width="130" height="80" viewBox="0 0 50 40" xmlns="http://www.w3.org/2000/svg">
 									<!-- Cercle extérieur -->
-									<circle 
-										class="arrow-circle" 
-										cx="20" 
-										cy="20" 
-										r="19" 
-										fill="none" 
-										stroke="currentColor" 
-										stroke-width="1"
-									/>
-									
+									<ellipse class="arrow-circle" cx="25" cy="20" rx="30" ry="19" fill="none"
+										stroke="currentColor" stroke-width="2" />
+
 									<!-- Cercle de remplissage -->
-									<circle 
-										class="fill-circle" 
-										cx="20" 
-										cy="20" 
-										r="0" 
-										fill="currentColor"
-									/>
-									
+									<ellipse class="fill-circle" cx="25" cy="20" rx="0" ry="0" fill="currentColor" />
+
 									<!-- Flèche (repositionnée et mise à l'échelle) -->
-									<g transform="translate(12, 11) scale(0.8)">
-										<path
-											class="arrow-path"
+									<g transform="translate(17, 11) scale(0.8)">
+										<path class="arrow-path"
 											d="M0.292893 17.2929C-0.0976311 17.6834 -0.0976311 18.3166 0.292893 18.7071C0.683418 19.0976 1.31658 19.0976 1.70711 18.7071L0.292893 17.2929ZM18.9706 1.02944C18.9706 0.477153 18.5228 0.0294373 17.9706 0.029437L8.97056 0.0294378C8.41828 0.0294375 7.97056 0.477153 7.97056 1.02944C7.97056 1.58172 8.41828 2.02944 8.97056 2.02944L16.9706 2.02944L16.9706 10.0294C16.9706 10.5817 17.4183 11.0294 17.9706 11.0294C18.5228 11.0294 18.9706 10.5817 18.9706 10.0294L18.9706 1.02944ZM1.70711 18.7071L18.6777 1.73654L17.2635 0.322331L0.292893 17.2929L1.70711 18.7071Z"
-											fill="white"
-										/>
+											fill="white" />
 									</g>
 								</svg>
 							</div>
 						</div>
 					</section>
+					<section id="sectionprojet2" class="section relative flex flex-row justify-end items-end h-screen cursor-hover-area">
+						<div id="movingsquareprojet2" class="moving-square"></div>
+
+
+						<div
+							class="section__title absolute top-0 right-[20vw]  lg:right-[25vw] h-full flex flex-col justify-center items-center">
+
+							<h2 class="section__title-text text-right">Mai</h2>
+							<h1 class="section__title-number text-right">25</h1>
+						</div>
+						<p class="section__paragraph opacity-0">
+							Voici une liste des projets sur lesquels j'ai travaillé<br>
+						</p>
+
+						<div id="sectiondroite2"
+							class="pt-12 lg:pt-0 px-2 md:px-0 absolute flex flex-col items-center justify-around top-0 left-[100vw]  lg:h-full h-[80vh] w-[50vw]">
+							<p class="w-full px-10 text-6xl bg-blue-500">
+							<h2 id="titreprojet2" class="text-2xl xl:text-6xl font-bold">Animation de particules
+
+								<div class="ligneProjet2 w-full h-[2px] bg-white opacity-1"
+									style=" transform-origin: left; transform: scaleX(0);">
+									<div class="ligneProjet2 w-full pt-4 h-[2px] bg-white opacity-1"
+										style=" transform-origin: left; transform: scaleX(0);">
+
+									</div>
+								</div>
+							</h2>
+							<span id="texteprojet2" class="lg:text-4xl text-2xl">Des particules s'animent au fur et à
+								mesure que
+								l'utilisateur parcoure le site<br></span>
+							</p>
+							<!-- <div class="w-full h-[2px] bg-white opacity-1" -->
+								<!-- style=" transform-origin: left; transform: scaleX(0);"> -->
+							<!-- </div> -->
+							<div
+								class="pb-32 max-h-[30%] lg:max-h-[50%] w-[60%] flex justify-center items-center">
+								<img src="/images/uconsulting.png" alt="logo" class="object-contain my-auto" >
+							</div>
+							<div class="text-white  text-4xl flex items-center gap-4 px-12">
+								<span class="lg:text-4xl text-2xl" id="visitezleprojet2">Visitez le site</span>
+								<svg id="fleche2" width="130" height="80" viewBox="0 0 50 40" xmlns="http://www.w3.org/2000/svg">
+									<!-- Cercle extérieur -->
+									<ellipse class="arrow-circle" cx="25" cy="20" rx="30" ry="19" fill="none"
+										stroke="currentColor" stroke-width="2" />
+
+									<!-- Cercle de remplissage -->
+									<ellipse class="fill-circle" cx="25" cy="20" rx="0" ry="0" fill="currentColor" />
+
+									<!-- Flèche (repositionnée et mise à l'échelle) -->
+									<g transform="translate(17, 11) scale(0.8)">
+										<path class="arrow-path"
+											d="M0.292893 17.2929C-0.0976311 17.6834 -0.0976311 18.3166 0.292893 18.7071C0.683418 19.0976 1.31658 19.0976 1.70711 18.7071L0.292893 17.2929ZM18.9706 1.02944C18.9706 0.477153 18.5228 0.0294373 17.9706 0.029437L8.97056 0.0294378C8.41828 0.0294375 7.97056 0.477153 7.97056 1.02944C7.97056 1.58172 8.41828 2.02944 8.97056 2.02944L16.9706 2.02944L16.9706 10.0294C16.9706 10.5817 17.4183 11.0294 17.9706 11.0294C18.5228 11.0294 18.9706 10.5817 18.9706 10.0294L18.9706 1.02944ZM1.70711 18.7071L18.6777 1.73654L17.2635 0.322331L0.292893 17.2929L1.70711 18.7071Z"
+											fill="white" />
+									</g>
+								</svg>
+							</div>
+						</div>
+					</section>
+					<section id="sectionprojet3" class="section relative flex flex-row justify-end items-end cursor-hover-area">
+						<!-- justify-end items-end -->
+						<div id="movingsquareprojet3" class="moving-square"></div>
+
+						<div class="section__title w-[20vw] ">
+							<div class="flex flex-col">
+								<h2 class="section__title-text ">Mai</h2>
+								<h1 class="section__title-number">25</h1>
+							</div>
+							<div class="flex flex-col">
+								<h2 class="section__title-text ">Mai</h2>
+								<h1 class="section__title-number">25</h1>
+							</div>
+							<div class="flex flex-col">
+								<h2 class="section__title-text ">Mai</h2>
+								<h1 class="section__title-number">25</h1>
+							</div>
+						</div>
+						<!-- <p class="section__paragraph opacity-0">
+							Voici une liste des projets sur lesquels j'ai travaillé<br>
+						</p> -->
+
+						<div id="sectiondroite3"
+							class="absolute flex flex-col items-center justify-around top-0 left-[100vw] h-full w-[50vw]">
+							<!-- id="blindsEffectContainer" -->
+
+							<div class="h-1/3 w-full flex items-center justify-around flex-row relative custom-left">
+								<div class="text-2xl lg:text-4xl mr-4 w-1/2 text-left"
+									style="word-break: keep-all; word-wrap: normal;">Design
+									axé tech</div>
+								<img id="image3" style="clip-path: ellipse(50% 35% at 50% 50%); transition: outline 0.3s ease; outline: 2px solid transparent; outline-offset: -2px;"
+									class="w-1/2 object-cover hover:outline-white" src="/images/unclick.webp"
+									alt="logo">
+							</div>
+							<div class="w-full h-1/3 flex items-center justify-around  flex-row relative custom-left">
+								<div class="text-2xl mr-4 lg:text-4xl w-1/2 text-left">Canevas de site personnalisable
+								</div>
+								<img id="image4" style="clip-path: ellipse(50% 35% at 50% 50%)"
+									src="/images/sitePersoAutomatique.webp" alt="logo" class="w-1/2 object-cover">
+							</div>
+							<div class="w-full h-1/3 flex items-center justify-around flex-row relative custom-left">
+								<div class="text-2xl mr-4 lg:text-4xl w-1/2 text-left">Création d'un effet de profondeur
+									original en 3D</div>
+
+								<img id="image5" src="/images/sunflower.webp" alt="logo" class="w-1/2 object-cover"
+									style="clip-path: ellipse(50% 35% at 50% 50%)">
+							</div>
+						</div>
+					</section>
+					<!-- react root -->
+					<div id="react-root1" class="fixed w-screen h-screen top-[400vh] left-[100vh]"></div>
+
+				</div>
+
+			</div>
+		</div>
+		<!-- <div class="layout__line"></div>
+
+
+		</div> -->
+		<!-- <iframe src="smal.html"></iframe> -->
+		<!-- <div class="content md:hidden"> -->
+		<div class="content md:hidden">
+			<div class="scroll__stage">
+				<div class="scroll__content">
 					<section class="section">
 						<div class="section__title">
-							<h2 class="section__title-text">Mai</h2>
-							<h1 class="section__title-number">25</h1>
+							<h1 class="section__title-number">&lt; dev/></h1>
+							<h2 class="section__title-text">agence web</h2>
+							<p class="section__title-arrow">
+								<span>➤</span><br>
+								<span>➤</span>
+							</p>
 						</div>
+
+						<!-- </section> -->
 						<p class="section__paragraph">
-							Close your eyes now –
-							And give in to the night –
-							Soar above the stars –
-							Forget what's behind<br>
-							<a href="https://dimorph.ch/" class="section__button">Discover</a>
+							Amaury PICHAT<br>
+							<!-- <a href="https://groupeleonie.vercel.app/" class="section__button">Discover</a> -->
 						</p>
 					</section>
-					<div id="react-root">
-						
-					</div>
-					
+					<section class="section">
+						<div class="section__title">
+							<h1 class="section__title-number">2</h1>
+							<h2 class="section__title-text">2025</h2>
+						</div>
+						<p class="section__paragraph">
+							Création d'un site corporate pour le groupe Léonie<br>
+							<a href="https://u-consulting.vercel.app/" class="section__button">Découvrir</a>
+						</p>
+					</section>
+					<section class="section">
+						<div class="section__title">
+							<h1 class="section__title-number">3</h1>
+							<h2 class="section__title-text">2025</h2>
+						</div>
+						<p class="section__paragraph">
+							Des particules s'animent au fur et à mesure que l'utilisateur parcoure le site<br>
+							<a href="https://unclick-lac.vercel.app/" class="section__button">Découvrir</a>
+						</p>
+					</section>
+					<!-- https://site-perso-exemple.vercel.app/ -->
+					<section class="section">
+						<div class="section__title">
+							<h1 class="section__title-number">4</h1>
+							<h2 class="section__title-text">2025</h2>
+						</div>
+						<p class="section__paragraph">
+							Canevas de site personnalisable<br>
+							<a href="https://site-perso-exemple.vercel.app/" class="section__button">Découvrir</a>
+						</p>
+					</section>
+					<section class="section">
+						<div class="section__title">
+							<h1 class="section__title-number">5</h1>
+							<h2 class="section__title-text">2024</h2>
+						</div>
+						<p class="section__paragraph">
+							Projet 3D : Création d'un effet de profondeur original<br>
+							<a href="https://amaurypichat.fr/slide/index.html" class="section__button">Découvrir</a>
+						</p>
+					</section>
+					<div id="react-root2" class="fixed w-screen h-screen top-[500vh] left-0"></div>
 				</div>
 			</div>
-			<div class="layout__line"></div>
-
-
+			<!-- <div class="layout__line"></div> -->
 			<!-- <div class="layout__faboolea"><a class="layout__faboolea-link" href="https://twitter.com/faboolea">Made by &nbsp; ꜰᴀʙᴏᴏʟᴇᴀ</a></div> -->
+
+
+		</div>
+		</div>
+		<!-- <div class="layout__line"></div> -->
 		</div>
 
 	</main>
+
+
 	<script type="module" src="/src/app/index.js"></script>
 	<script type="module" src="/src/react-entry.jsx"></script>
-	<!--script src="https://tympanus.net/codrops/adpacks/cda.js"></script-->
+	<script>
+		(function () {
+			var fpsCounter = document.getElementById('fps-counter');
+			var frameCount = 0;
+			var lastTime = performance.now();
+			var fps = 0;
+
+			function updateFPS() {
+				frameCount++;
+				var currentTime = performance.now();
+
+				if (currentTime - lastTime > 1000) {
+					fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
+					fpsCounter.textContent = `FPS: ${fps}`;
+					frameCount = 0;
+					lastTime = currentTime;
+				}
+
+				requestAnimationFrame(updateFPS);
+			}
+
+			requestAnimationFrame(updateFPS);
+		})();
+
+		// Fonction pour détecter si l'utilisateur est sur mobile
+		function isMobileDevice() {
+			const mobileKeywords = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+			const userAgent = navigator.userAgent;
+			const isMobile = mobileKeywords.test(userAgent);
+			
+			// On ajoute une classe au body pour pouvoir styler en fonction
+			document.body.classList.toggle('is-mobile', isMobile);
+			
+			return isMobile;
+		}
+
+		// Gestion de la barre de navigation mobile
+		let lastHeight = window.innerHeight;
+		let lastWidth = window.innerWidth;
+		const heightThreshold = 100; // Seuil de différence de hauteur typique pour la barre de navigation
+
+		function handleResize() {
+			const newHeight = window.innerHeight;
+			const newWidth = window.innerWidth;
+			
+			// Si la largeur n'a pas changé (pour éviter les faux positifs lors des rotations)
+			if (newWidth === lastWidth) {
+				const heightDiff = Math.abs(newHeight - lastHeight);
+				
+				// Si le changement de hauteur est significatif mais pas trop grand
+				if (heightDiff > 0 && heightDiff < heightThreshold) {
+					// C'est probablement la barre de navigation qui apparaît/disparaît
+					document.body.classList.toggle('nav-bar-visible', newHeight < lastHeight);
+					
+					// On peut ajuster la hauteur de notre contenu si nécessaire
+					document.documentElement.style.setProperty('--real-viewport-height', `${newHeight}px`);
+					
+					console.log('Changement de la barre de navigation:', 
+						newHeight < lastHeight ? 'apparition' : 'disparition');
+				}
+			}
+			
+			lastHeight = newHeight;
+			lastWidth = newWidth;
+		}
+
+		// On écoute les changements de taille
+		window.addEventListener('resize', handleResize);
+
+		
+	</script>
 </body>
 
 </html>
