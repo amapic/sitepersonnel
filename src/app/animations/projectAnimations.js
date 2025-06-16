@@ -84,3 +84,65 @@ export const playProjectAnimation2 = () => {
       duration: 1.6,
     },'<.3');
   } 
+  
+export function animateIn1() {
+    const animateIn = GSAP.timeline({ 
+      defaults: {
+        ease: 'expo'
+      }
+    })
+    const divArray = [
+      document.getElementById("titreprojet1"),
+      document.getElementById("texteprojet1"),
+      document.getElementById("visitezleprojet1"),
+      document.getElementById("image1"),
+      document.getElementById("ensembletexteetfleche1"),
+    ]
+    
+    animateIn
+      .fromTo(divArray, 
+        {
+          y: -100,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: .2,
+          duration: 1.6
+        }, 
+        '<.3'
+      )
+}
+	
+	
+	export function animateIn2() {
+    const animateIn = GSAP.timeline({ 
+      defaults: {
+        ease: 'expo'
+      }
+    })
+    const divArray=[document.getElementById("titreprojet2"),
+	document.getElementById("texteprojet2"),
+	document.getElementById("visitezleprojet2"),
+	document.getElementById("image2"),
+	document.getElementById("ensembletexteetfleche2"),
+	]
+	
+    
+  animateIn
+  .fromTo(divArray, 
+    {
+      y: -100,
+      opacity: 0,
+    },
+    {
+      y: 0,
+      opacity: 1,
+      stagger: .2,
+      duration: 1.6
+    }, 
+    '<.3'
+  )
+    }
+

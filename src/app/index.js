@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import GSAP from "gsap";
-import "./animations/cursor.js";  // Import du curseur personnalisé
+import "./animations/cursor.js"; // Import du curseur personnalisé
 
 import Animations from "./Animations";
 import SmoothScroll from "./SmoothScroll";
@@ -19,6 +19,7 @@ class ScrollStage {
     this.elements = {
       line: this.element.querySelectorAll(".layout__line")[this.index],
     };
+    this.canvasHasRendered = false;
 
     this.viewport = {
       width: window.innerWidth,
@@ -27,7 +28,7 @@ class ScrollStage {
 
     this.mouse = {
       x: 0,
-      y: 0,
+      y: 0
     };
 
     this.scroll = {
@@ -74,7 +75,7 @@ class ScrollStage {
     this.scene = new THREE.Scene();
 
     this.renderer = new THREE.WebGLRenderer({
-      antialias: false,
+      antialias: true,
       alpha: true,
     });
     // !this.isMobile
@@ -182,10 +183,10 @@ class ScrollStage {
     // }
 
     // GSAP.to(this.elements.line, {
-      // scaleX: this.scroll.normalized,
-      // transformOrigin: "left",
-      // duration: 1.5,
-      // ease: "ease",
+    // scaleX: this.scroll.normalized,
+    // transformOrigin: "left",
+    // duration: 1.5,
+    // ease: "ease",
     // });
 
     // if (!(this.isMobile && this.clock.getElapsedTime() > 2)) {
@@ -255,26 +256,37 @@ class ScrollStage {
 
   onResize() {
     const isMobile = isMobileDevice();
-    // if (!isMobile) {
-      this.viewport = {
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
-      // alert(this.viewport.width + " " + this.viewport.height);
-      this.smoothScroll.onResize();
+    const previousWidth = this.viewport.width;
+    const previousHeight = this.viewport.height;
+    const isHeightOnlyResize = previousWidth === window.innerWidth;
 
-      // if (this.viewport.width < this.viewport.height) {
+    this.viewport = {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+
+    // Calcul du facteur d'échelle pour maintenir le ratio
+    const widthRatio = this.viewport.width / previousWidth;
+    const heightRatio = this.viewport.height / previousHeight;
+    // const scaleFactor = Math.min(widthRatio, -1);
+    // const scaleFactor = heightRatio;
+    const scaleFactor = 1;
+
+    // if (isHeightOnlyResize) {
+      console.log('Redimensionnement de la hauteur uniquement');
       if (isMobile) {
-        this.mesh.scale.set(0.75, 0.75, 0.75);
+        this.mesh.scale.set(0.75 * scaleFactor, 0.75 * scaleFactor, 0.75 * scaleFactor);
       } else {
-        this.mesh.scale.set(1, 1, 1);
+        this.mesh.scale.set(1 * scaleFactor, 1 * scaleFactor, 1 * scaleFactor);
       }
-
-      this.camera.aspect = this.viewport.width / this.viewport.height;
-      this.camera.updateProjectionMatrix();
-
-      this.renderer.setSize(this.viewport.width, this.viewport.height);
     // }
+
+    this.smoothScroll.onResize();
+
+    this.camera.aspect = this.viewport.width / this.viewport.height;
+    this.camera.updateProjectionMatrix();
+
+    this.renderer.setSize(this.viewport.width, this.viewport.height);
   }
 
   /**
@@ -299,9 +311,10 @@ class ScrollStage {
    */
   render() {
     // if (!this.isMobile) {
-    if (1==0) {
+    // if (1==0) {
     this.renderer.render(this.scene, this.camera);
-    }
+    this.canvasHasRendered = true;
+    // }
   }
 
   debounce(func, wait) {
@@ -321,25 +334,25 @@ new ScrollStage();
 
 // Initialiser l'effet des stores
 // document.addEventListener("DOMContentLoaded", () => {
-  // if (window.innerWidth > 768) {
-    // initBlindsEffect("#blindsEffectContainer");
-  // }
+// if (window.innerWidth > 768) {
+// initBlindsEffect("#blindsEffectContainer");
+// }
 
-  // Gestion de la position left dynamique
-  // const updateDynamicLeft = () => {
-    // const container = document.querySelector(".dynamic-left");
-    // if (container) {
-      // const leftValue =
-        // window.innerWidth <= 360 ? "10px" : `${window.innerWidth / 5}px`;
-      // container.style.left = `-${leftValue}`;
-    // }
-  // };
+// Gestion de la position left dynamique
+// const updateDynamicLeft = () => {
+// const container = document.querySelector(".dynamic-left");
+// if (container) {
+// const leftValue =
+// window.innerWidth <= 360 ? "10px" : `${window.innerWidth / 5}px`;
+// container.style.left = `-${leftValue}`;
+// }
+// };
 
-  // Appel initial
-  // updateDynamicLeft();
+// Appel initial
+// updateDynamicLeft();
 
-  // Mise à jour lors du redimensionnement
-  // window.addEventListener("resize", updateDynamicLeft);
+// Mise à jour lors du redimensionnement
+// window.addEventListener("resize", updateDynamicLeft);
 // });
 
 function isMobileDevice() {

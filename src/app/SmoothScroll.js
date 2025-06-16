@@ -3,6 +3,8 @@ import { SplitText } from "gsap/SplitText";
 import {
   playProjectAnimation,
   playProjectAnimation2,
+  animateIn1,
+  animateIn2
 } from "./animations/projectAnimations";
 GSAP.registerPlugin(SplitText);
 export default class {
@@ -369,12 +371,14 @@ export default class {
 
         if (this.scroll.soft > 1.2 * this.viewport.height && !this.animationPlayed) {
           this.animationPlayed = true;
-          playProjectAnimation();
+          animateIn1();
+		  
         }
 
         if (this.scroll.soft > 2.2 * this.viewport.height && !this.animationPlayed2) {
           this.animationPlayed2 = true;
-          playProjectAnimation2();
+          // playProjectAnimation2();
+          animateIn2();
         }
 
         this.ticking = false;

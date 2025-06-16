@@ -23,6 +23,7 @@ export default class {
         ease: 'expo'
       }
     })
+	
     
     animateIn
       .from(this.camera.position, {
