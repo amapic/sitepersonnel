@@ -1,6 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import MonComposant from './components/MonComposant'
+// import MonComposant from './components/MonComposant'
+const MonComposant = React.lazy(() => import('./components/MonComposant'))  
 
 // Montez React dans un élément existant de votre HTML
  function isMobileDevice() {

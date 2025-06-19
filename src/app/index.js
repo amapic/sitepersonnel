@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import GSAP from "gsap";
-import "./animations/cursor.js"; // Import du curseur personnalisé
+// Import du curseur personnalisé
+ import "./animations/cursor.js"; 
+// import './lazyLoader.js';
 
 import Animations from "./Animations";
 import SmoothScroll from "./SmoothScroll";
@@ -8,11 +10,17 @@ import SmoothScroll from "./SmoothScroll";
 import vertexShader from "./shaders/vertex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
 
-import { initBlindsEffect } from "./animations/blindsEffect.js";
+// import { initBlindsEffect } from "./animations/blindsEffect.js";
 
 class ScrollStage {
   constructor() {
+    // Masquer le curseur de la souris
+    // document.body.style.cursor = 'none';
+   
     this.isMobile = window.innerWidth <= 768;
+    // if (!this.isMobile) {
+      document.body.style.cursor = 'none';
+    // }
     this.index = this.isMobile ? 1 : 0;
     this.element = document.querySelectorAll(".content")[this.index];
     this.contaienrcanvas2 = document.querySelector("#canvas-container2");
@@ -331,10 +339,10 @@ class ScrollStage {
    */
   render() {
     // if (!this.isMobile) {
-    // if (1==0) {
+    if (1==0) {
     this.renderer.render(this.scene, this.camera);
     this.canvasHasRendered = true;
-    // }
+    }
   }
 
   debounce(func, wait) {

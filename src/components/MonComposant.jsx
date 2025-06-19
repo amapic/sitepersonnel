@@ -80,7 +80,7 @@ export default function MonComposant() {
             dpr={[1, 2]}
             gl={{
               antialias: true,
-              preserveDrawingBuffer: true,
+              preserveDrawingBuffer: false,
             }}
             // orthographic
             camera={{
@@ -103,7 +103,7 @@ export default function MonComposant() {
                 className="absolute left-0 right-0 w-full text-center pointer-events-auto text-4xl"
                 style={{ top: 0 }}
               >
-                <a href="tel:+33688918019">06 88 91 80 19</a>
+                <a name="contact_tel" href="tel:+33688918019">06 88 91 80 19</a>
               </span>
               {/* Texte statique, toujours visible */}
               <span
@@ -111,12 +111,21 @@ export default function MonComposant() {
                 style={{ top: 0 }}
                 aria-hidden="true"
               >
-                <a href="tel:+33688918019" style={{ color: "inherit", textDecoration: "inherit" }}>
+                <a name="contact_tel" href="tel:+33688918019" style={{ color: "inherit", textDecoration: "inherit" }}>
                   06 88 91 80 19
                 </a>
+                {/* <a 
+                  name="contact_tel" 
+                  href="tel:+33688918019" 
+                  style={{ 
+                    color: "inherit", 
+                    textDecoration: "inherit",
+                    pointerEvents: "auto"
+                  }}
+                ></a> */}
               </span>
             </div>
-            <span  className="w-full text-center">Lyon 6 </span>
+            <span className="w-full text-center">Lyon 6 </span>
             <div className="relative w-full flex justify-center items-center" style={{ minHeight: "2.5em" }}>
               {/* Texte animé (SplitText/GSAP) */}
               <span
@@ -124,7 +133,7 @@ export default function MonComposant() {
                 className="absolute left-0 right-0 w-full text-center pointer-events-auto text-4xl"
                 style={{ top: 0 }}
               >
-                <a href="mailto:amaurypichat@gmail.com">amaury.pichat@gmail.com</a>
+                <a name="contact_mail" href="mailto:amaurypichat@gmail.com">amaury.pichat@gmail.com</a>
               </span>
               {/* Texte statique, toujours visible */}
               <span
@@ -132,7 +141,7 @@ export default function MonComposant() {
                 style={{ top: 0 }}
                 aria-hidden="true"
               >
-                <a href="mailto:amaurypichat@gmail.com" style={{ color: "inherit", textDecoration: "inherit" }}>
+                <a name="contact_mail" href="mailto:amaurypichat@gmail.com" style={{ color: "inherit", textDecoration: "inherit" }}>
                   amaury.pichat@gmail.com
                 </a>
               </span>
@@ -267,38 +276,7 @@ function Scene() {
     materialRef.current.uniforms.uMouse.value.y = mouseLerped.current.y;
 
 
-    // Calcul de la distance avec les éléments de contact
     
-
-    // if (cursor && contactTel && contactMail) {
-    //   const cursorRect = cursor.getBoundingClientRect();
-    //   const telRect = contactTel.getBoundingClientRect();
-    //   const mailRect = contactMail.getBoundingClientRect();
-
-    //   // Position du centre du curseur
-    //   const cursorX = cursorRect.left + cursorRect.width / 2;
-    //   const cursorY = cursorRect.top + cursorRect.height / 2;
-
-    //   // Position du centre des éléments de contact
-    //   const telX = telRect.left + telRect.width / 2;
-    //   const telY = telRect.top + telRect.height / 2;
-    //   const mailX = mailRect.left + mailRect.width / 2;
-    //   const mailY = mailRect.top + mailRect.height / 2;
-
-    //   // Calcul des distances
-    //   const distanceTel = Math.sqrt(
-    //     Math.pow(cursorX - telX, 2) + Math.pow(cursorY - telY, 2)
-    //   );
-    //   const distanceMail = Math.sqrt(
-    //     Math.pow(cursorX - mailX, 2) + Math.pow(cursorY - mailY, 2)
-    //   );
-
-    //   materialRef.current.uniforms.uDistance.value = distanceTel;
-
-    //   // Vous pouvez utiliser ces distances pour des effets
-    //   // console.log('Distance au téléphone:', distanceTel);
-    //   // console.log('Distance au mail:', distanceMail);
-    // }
   });
 
   return (

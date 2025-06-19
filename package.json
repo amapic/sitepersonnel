@@ -31,12 +31,16 @@
   "dependencies": {
     "@react-three/drei": "^9.74.0",
     "@react-three/fiber": "^8.13.0",
+    "cssnano": "^7.0.7",
+    "fs": "^0.0.1-security",
     "gsap": "^3.12.0",
     "html2canvas": "^1.4.1",
     "leva": "^0.10.0",
     "lodash": "^4.17.21",
+    "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "sharp": "^0.34.2",
     "three": "^0.153.0",
     "three-custom-shader-material": "^6.3.7"
   }

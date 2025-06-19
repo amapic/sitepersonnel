@@ -1,8 +1,7 @@
 import GSAP from "gsap";
 import { SplitText } from "gsap/SplitText";
 import {
-  playProjectAnimation,
-  playProjectAnimation2,
+
   animateIn1,
   animateIn2,
   animateIn3

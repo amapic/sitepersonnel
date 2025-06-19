@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="/src/styles/style.css">
   <link rel="stylesheet" type="text/css" href="./src/styles/base.css" />
 	<link rel="stylesheet" type="text/css" href="./src/styles/shaders-on-scroll.sass" />
+  <link rel="shortcut icon" href="favicon.svg?v=3">
 </head>
-
-<body class="bg-[url('/images/fond.png')] bg-cover bg-center bg-no-repeat min-h-screen">
+<!-- bg-[url('/images/fond.png')] -->
+<body class=" bg-cover bg-center bg-no-repeat min-h-screen">
   <!-- <div class="container"> -->
     <main class="mx-auto px-4 py-8   w-[80%]">
       <h1 class="text-3xl font-bold mb-8">Mentions Légales</h1>
@@ -78,16 +79,18 @@
       </section>
 
       <div class="flex flex-row justify-center w-full text-4xl">
-        <p class="section__title-arrow-mentions">
+        <!-- <p class="section__title-arrow-mentions">
           <span>➤</span>
           <span>➤</span>
-        </p>
-        <span class="h-full text-center flex items-center justify-center leading-[100%] break-normal">Retour à l'accueil</span>
+        </p> -->
+        <span class="h-full text-center flex items-center justify-center leading-[100%] break-normal"><a name="retourà laccueil" href="/" style="color: inherit; text-decoration: inherit;">Retour à l'accueil</a></span>
       </div>
     </main>
 
-  <!-- </div> -->
-  <!-- <script type="module" src="/src/app/index.js"></script> -->
+  /* <!-- </div> --> */
 </body>
+<script>
+  document.body.style.cursor = 'default';
+</script>
 
 </html>

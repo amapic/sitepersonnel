@@ -19,10 +19,10 @@ float elevation(float radius, float intensity) {
 
 void main() {
 	vec3 newPosition = position;
-	if (uMouse.x != 0.0 && uMouse.y != 0.0) {
-		newPosition.z += elevation(0.2*(max((1000.0-uDistance)/1000.0	,0.5)	), .7);
-	}
-	// newPosition.z += elevation(0.2, .7);
+	// if (uMouse.x != 0.0 && uMouse.y != 0.0) {
+	// 	newPosition.z += elevation(0.2*(max((1000.0-uDistance)/1000.0	,0.5)	), .7);
+	// }
+	newPosition.z += elevation(0.2, .7);
 
 	csm_Position = newPosition;
 	vUv = uv;
