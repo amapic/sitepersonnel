@@ -12,6 +12,9 @@ import vertexShader from "../app/shaders/vertexbulk.glsl";
 import fragmentShader from "../app/shaders/fragmentbulk.glsl";
 import html2canvas from "html2canvas";
 import { Canvas } from "@react-three/fiber";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+gsap.registerPlugin(SplitText);
 
 export default function MonComposant() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -22,7 +25,39 @@ export default function MonComposant() {
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
+
+    const text = new SplitText(document.getElementById("contact_tel"), {
+      type: "chars",
+      charsClass: "char",
+    });
+
+    const tl = gsap.timeline({repeat: -1});
+  
+    tl.to(text.chars, {
+      scale: 2,
+      opacity: 0,
+      duration: 2,
+      ease: "power4.out",
+    });
+
+    
+    const text2 = new SplitText(document.getElementById("contact_mail"), {
+      type: "chars",
+      charsClass: "char",
+    });
+
+    const tl2 = gsap.timeline({repeat: -1});
+  
+    tl2.to(text2.chars, {
+      scale: 2,
+      opacity: 0,
+      duration: 2,
+      ease: "power4.out",
+    });
+
+    // tl.from(text.chars, {
     return () => window.removeEventListener("resize", handleResize);
+
   }, []);
 
   return (
@@ -47,6 +82,7 @@ export default function MonComposant() {
               antialias: true,
               preserveDrawingBuffer: true,
             }}
+            // orthographic
             camera={{
               fov: 55,
               near: 0.1,
@@ -57,22 +93,63 @@ export default function MonComposant() {
           </Canvas>
         )}
 
-        <div className="relative w-full h-[0vh]">
+        <div className="relative w-full h-[0vh] pointer-events-none">
           {/* grande taille */}
           <div className="z-[1000] pb-4 flex flex-col md:flex-row items-center justify-center absolute h-[10vh] -top-[11vh] left-0 right-0 w-full h-full ">
-            <span id="contact_tel" className="w-full text-center"><a href="tel:+33688918019">06 88 91 80 19</a> </span>
+            <div className="relative w-full flex justify-center items-center" style={{ minHeight: "2.5em" }}>
+              {/* Texte animé (SplitText/GSAP) */}
+              <span
+                id="contact_tel"
+                className="absolute left-0 right-0 w-full text-center pointer-events-auto text-4xl"
+                style={{ top: 0 }}
+              >
+                <a href="tel:+33688918019">06 88 91 80 19</a>
+              </span>
+              {/* Texte statique, toujours visible */}
+              <span
+                className="absolute left-0 right-0 w-full text-center pointer-events-none text-4xl"
+                style={{ top: 0 }}
+                aria-hidden="true"
+              >
+                <a href="tel:+33688918019" style={{ color: "inherit", textDecoration: "inherit" }}>
+                  06 88 91 80 19
+                </a>
+              </span>
+            </div>
             <span  className="w-full text-center">Lyon 6 </span>
-            <span id="contact_mail" className="w-full text-center"> <a href="mailto:amaurypichat@gmail.com">amaury.pichat@gmail.com</a></span>
-            <span className="w-full text-center">
-              <span className="border-b-2 border-dotted border-current inline-block leading-none cursor-pointer">
-                <a href="/mentions-legales.html" target="_blank" rel="noopener noreferrer">
+            <div className="relative w-full flex justify-center items-center" style={{ minHeight: "2.5em" }}>
+              {/* Texte animé (SplitText/GSAP) */}
+              <span
+                id="contact_mail"
+                className="absolute left-0 right-0 w-full text-center pointer-events-auto text-4xl"
+                style={{ top: 0 }}
+              >
+                <a href="mailto:amaurypichat@gmail.com">amaury.pichat@gmail.com</a>
+              </span>
+              {/* Texte statique, toujours visible */}
+              <span
+                className="absolute left-0 right-0 w-full text-center pointer-events-none text-4xl"
+                style={{ top: 0 }}
+                aria-hidden="true"
+              >
+                <a href="mailto:amaurypichat@gmail.com" style={{ color: "inherit", textDecoration: "inherit" }}>
+                  amaury.pichat@gmail.com
+                </a>
+              </span>
+            </div>
+            <span className="w-full text-center pointer-events-auto">
+              <span className="pointer-events-auto border-b-2 border-dotted border-current inline-block leading-none cursor-pointer">
+                <a href="/mentions-legales.html" target="_blank" rel="noopener noreferrer pointer-events-auto">
                   mentions-legales
                 </a>
                 </span>
             </span>
-            <span className="w-full text-center">
-              <span className="border-b-2 border-dotted border-current inline-block leading-none cursor-pointer">
-                  politique de confidentialité</span>
+            <span className="pointer-events-auto w-full text-center">
+              <span className="pointer-events-auto border-b-2 border-dotted border-current inline-block leading-none cursor-pointer">
+              <a href="/mentions-legales.html" target="_blank" rel="noopener noreferrer pointer-events-auto">
+                  politique de confidentialité
+                  </a>
+                  </span>
             </span>
           </div>
 
@@ -141,6 +218,10 @@ function Scene() {
   const [domEl, setDomEl] = useState(null);
   const [containerRatio, setContainerRatio] = useState(1);
 
+  const cursor = document.querySelector('.custom-cursor');
+    const contactTel = document.querySelector('#contact_tel');
+    const contactMail = document.querySelector('#contact_mail');
+
   useEffect(() => {
     const container = document.getElementById("canvas-container2");
     if (container) {
@@ -163,6 +244,7 @@ function Scene() {
       uTexture: { value: textureDOM },
       uMouse: { value: new THREE.Vector2(0, 0) },
       uRatio: { value: containerRatio },
+      uDistance: { value: 1000 },
     }),
     [textureDOM, containerRatio]
   );
@@ -183,6 +265,40 @@ function Scene() {
     );
     materialRef.current.uniforms.uMouse.value.x = mouseLerped.current.x;
     materialRef.current.uniforms.uMouse.value.y = mouseLerped.current.y;
+
+
+    // Calcul de la distance avec les éléments de contact
+    
+
+    // if (cursor && contactTel && contactMail) {
+    //   const cursorRect = cursor.getBoundingClientRect();
+    //   const telRect = contactTel.getBoundingClientRect();
+    //   const mailRect = contactMail.getBoundingClientRect();
+
+    //   // Position du centre du curseur
+    //   const cursorX = cursorRect.left + cursorRect.width / 2;
+    //   const cursorY = cursorRect.top + cursorRect.height / 2;
+
+    //   // Position du centre des éléments de contact
+    //   const telX = telRect.left + telRect.width / 2;
+    //   const telY = telRect.top + telRect.height / 2;
+    //   const mailX = mailRect.left + mailRect.width / 2;
+    //   const mailY = mailRect.top + mailRect.height / 2;
+
+    //   // Calcul des distances
+    //   const distanceTel = Math.sqrt(
+    //     Math.pow(cursorX - telX, 2) + Math.pow(cursorY - telY, 2)
+    //   );
+    //   const distanceMail = Math.sqrt(
+    //     Math.pow(cursorX - mailX, 2) + Math.pow(cursorY - mailY, 2)
+    //   );
+
+    //   materialRef.current.uniforms.uDistance.value = distanceTel;
+
+    //   // Vous pouvez utiliser ces distances pour des effets
+    //   // console.log('Distance au téléphone:', distanceTel);
+    //   // console.log('Distance au mail:', distanceMail);
+    // }
   });
 
   return (

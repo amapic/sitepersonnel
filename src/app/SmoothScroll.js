@@ -4,7 +4,8 @@ import {
   playProjectAnimation,
   playProjectAnimation2,
   animateIn1,
-  animateIn2
+  animateIn2,
+  animateIn3
 } from "./animations/projectAnimations";
 GSAP.registerPlugin(SplitText);
 export default class {
@@ -14,6 +15,7 @@ export default class {
     this.scroll = scroll;
     this.animationPlayed = false;
     this.animationPlayed2 = false;
+    this.animationPlayed3 = false;
     this.easedScroll = this.scroll.soft;
     this.isMobile = window.innerWidth <= 768;
     this.ticking = false;
@@ -379,6 +381,12 @@ export default class {
           this.animationPlayed2 = true;
           // playProjectAnimation2();
           animateIn2();
+        }
+
+        if (this.scroll.soft > 3.2 * this.viewport.height && !this.animationPlayed3) {
+          this.animationPlayed3 = true;
+          // playProjectAnimation2();
+          animateIn3();
         }
 
         this.ticking = false;

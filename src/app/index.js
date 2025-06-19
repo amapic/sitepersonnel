@@ -20,6 +20,8 @@ class ScrollStage {
       line: this.element.querySelectorAll(".layout__line")[this.index],
     };
     this.canvasHasRendered = false;
+    this.tanFOV = "init";
+    this.windowHeight = 0;
 
     this.viewport = {
       width: window.innerWidth,
@@ -120,6 +122,10 @@ class ScrollStage {
     this.addCamera();
     this.addMesh();
     this.addEventListeners();
+    if (this.tanFOV=="init"){
+      this.tanFOV = Math.tan( ( ( Math.PI / 180 ) * this.camera.fov / 2 ) );
+      this.windowHeight = window.innerHeight;
+    }
     this.onResize();
     this.update();
   }
@@ -259,11 +265,24 @@ class ScrollStage {
     const previousWidth = this.viewport.width;
     const previousHeight = this.viewport.height;
     const isHeightOnlyResize = previousWidth === window.innerWidth;
+    
+    // Mettre à jour l'historique des hauteurs
+    if (window.updateHeightHistory) {
+      // window.updateHeightHistory(previousHeight, window.innerHeight);
+    }
 
     this.viewport = {
       width: window.innerWidth,
       height: window.innerHeight,
     };
+    // console.log("ee",this.tanFOV);
+    // if (this.tanFOV!="init"){
+      console.log(( 360 / Math.PI ) * Math.atan( this.tanFOV * ( window.innerHeight / this.windowHeight ) ));
+      this.camera.fov = ( 360 / Math.PI ) * Math.atan( this.tanFOV * ( window.innerHeight / this.windowHeight ) );
+    // }
+
+    // this.camera.lookAt( new THREE.Vector3(0, 0, 0) );
+    // this.camera.updateProjectionMatrix();
 
     // Calcul du facteur d'échelle pour maintenir le ratio
     const widthRatio = this.viewport.width / previousWidth;
@@ -283,10 +302,10 @@ class ScrollStage {
 
     this.smoothScroll.onResize();
 
-    this.camera.aspect = this.viewport.width / this.viewport.height;
+    this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
 
-    this.renderer.setSize(this.viewport.width, this.viewport.height);
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
   /**
@@ -302,6 +321,7 @@ class ScrollStage {
     this.smoothScroll.update();
 
     this.render();
+    
 
     window.requestAnimationFrame(this.update);
   }
