@@ -1,18 +1,5 @@
 import GSAP from 'gsap'
-function loadScript(src) {
-  
-  const script = document.createElement('script')
-  script.src = src
-  script.onload = () => {
-    console.log('Script chargé avec succès:', src)
-    alert(src)
-    // Le script est maintenant chargé et exécuté
-  }
-  script.onerror = () => {
-    console.error('Erreur lors du chargement du script:', src)
-  }
-  document.head.appendChild(script)
-}
+
 
 
 export default class {
@@ -59,6 +46,7 @@ export default class {
       ], {
           y: -100,
           autoAlpha: 0,
+          opacity: 0,
           stagger: .2,
           duration: 1.6
       }, '<.3').to(cursor, {

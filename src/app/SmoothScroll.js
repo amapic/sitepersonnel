@@ -352,7 +352,7 @@ export default class {
 
         //ajout perso
 
-        if (this.scroll.soft > 1.1 * this.viewport.height) {
+        if (this.scroll.soft > 1.3 * this.viewport.height) {
           const voici = document.querySelector("#voici");
           GSAP.to(voici, {
             opacity: 0,
@@ -361,7 +361,7 @@ export default class {
           });
         }
 
-        if (this.scroll.soft < 1.1 * this.viewport.height) {
+        if (this.scroll.soft < 1.3 * this.viewport.height) {
           const voici = document.querySelector("#voici");
           GSAP.to(voici, {
             opacity: 1,

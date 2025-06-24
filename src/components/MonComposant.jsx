@@ -100,18 +100,18 @@ export default function MonComposant() {
               {/* Texte animé (SplitText/GSAP) */}
               <span
                 id="contact_tel"
-                className="absolute left-0 right-0 w-full text-center pointer-events-auto text-4xl"
+                className="absolute left-0 right-0 w-full text-center pointer-events-auto text-2xl xl:text-4xl"
                 style={{ top: 0 }}
               >
-                <a name="contact_tel" href="tel:+33688918019">06 88 91 80 19</a>
+                <a name="contact telephonique" href="tel:+33688918019">06 88 91 80 19</a>
               </span>
               {/* Texte statique, toujours visible */}
               <span
-                className="absolute left-0 right-0 w-full text-center pointer-events-none text-4xl"
+                className="absolute left-0 right-0 w-full text-center pointer-events-none text-2xl xl:text-4xl"
                 style={{ top: 0 }}
                 aria-hidden="true"
               >
-                <a name="contact_tel" href="tel:+33688918019" style={{ color: "inherit", textDecoration: "inherit" }}>
+                <a name="contact telephone" href="tel:+33688918019" style={{ color: "inherit", textDecoration: "inherit" }}>
                   06 88 91 80 19
                 </a>
                 {/* <a 
@@ -133,7 +133,14 @@ export default function MonComposant() {
                 className="absolute left-0 right-0 w-full text-center pointer-events-auto text-4xl"
                 style={{ top: 0 }}
               >
-                <a name="contact_mail" href="mailto:amaurypichat@gmail.com">amaury.pichat@gmail.com</a>
+                <a 
+                  href="mailto:amaurypichat@gmail.com"
+                  aria-label="Envoyez-nous un email à amaury.pichat@gmail.com"
+                  className="text-center pointer-events-auto text-2xl xl:text-4xl"
+                  style={{ display: 'inline-block' }}
+                >
+                  amaury.pichat@gmail.com
+                </a>
               </span>
               {/* Texte statique, toujours visible */}
               <span
@@ -141,7 +148,12 @@ export default function MonComposant() {
                 style={{ top: 0 }}
                 aria-hidden="true"
               >
-                <a name="contact_mail" href="mailto:amaurypichat@gmail.com" style={{ color: "inherit", textDecoration: "inherit" }}>
+                <a 
+                  href="mailto:amaurypichat@gmail.com"
+                  aria-label="Envoyez-nous un email à amaury.pichat@gmail.com"
+                  className="text-center pointer-events-auto text-2xl xl:text-4xl"
+                  style={{ display: 'inline-block' }}
+                >
                   amaury.pichat@gmail.com
                 </a>
               </span>

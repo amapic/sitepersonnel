@@ -6,16 +6,44 @@ const cursorArrow = document.querySelector(".cursor-arrow");
 const cursorWidth = 80;
 const cursorHeight = 80;
 
+// Système de détection de transition entre sections
+
+
+// Fonction pour détecter les transitions entre sections
+
+
+// consent-banner
+document.querySelector("#consent-banner").addEventListener("mouseenter", (event) => {
+  cursor.style.display = "none";
+  // alert(cursor.style.display);
+  // cursor.style.display = "hidden";
+  // window.style.cursor="none";
+
+});
+
+document.querySelector("#consent-banner").addEventListener("mouseleave", (event) => {
+  cursor.style.display = "block";
+  // alert(cursor.style.display);
+  // cursor.style.display = "hidden";
+  // window.style.cursor="none";
+
+});
+
+
+// Fonction pour afficher la bannière
+
+
+document.querySelector(".frame__links").addEventListener("mouseenter", (event) => {
+  cursor.style.display = "none";
+});
+document.querySelector(".frame__links").addEventListener("mouseleave", (event) => {
+  cursor.style.display = "block";
+});
+
 // fleche1,fleche2
 document.getElementById("fleche1").addEventListener("mouseenter", (event) => {
   cursorArrow.style.opacity = 0;
-  // const cursor = document.querySelector(".custom-cursor");
-  gsap.to(cursorGoText, {
-    scaleX: 2,
-    scaleY: 10,
-    duration: 0.0,
-    ease: "power2.inOut",
-  });
+
   gsap.killTweensOf(cursor);
 
   gsap.to(cursor, {
@@ -38,12 +66,19 @@ document.getElementById("fleche1").addEventListener("mouseenter", (event) => {
                 duration: 0.1,
                 ease: "power2.inOut",
                 onComplete: () => {
-                  
                   gsap.to(cursor, {
                     scaleX: 2,
                     scaleY: 1.3,
                     duration: 0.3,
                     ease: "power2.inOut",
+                    onComplete: () => {
+                      // gsap.to(cursorGoText, {
+                      //   scaleX: 2,
+                      //   scaleY: 10,
+                      //   duration: 0.0,
+                      //   // ease: "power2.inOut",
+                      // });
+                    },
                   });
                 },
               });
@@ -107,7 +142,7 @@ document.getElementById("fleche2").addEventListener("mouseenter", (event) => {
                 onComplete: () => {
                   gsap.to(cursorGoText, {
                     scaleX: 2,
-                    scaleY: 3,
+                    scaleY: 2,
                     duration: 0.0,
                     ease: "power2.inOut",
                   });
@@ -161,10 +196,16 @@ document
 document
   .getElementById("react-root1")
   .addEventListener("mouseleave", (event) => {
-    // const cursor = document.querySelector(".custom-cursor");
-    const circle = document.querySelector(".cursor-circle");
-    gsap.to(cursor, { scale: 1.5, duration: 0.3 });
-    gsap.to(circle, { fill: null, duration: 0.5 });
+    if (
+      event.clientX >= 0 &&
+      event.clientX <= window.innerWidth &&
+      event.clientY >= 0 &&
+      event.clientY <= window.innerHeight
+    ) {
+      const circle = document.querySelector(".cursor-circle");
+      gsap.to(cursor, { scale: 1.5, duration: 0.3 });
+      gsap.to(circle, { fill: null, duration: 0.5 });
+    }
   });
 
 document
@@ -179,11 +220,43 @@ document
 document
   .getElementById("sectionprojet1")
   .addEventListener("mouseenter", (event) => {
+    // alert("ok");
     // const cursor = document.querySelector(".custom-cursor");
     const circle = document.querySelector(".cursor-circle");
     gsap.to(cursor, { scale: 1.5, duration: 0.3 });
     gsap.to(circle, { fill: null, duration: 0.5 });
   });
+
+  document
+  .getElementById("sectionprojet1")
+  .addEventListener("mouseleave", (event) => {
+    // alert(window.scrollX/window.innerWidth);
+    if (window.scrollY > 0 && window.scrollY < window.innerHeight) {
+      // alert(window.scrollX);
+      gsap.to(cursor, { scale: 1.0, duration: 0.3 });
+    }
+    // alert("ok");
+    // const cursor = document.querySelector(".custom-cursor");
+    // const circle = document.querySelector(".cursor-circle");
+    
+    // gsap.to(circle, { fill: null, duration: 0.5 });
+  });
+
+// document
+//   .getElementById("sectionprojet0")
+//   .addEventListener("mouseleave", (event) => {
+//     // alert(cursor.getBoundingClientRect().top);
+//     if (cursor.getBoundingClientRect().top < window.innerHeight / 10) {
+//       // cursor.style.left=screen.width/2+"px";
+//       // cursor.style.top=window.innerHeight/2+"px";
+
+//       // gsap.to(cursor, {
+//       //   left: screen.width / 2,
+//       //   top: window.innerHeight / 2,
+//       //   duration: 0.6,
+//       // });
+//     }
+//   });
 
 class CustomCursor {
   constructor() {
@@ -208,7 +281,6 @@ class CustomCursor {
 
   init() {
     if (this.isMobile) {
-
       let cursor = document.querySelector(".custom-cursor");
       cursor.style.display = "none";
       return;
@@ -262,9 +334,9 @@ class CustomCursor {
 
   bindEvents() {
     document.addEventListener("mousemove", this.handleMouseMove.bind(this));
-    this.hoverAreas.forEach((area) => {
-      area.addEventListener("mouseenter", this.handleHoverEnter.bind(this));
-    });
+    // this.hoverAreas.forEach((area) => {
+      // area.addEventListener("mouseenter", this.handleHoverEnter.bind(this));
+    // });
   }
 
   handleMouseMove(e) {
@@ -387,16 +459,16 @@ class CustomCursor {
 
   handleCloseTarget(targetCenterX, targetCenterY, clientX, clientY, distance) {
     this.cursorArrow.classList.remove("active", "pointing");
-    
+
     // Annuler le timeout précédent s'il existe
-    if (this.closeTargetTimeout) {
-      clearTimeout(this.closeTargetTimeout);
-    }
-    
-    this.closeTargetTimeout = setTimeout(() => {
-      this.cursorGoText.classList.add("active");
-    }, 500);
-    
+    // if (this.closeTargetTimeout) {
+    // clearTimeout(this.closeTargetTimeout);
+    // }
+
+    // this.closeTargetTimeout = setTimeout(() => {
+    this.cursorGoText.classList.add("active");
+    // }, 000);
+
     this.textcursor1.style.opacity = "0";
     this.arrowcursor1.style.opacity = "0";
   }
@@ -407,7 +479,7 @@ class CustomCursor {
       clearTimeout(this.closeTargetTimeout);
       this.closeTargetTimeout = null;
     }
-    
+
     // this.cursor.classList.remove("anim");
     // this.cursor.style.scaleX = 1.5;
     // this.cursor.style.scaleY = 1.5;
@@ -428,9 +500,9 @@ class CustomCursor {
     // this.cursor.style.scale = 1;
   }
 
-  handleHoverEnter() {
+  // handleHoverEnter() {
     // Implement hover effect if needed
-  }
+  // }
 }
 
 // Initialize cursor when DOM is loaded

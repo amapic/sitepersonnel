@@ -10,7 +10,20 @@ import SmoothScroll from "./SmoothScroll";
 import vertexShader from "./shaders/vertex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
 
+
+// document.querySelectorAll(".frame")[1].addEventListener("click", () => {
+//   document.querySelectorAll(".frame__links")[1].classList.toggle("active");
+//   // alert("ok");
+// });
 // import { initBlindsEffect } from "./animations/blindsEffect.js";
+
+// Empêcher la restauration automatique de la position de scroll
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+// Forcer le scroll vers le haut immédiatement
+window.scrollTo(0, 0);
 
 class ScrollStage {
   constructor() {
@@ -18,14 +31,14 @@ class ScrollStage {
     // document.body.style.cursor = 'none';
    
     this.isMobile = window.innerWidth <= 768;
-    // if (!this.isMobile) {
+    // if (this.isMobile) {
       document.body.style.cursor = 'none';
     // }
     this.index = this.isMobile ? 1 : 0;
     this.element = document.querySelectorAll(".content")[this.index];
     this.contaienrcanvas2 = document.querySelector("#canvas-container2");
     this.elements = {
-      line: this.element.querySelectorAll(".layout__line")[this.index],
+      line: document.querySelector(".layout__line"),
     };
     this.canvasHasRendered = false;
     this.tanFOV = "init";
@@ -196,12 +209,12 @@ class ScrollStage {
     //   return;
     // }
 
-    // GSAP.to(this.elements.line, {
-    // scaleX: this.scroll.normalized,
-    // transformOrigin: "left",
-    // duration: 1.5,
-    // ease: "ease",
-    // });
+    GSAP.to(this.elements.line, {
+      scaleX: this.scroll.normalized,
+      transformOrigin: "left",
+      duration: 1.5,
+      ease: "ease",
+    });
 
     // if (!(this.isMobile && this.clock.getElapsedTime() > 2)) {
     // console.log("ok");
@@ -240,6 +253,14 @@ class ScrollStage {
     // alert(window.innerWidth);
     //360
     this.animations = new Animations(this.element, this.camera);
+    
+    // S'assurer que la page commence en haut après le chargement complet
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      // Réinitialiser les valeurs de scroll
+      this.scroll.hard = 0;
+      this.scroll.soft = 0;
+    }, 100);
   }
 
   onMouseMove(event) {
@@ -270,9 +291,9 @@ class ScrollStage {
 
   onResize() {
     const isMobile = isMobileDevice();
-    const previousWidth = this.viewport.width;
-    const previousHeight = this.viewport.height;
-    const isHeightOnlyResize = previousWidth === window.innerWidth;
+    // const previousWidth = this.viewport.width;
+    // const previousHeight = this.viewport.height;
+    // const isHeightOnlyResize = previousWidth === window.innerWidth;
     
     // Mettre à jour l'historique des hauteurs
     if (window.updateHeightHistory) {
@@ -293,14 +314,14 @@ class ScrollStage {
     // this.camera.updateProjectionMatrix();
 
     // Calcul du facteur d'échelle pour maintenir le ratio
-    const widthRatio = this.viewport.width / previousWidth;
-    const heightRatio = this.viewport.height / previousHeight;
+    // const widthRatio = this.viewport.width / previousWidth;
+    // const heightRatio = this.viewport.height / previousHeight;
     // const scaleFactor = Math.min(widthRatio, -1);
     // const scaleFactor = heightRatio;
     const scaleFactor = 1;
 
     // if (isHeightOnlyResize) {
-      console.log('Redimensionnement de la hauteur uniquement');
+      // console.log('Redimensionnement de la hauteur uniquement');
       if (isMobile) {
         this.mesh.scale.set(0.75 * scaleFactor, 0.75 * scaleFactor, 0.75 * scaleFactor);
       } else {
@@ -339,10 +360,10 @@ class ScrollStage {
    */
   render() {
     // if (!this.isMobile) {
-    if (1==0) {
+    // if (1==0) {
     this.renderer.render(this.scene, this.camera);
     this.canvasHasRendered = true;
-    }
+    // }
   }
 
   debounce(func, wait) {
