@@ -114,15 +114,7 @@ export default function MonComposant() {
                 <a name="contact telephone" href="tel:+33688918019" style={{ color: "inherit", textDecoration: "inherit" }}>
                   06 88 91 80 19
                 </a>
-                {/* <a 
-                  name="contact_tel" 
-                  href="tel:+33688918019" 
-                  style={{ 
-                    color: "inherit", 
-                    textDecoration: "inherit",
-                    pointerEvents: "auto"
-                  }}
-                ></a> */}
+              
               </span>
             </div>
             <span className="w-full text-center">Lyon 6 </span>
@@ -130,31 +122,26 @@ export default function MonComposant() {
               {/* Texte animé (SplitText/GSAP) */}
               <span
                 id="contact_mail"
-                className="absolute left-0 right-0 w-full text-center pointer-events-auto text-4xl"
-                style={{ top: 0 }}
+                className="absolute left-0 right-0 w-full text-center pointer-events-auto text-2xl xl:text-4xl "
+                style={{ top: 0,whiteSpace: "nowrap",textOverflow: "ellipsis"}}
               >
-                <a 
-                  href="mailto:amaurypichat@gmail.com"
-                  aria-label="Envoyez-nous un email à amaury.pichat@gmail.com"
-                  className="text-center pointer-events-auto text-2xl xl:text-4xl"
-                  style={{ display: 'inline-block' }}
-                >
-                  amaury.pichat@gmail.com
-                </a>
+                
+                amo@dev2site.com
+                
               </span>
               {/* Texte statique, toujours visible */}
               <span
                 className="absolute left-0 right-0 w-full text-center pointer-events-none text-4xl"
-                style={{ top: 0 }}
+                style={{ top: 0,whiteSpace: "nowrap",textOverflow: "ellipsis"}}
                 aria-hidden="true"
               >
                 <a 
-                  href="mailto:amaurypichat@gmail.com"
-                  aria-label="Envoyez-nous un email à amaury.pichat@gmail.com"
+                  href="mailto:amo@dev2site.com"
+                  aria-label="Envoyez-nous un email à amo@dev2site.com"
                   className="text-center pointer-events-auto text-2xl xl:text-4xl"
                   style={{ display: 'inline-block' }}
                 >
-                  amaury.pichat@gmail.com
+                  amo@dev2site.com
                 </a>
               </span>
             </div>
@@ -178,8 +165,8 @@ export default function MonComposant() {
             <span className="text-4xl w-full h-full text-center z-[1000] text-right">
               Développement web
             </span>
-            <span className="text-4xl w-full h-full text-center z-[1000] text-right">
-              Prise de photo et intégration
+            <span className="text-4xl w-full h-full text-center z-[1000] text-right underline">
+              Prise de photos professionelles
             </span>
             <span className="text-4xl w-full h-full text-center z-[1000] text-right">
               Animation 3D

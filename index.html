@@ -1,5 +1,13 @@
 <!DOCTYPE html>
-
+<!---
+ _____            ___   _____ _ _       
+ |  __ \          |__ \ / ____(_) |      
+ | |  | | _____   __ ) | (___  _| |_ ___ 
+ | |  | |/ _ \ \ / // / \___ \| | __/ _ \
+ | |__| |  __/\ V // /_ ____) | | ||  __/
+ |_____/ \___| \_/|____|_____/|_|\__\___|
+                                         
+--->
 <head>
 	<meta charset="UTF-8" />
 	<title>Agence Web Lyon, Création de site internet sur-mesure et personnalisé</title>
@@ -15,13 +23,12 @@
 	<meta property="og:url" content="https://amaurypichat.fr">
 	<meta property="og:title" content="Agence web lyon : Création de site internet sur-mesure et personnalisé.">
 	<meta name="twitter:title" content="Agence web lyon : Création de site internet sur-mesure et personnalisé.">
-	<meta property="og:site_name" content="Antislash">
+	<meta property="og:site_name" content="Dev2site">
 	<meta name="description"
-		content="Antislash est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
+		content="Dev2site est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
 	<meta property="og:description"
-		content="Antislash est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
+		content="Dev2site est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
 	<!-- <meta name="twitter:description" content="<dev/> est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
-	<meta name="twitter:site" content="@Akaru_agency">
 	<meta name="twitter:card" content="summary_large_image"> -->
 	<meta name="theme-color" content="#FFF">
 
@@ -31,8 +38,8 @@
 	<script>
 		// Fonction pour vérifier le consentement
 		function hasConsent() {
-			return false;
-			// return localStorage.getItem('analytics-consent') === 'true';
+			// return false;
+			return localStorage.getItem('analytics-consent') === 'true';
 		}
 
 		// Fonction pour charger Google Analytics
@@ -64,30 +71,30 @@
 		}
 		
 		// Forcer le scroll vers le haut au chargement
-		window.addEventListener('beforeunload', function() {
-			window.scrollTo(0, 0);
-		});
+		// window.addEventListener('beforeunload', function() {
+		// 	window.scrollTo(0, 0);
+		// });
 		
 		// S'assurer que la page commence en haut
-		window.addEventListener('load', function() {
-			window.scrollTo(0, 0);
-		});
+		// window.addEventListener('load', function() {
+		// 	window.scrollTo(0, 0);
+		// });
 		
 		// Gérer la navigation avec les boutons précédent/suivant
-		window.addEventListener('pageshow', function(event) {
-			// Si la page est restaurée depuis le cache (bouton précédent/suivant)
-			if (event.persisted) {
-				window.scrollTo(0, 0);
-			}
-		});
+		// window.addEventListener('pageshow', function(event) {
+		// 	// Si la page est restaurée depuis le cache (bouton précédent/suivant)
+		// 	if (event.persisted) {
+		// 		window.scrollTo(0, 0);
+		// 	}
+		// });
 		
 		// Empêcher le scroll automatique lors de la navigation
-		window.addEventListener('popstate', function() {
-			window.scrollTo(0, 0);
-		});
+		// window.addEventListener('popstate', function() {
+		// 	window.scrollTo(0, 0);
+		// });
 		
 		// Forcer le scroll vers le haut immédiatement
-		window.scrollTo(0, 0);
+		// window.scrollTo(0, 0);
 	</script>
 
 	<link rel="shortcut icon" href="favicon.svg?v=3">
@@ -109,15 +116,15 @@
 	<style>
 		
 	</style>
-	<meta name="description"
-		content="Portfolio d'Amaury Pichat, développeur web à Lyon. Découvrez mes projets de création de sites web sur-mesure avec des animations modernes.">
-	<meta name="keywords" content="développeur web, Lyon, portfolio, sites web, animations, Three.js, GSAP">
+		
+	<meta name="keywords" content="développeur web, Lyon,  sites web, agence web, dev2site">
 	<meta name="author" content="Amaury Pichat">
 	<meta name="robots" content="index, follow">
-
+	
 	<!-- Améliorer les meta Open Graph -->
 	<meta property="og:type" content="website">
-	<meta property="og:site_name" content="Amaury Pichat - Développeur Web">
+	<meta property="og:site_name" content="Dev2site - Agence web Lyon">
+	
 </head>
 
 
@@ -166,7 +173,7 @@
 						<div class="frame">
 		
 							<nav class="frame__links" aria-label="Navigation principale">
-								Contact
+								<span id="contact" class="contact">Contact</span>
 								<div class="contact-container">
 									<ul>
 									  <li>06 88 91 80 19</li>
@@ -176,7 +183,8 @@
 							</nav>
 						</div>
 						<div class="section__title">
-							<h1 class="section__title-number ">&lt; dev/></h1>
+							<!-- <h1 class="section__title-number ">&lt; dev/></h1> -->
+							<h1 class="section__title-number ">&lt; dev<span class="highlight-2">2</span>site/></h1>
 							<h2 class="section__title-text">agence web</h2>
 							<p class="section__title-arrow" aria-hidden="true">
 								<span>➤</span><br>
@@ -184,7 +192,7 @@
 							</p>
 						</div>
 						<p class="section__paragraph">
-							Amaury PICHAT<br>
+							<!-- Amaury PICHAT<br> -->
 						</p>
 					</section>
 					<section id="sectionprojet1" class="section relative h-screen cursor-hover-area">
@@ -196,7 +204,9 @@
 							<h2 class="section__title-number">25</h2>
 						</div>
 						<p id="voici" class="section__paragraph opacity-1 premier-texte">
-							Voici une liste des projets sur lesquels j'ai travaillé<br>
+							Voici différents projets réalisés
+							<span>➤</span>
+							<span>➤</span>
 						</p>
 
 						<div id="sectiondroite1"
@@ -442,18 +452,18 @@
 					<section class="section">
 						<div class="frame">
 		
-							<!-- <nav class="frame__links" aria-label="Navigation principale">
-								Contact
+							<nav class="frame__links" aria-label="Navigation principale">
+								<span id="contact2" class="contact2">Contact</span>
 								<div class="contact-container">
 									<ul>
-									  <li>06 88 91 80 19</li>
-									  <li>amaury.pichat@gmail.com</li>
+									  <li><a href="tel:0688918019">06 88 91 80 19</a></li>
+									  <li><a href="mailto:amo@dev2site.com">amo@dev2site.net</a></li>
 									</ul>
 								  </div>
-							</nav> -->
+							</nav>
 						</div>
 						<div class="section__title">
-							<h1 class="section__title-number">&lt; dev/></h1>
+							<h1 class="section__title-number">&lt; dev<span class="highlight-2">2</span>site/></h1>
 							<h2 class="section__title-text">agence web</h2>
 							<p class="section__title-arrow" aria-hidden="true">
 								<span>➤</span><br>
@@ -463,7 +473,7 @@
 
 						<!-- </section> -->
 						<p class="section__paragraph">
-							Amaury PICHAT<br>
+							<!-- Amaury PICHAT<br> -->
 						</p>
 					</section>
 					<section class="section">
@@ -574,23 +584,30 @@
 
 			// Gestion du menu contact sur mobile (seulement la seconde instance)
 			const mobileFrameLinks = document.querySelectorAll('.frame__links')[1]; // Index 1 = version mobile
+			const contact2Element = document.getElementById('contact2');
 			
-			if (mobileFrameLinks) {
-				mobileFrameLinks.addEventListener('click', function(e) {
-					// Vérifier si on est sur mobile
-					if (window.innerWidth <= 768) {
-						// Si on clique sur le texte "Contact", basculer le menu
-						if (e.target === this || e.target.textContent === 'Contact') {
-							e.preventDefault();
-							this.classList.toggle('active');
-						}
-						// Si on clique sur un li, fermer le menu après un délai
-						else if (e.target.tagName === 'LI') {
-							setTimeout(() => {
-								this.classList.remove('active');
-							}, 300);
-						}
+			if (mobileFrameLinks && contact2Element) {
+				contact2Element.addEventListener('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					mobileFrameLinks.classList.toggle('active');
+				});
+				
+				// Fermer le menu si on clique ailleurs
+				document.addEventListener('click', function(e) {
+					if (!mobileFrameLinks.contains(e.target)) {
+						mobileFrameLinks.classList.remove('active');
 					}
+				});
+				
+				// Fermer le menu après avoir cliqué sur un lien
+				const contactLinks = mobileFrameLinks.querySelectorAll('a');
+				contactLinks.forEach(link => {
+					link.addEventListener('click', function() {
+						setTimeout(() => {
+							mobileFrameLinks.classList.remove('active');
+						}, 300);
+					});
 				});
 			}
 		});

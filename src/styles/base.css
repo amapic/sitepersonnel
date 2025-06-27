@@ -35,6 +35,25 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	cursor: none;
 }
+body {
+  
+  
+}
+
+/* Chrome, Edge, Safari */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none; /* Masque la barre de défilement */
+}
+
+/* Internet Explorer et Edge */
+body {
+  -ms-overflow-style: none; /* Masque la barre de défilement */
+}
 
 /* Page Loader */
 .js .loading::before,
@@ -146,8 +165,6 @@ button, input, textarea, select {
 	right: -2rem;
 	bottom: -2rem;
 	left: -2rem;
-	/* background-color: red; */
-	/* z-index: -1; Optionnel, si vous aviez des problèmes de superposition */
 }
 
 
@@ -467,6 +484,13 @@ button, input, textarea, select {
 	/* padding: 1rem; */
 }
   
+/* Désactiver le hover sur mobile pour éviter les conflits */
+@media (max-width: 768px) {
+	.frame__links:hover .contact-container {
+		grid-template-rows: 0fr; /* Désactiver le hover sur mobile */
+	}
+}
+  
 /* Styling for the list inside */
 .contact-container > ul {
 	overflow: hidden;
@@ -481,15 +505,16 @@ button, input, textarea, select {
 	width: 100%;
 }
 
+/* Déploiement au clic - fonctionne sur tous les écrans */
+.frame__links.active .contact-container {
+	grid-template-rows: 1fr;
+}
+
 /* Ajout pour mobile - déploiement au clic */
 @media (max-width: 768px) {
 	.frame__links .contact-container {
 		grid-template-rows: 0fr;
 		transition: grid-template-rows 0.3s ease;
-	}
-	
-	.frame__links.active .contact-container {
-		grid-template-rows: 1fr;
 	}
 	
 	/* Augmenter l'espacement entre les lignes du menu */
