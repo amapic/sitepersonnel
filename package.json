@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-apple-icons": "node generate-apple-icons-sharp.js",
+    "generate-apple-icons-imagemagick": "node generate-apple-icons.js"
   },
   "repository": {
     "type": "git",

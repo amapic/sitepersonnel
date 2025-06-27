@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-
+<!---
+ _____            ___   _____ _ _       
+ |  __ \          |__ \ / ____(_) |      
+ | |  | | _____   __ ) | (___  _| |_ ___ 
+ | |  | |/ _ \ \ / // / \___ \| | __/ _ \
+ | |__| |  __/\ V // /_ ____) | | ||  __/
+ |_____/ \___| \_/|____|_____/|_|\__\___|
+                                         
+--->
 <head>
 	<meta charset="UTF-8" />
 	<title>Agence Web Lyon, Création de site internet sur-mesure et personnalisé</title>
-	<meta name="description" content="Agence Web Lyon, Création de site internet sur-mesure et personnalisé" />
-	<meta name="keywords" content="webgl, three.js, on scroll, animation, three.js, gsap, javascript" />
 	<meta id="" property="og:url" content="https://amaurypichat.fr">
 	<html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 	<meta id="" property="og:locale" content="fr_fr">
@@ -14,16 +20,15 @@
 	<meta name="twitter:image"
 		content="https://cdn.sanity.io/images/nm4wf2ua/production/bce3b5cbd5640d4599a87813e87305b88218bbc4-1920x912.png">
 	<meta name="url" content="https://amaurypichat.fr">
-	<meta property="og:url" content="https://amaurypichat.fr">
+	<meta property="og:url" content="https://dev2site.net">
 	<meta property="og:title" content="Agence web lyon : Création de site internet sur-mesure et personnalisé.">
 	<meta name="twitter:title" content="Agence web lyon : Création de site internet sur-mesure et personnalisé.">
-	<meta property="og:site_name" content="<dev/>">
+	<meta property="og:site_name" content="Dev2site">
 	<meta name="description"
-		content="<dev/> est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
+		content="Dev2site est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
 	<meta property="og:description"
-		content="<dev/> est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
+		content="Dev2site est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
 	<!-- <meta name="twitter:description" content="<dev/> est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
-	<meta name="twitter:site" content="@Akaru_agency">
 	<meta name="twitter:card" content="summary_large_image"> -->
 	<meta name="theme-color" content="#FFF">
 
@@ -33,28 +38,28 @@
 	<script>
 		// Fonction pour vérifier le consentement
 		function hasConsent() {
-			return false;
-			// return localStorage.getItem('analytics-consent') === 'true';
+			// return false;
+			return localStorage.getItem('analytics-consent') === 'true';
 		}
 
 		// Fonction pour charger Google Analytics
-		function loadGoogleAnalytics() {
-			// Charger le script Google Analytics
-			const script = document.createElement('script');
-			script.async = true;
-			script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790';
-			document.head.appendChild(script);
+		// function loadGoogleAnalytics() {
+		// 	// Charger le script Google Analytics
+		// 	const script = document.createElement('script');
+		// 	script.async = true;
+		// 	script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790';
+		// 	document.head.appendChild(script);
 
-			// Configuration Google Analytics
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'G-LTCXHF5790');
-		}
+		// 	// Configuration Google Analytics
+		// 	window.dataLayer = window.dataLayer || [];
+		// 	function gtag(){dataLayer.push(arguments);}
+		// 	gtag('js', new Date());
+		// 	gtag('config', 'G-LTCXHF5790');
+		// }
 
 		// Charger Google Analytics si consentement déjà donné
 		if (hasConsent()) {
-			loadGoogleAnalytics();
+			// loadGoogleAnalytics();
 		}
 	</script>
 
@@ -66,30 +71,30 @@
 		}
 		
 		// Forcer le scroll vers le haut au chargement
-		window.addEventListener('beforeunload', function() {
-			window.scrollTo(0, 0);
-		});
+		// window.addEventListener('beforeunload', function() {
+		// 	window.scrollTo(0, 0);
+		// });
 		
 		// S'assurer que la page commence en haut
-		window.addEventListener('load', function() {
-			window.scrollTo(0, 0);
-		});
+		// window.addEventListener('load', function() {
+		// 	window.scrollTo(0, 0);
+		// });
 		
 		// Gérer la navigation avec les boutons précédent/suivant
-		window.addEventListener('pageshow', function(event) {
-			// Si la page est restaurée depuis le cache (bouton précédent/suivant)
-			if (event.persisted) {
-				window.scrollTo(0, 0);
-			}
-		});
+		// window.addEventListener('pageshow', function(event) {
+		// 	// Si la page est restaurée depuis le cache (bouton précédent/suivant)
+		// 	if (event.persisted) {
+		// 		window.scrollTo(0, 0);
+		// 	}
+		// });
 		
 		// Empêcher le scroll automatique lors de la navigation
-		window.addEventListener('popstate', function() {
-			window.scrollTo(0, 0);
-		});
+		// window.addEventListener('popstate', function() {
+		// 	window.scrollTo(0, 0);
+		// });
 		
 		// Forcer le scroll vers le haut immédiatement
-		window.scrollTo(0, 0);
+		// window.scrollTo(0, 0);
 	</script>
 
 	<link rel="shortcut icon" href="favicon.svg?v=3">
@@ -111,28 +116,40 @@
 	<style>
 		
 	</style>
-	<meta name="description"
-		content="Portfolio d'Amaury Pichat, développeur web à Lyon. Découvrez mes projets de création de sites web sur-mesure avec des animations modernes.">
-	<meta name="keywords" content="développeur web, Lyon, portfolio, sites web, animations, Three.js, GSAP">
+		
+	<meta name="keywords" content="développeur web, Lyon,  sites web, agence web, dev2site">
 	<meta name="author" content="Amaury Pichat">
 	<meta name="robots" content="index, follow">
-
+	
 	<!-- Améliorer les meta Open Graph -->
 	<meta property="og:type" content="website">
-	<meta property="og:site_name" content="Amaury Pichat - Développeur Web">
-  <script type="module" crossorigin src="/assets/main-7bdcb3cd.js"></script>
+	<meta property="og:site_name" content="Dev2site - Agence web Lyon">
+	
+	<!-- Preconnect pour Google Analytics -->
+	<link rel="preconnect" href="https://www.googletagmanager.com">
+	<link rel="preconnect" href="https://www.google-analytics.com">
+	<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+	
+  <script type="module" crossorigin src="/assets/main-e8c40503.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/three-f1d6f93c.js">
   <link rel="modulepreload" crossorigin href="/assets/gsap-cf87e9ff.js">
   <link rel="modulepreload" crossorigin href="/assets/vendor-8a332d8f.js">
-  <link rel="stylesheet" href="/assets/shaders-on-scroll-401328d5.css">
+  <link rel="stylesheet" href="/assets/shaders-on-scroll-418b3ae4.css">
 </head>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-LTCXHF5790');
+</script>
 
 <body class="loading">
-	<!-- <a href="#main-content" class="skip-link">
-		Aller au contenu principal
-	</a> -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKQLF59T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div class="custom-cursor opacity-0">
 		<svg id="svgcursor1" width="80" height="80" viewBox="0 0 80 80" aria-hidden="true">
 			<defs>
@@ -175,7 +192,7 @@
 						<div class="frame">
 		
 							<nav class="frame__links" aria-label="Navigation principale">
-								Contact
+								<span id="contact" class="contact">Contact</span>
 								<div class="contact-container">
 									<ul>
 									  <li>06 88 91 80 19</li>
@@ -185,7 +202,8 @@
 							</nav>
 						</div>
 						<div class="section__title">
-							<h1 class="section__title-number ">&lt; dev/></h1>
+							<!-- <h1 class="section__title-number ">&lt; dev/></h1> -->
+							<h1 class="section__title-number ">&lt; dev<span class="highlight-2">2</span>site/></h1>
 							<h2 class="section__title-text">agence web</h2>
 							<p class="section__title-arrow" aria-hidden="true">
 								<span>➤</span><br>
@@ -193,7 +211,7 @@
 							</p>
 						</div>
 						<p class="section__paragraph">
-							Amaury PICHAT<br>
+							<!-- Amaury PICHAT<br> -->
 						</p>
 					</section>
 					<section id="sectionprojet1" class="section relative h-screen cursor-hover-area">
@@ -205,7 +223,9 @@
 							<h2 class="section__title-number">25</h2>
 						</div>
 						<p id="voici" class="section__paragraph opacity-1 premier-texte">
-							Voici une liste des projets sur lesquels j'ai travaillé<br>
+							Voici différents projets réalisés
+							<span>➤</span>
+							<span>➤</span>
 						</p>
 
 						<div id="sectiondroite1"
@@ -421,18 +441,18 @@
 					<section class="section">
 						<div class="frame">
 		
-							<!-- <nav class="frame__links" aria-label="Navigation principale">
-								Contact
+							<nav class="frame__links" aria-label="Navigation principale">
+								<span id="contact2" class="contact2">Contact</span>
 								<div class="contact-container">
 									<ul>
-									  <li>06 88 91 80 19</li>
-									  <li>amaury.pichat@gmail.com</li>
+									  <li><a href="tel:0688918019">06 88 91 80 19</a></li>
+									  <li><a href="mailto:amo@dev2site.com">amo@dev2site.net</a></li>
 									</ul>
 								  </div>
-							</nav> -->
+							</nav>
 						</div>
 						<div class="section__title">
-							<h1 class="section__title-number">&lt; dev/></h1>
+							<h1 class="section__title-number">&lt; dev<span class="highlight-2">2</span>site/></h1>
 							<h2 class="section__title-text">agence web</h2>
 							<p class="section__title-arrow" aria-hidden="true">
 								<span>➤</span><br>
@@ -442,7 +462,7 @@
 
 						<!-- </section> -->
 						<p class="section__paragraph">
-							Amaury PICHAT<br>
+							<!-- Amaury PICHAT<br> -->
 						</p>
 					</section>
 					<section class="section">
@@ -553,23 +573,27 @@
 
 			// Gestion du menu contact sur mobile (seulement la seconde instance)
 			const mobileFrameLinks = document.querySelectorAll('.frame__links')[1]; // Index 1 = version mobile
+			const contact2Element = document.getElementById('contact2');
 			
-			if (mobileFrameLinks) {
-				mobileFrameLinks.addEventListener('click', function(e) {
-					// Vérifier si on est sur mobile
-					if (window.innerWidth <= 768) {
-						// Si on clique sur le texte "Contact", basculer le menu
-						if (e.target === this || e.target.textContent === 'Contact') {
-							e.preventDefault();
-							this.classList.toggle('active');
-						}
-						// Si on clique sur un li, fermer le menu après un délai
-						else if (e.target.tagName === 'LI') {
-							setTimeout(() => {
-								this.classList.remove('active');
-							}, 300);
-						}
+			if (mobileFrameLinks && contact2Element) {
+				
+				// Fermer le menu si on clique ailleurs
+				document.addEventListener('click', function(e) {
+					if (!mobileFrameLinks.contains(e.target)) {
+						mobileFrameLinks.classList.remove('active');
+					}else{
+						mobileFrameLinks.classList.toggle('active');
 					}
+				});
+				
+				// Fermer le menu après avoir cliqué sur un lien
+				const contactLinks = mobileFrameLinks.querySelectorAll('a');
+				contactLinks.forEach(link => {
+					link.addEventListener('click', function() {
+						setTimeout(() => {
+							mobileFrameLinks.classList.remove('active');
+						}, 300);
+					});
 				});
 			}
 		});

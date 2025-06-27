@@ -11,7 +11,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Agence Web Lyon, Création de site internet sur-mesure et personnalisé</title>
-	<meta id="" property="og:url" content="https://amaurypichat.fr">
+	<meta id="" property="og:url" content="https://dev2site.net">
 	<html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 	<meta id="" property="og:locale" content="fr_fr">
 	<!-- <meta id="i18n-og-alt-en-gb" property="og:locale:alternate" content="en_gb"> -->
@@ -19,8 +19,8 @@
 		content="https://cdn.sanity.io/images/nm4wf2ua/production/bce3b5cbd5640d4599a87813e87305b88218bbc4-1920x912.png">
 	<meta name="twitter:image"
 		content="https://cdn.sanity.io/images/nm4wf2ua/production/bce3b5cbd5640d4599a87813e87305b88218bbc4-1920x912.png">
-	<meta name="url" content="https://amaurypichat.fr">
-	<meta property="og:url" content="https://amaurypichat.fr">
+	<meta name="url" content="https://dev2site.net">
+	<meta property="og:url" content="https://dev2site.net">
 	<meta property="og:title" content="Agence web lyon : Création de site internet sur-mesure et personnalisé.">
 	<meta name="twitter:title" content="Agence web lyon : Création de site internet sur-mesure et personnalisé.">
 	<meta property="og:site_name" content="Dev2site">
@@ -30,10 +30,26 @@
 		content="Dev2site est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
 	<!-- <meta name="twitter:description" content="<dev/> est une agence web basée à Lyon, spécialiste en web design et création de site internet sur-mesure.">
 	<meta name="twitter:card" content="summary_large_image"> -->
-	<meta name="theme-color" content="#FFF">
+	<meta name="theme-color" content="#000">
 
 	<meta name="viewport"
 		content="height=device-height, width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+	
+	<!-- Balises Apple pour iOS -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="Dev2site">
+	<link rel="apple-touch-icon" href="/apple/favicon.svg">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple/apple-touch-icon-180x180.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/apple/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple/apple-touch-icon-57x57.png">
+	
 	<!-- Script de consentement RGPD -->
 	<script>
 		// Fonction pour vérifier le consentement
@@ -43,23 +59,23 @@
 		}
 
 		// Fonction pour charger Google Analytics
-		function loadGoogleAnalytics() {
-			// Charger le script Google Analytics
-			const script = document.createElement('script');
-			script.async = true;
-			script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790';
-			document.head.appendChild(script);
+		// function loadGoogleAnalytics() {
+		// 	// Charger le script Google Analytics
+		// 	const script = document.createElement('script');
+		// 	script.async = true;
+		// 	script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790';
+		// 	document.head.appendChild(script);
 
-			// Configuration Google Analytics
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'G-LTCXHF5790');
-		}
+		// 	// Configuration Google Analytics
+		// 	window.dataLayer = window.dataLayer || [];
+		// 	function gtag(){dataLayer.push(arguments);}
+		// 	gtag('js', new Date());
+		// 	gtag('config', 'G-LTCXHF5790');
+		// }
 
 		// Charger Google Analytics si consentement déjà donné
 		if (hasConsent()) {
-			loadGoogleAnalytics();
+			// loadGoogleAnalytics();
 		}
 	</script>
 
@@ -70,31 +86,7 @@
 			history.scrollRestoration = 'manual';
 		}
 		
-		// Forcer le scroll vers le haut au chargement
-		// window.addEventListener('beforeunload', function() {
-		// 	window.scrollTo(0, 0);
-		// });
 		
-		// S'assurer que la page commence en haut
-		// window.addEventListener('load', function() {
-		// 	window.scrollTo(0, 0);
-		// });
-		
-		// Gérer la navigation avec les boutons précédent/suivant
-		// window.addEventListener('pageshow', function(event) {
-		// 	// Si la page est restaurée depuis le cache (bouton précédent/suivant)
-		// 	if (event.persisted) {
-		// 		window.scrollTo(0, 0);
-		// 	}
-		// });
-		
-		// Empêcher le scroll automatique lors de la navigation
-		// window.addEventListener('popstate', function() {
-		// 	window.scrollTo(0, 0);
-		// });
-		
-		// Forcer le scroll vers le haut immédiatement
-		// window.scrollTo(0, 0);
 	</script>
 
 	<link rel="shortcut icon" href="favicon.svg?v=3">
@@ -125,11 +117,25 @@
 	<meta property="og:type" content="website">
 	<meta property="og:site_name" content="Dev2site - Agence web Lyon">
 	
+	<!-- Preconnect pour Google Analytics -->
+	<link rel="preconnect" href="https://www.googletagmanager.com">
+	<link rel="preconnect" href="https://www.google-analytics.com">
+	<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+	
 </head>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-LTCXHF5790');
+</script>
 
 <body class="loading">
+
 
 	<div class="custom-cursor opacity-0">
 		<svg id="svgcursor1" width="80" height="80" viewBox="0 0 80 80" aria-hidden="true">
@@ -177,19 +183,19 @@
 								<div class="contact-container">
 									<ul>
 									  <li>06 88 91 80 19</li>
-									  <li>amaury.pichat@gmail.com</li>
+									  <li>amo@dev2site.net</li>
 									</ul>
 								  </div>
 							</nav>
 						</div>
 						<div class="section__title">
 							<!-- <h1 class="section__title-number ">&lt; dev/></h1> -->
-							<h1 class="section__title-number ">&lt; dev<span class="highlight-2">2</span>site/></h1>
-							<h2 class="section__title-text">agence web</h2>
-							<p class="section__title-arrow" aria-hidden="true">
+							<!-- <h1 class="section__title-number ">&lt; dev<span class="highlight-2">2</span>site/></h1> -->
+							<!-- <h2 class="section__title-text text-right">agence web</h2> -->
+							<!-- <p class="section__title-arrow" aria-hidden="true">
 								<span>➤</span><br>
 								<span>➤</span>
-							</p>
+							</p> -->
 						</div>
 						<p class="section__paragraph">
 							<!-- Amaury PICHAT<br> -->
@@ -587,16 +593,13 @@
 			const contact2Element = document.getElementById('contact2');
 			
 			if (mobileFrameLinks && contact2Element) {
-				contact2Element.addEventListener('click', function(e) {
-					e.preventDefault();
-					e.stopPropagation();
-					mobileFrameLinks.classList.toggle('active');
-				});
 				
 				// Fermer le menu si on clique ailleurs
 				document.addEventListener('click', function(e) {
 					if (!mobileFrameLinks.contains(e.target)) {
 						mobileFrameLinks.classList.remove('active');
+					}else{
+						mobileFrameLinks.classList.toggle('active');
 					}
 				});
 				
@@ -612,7 +615,6 @@
 			}
 		});
 
-		// ... existing scripts ...
 	</script>
 </body>
 

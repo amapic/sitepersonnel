@@ -515,17 +515,18 @@ button, input, textarea, select {
 	.frame__links .contact-container {
 		grid-template-rows: 0fr;
 		transition: grid-template-rows 0.3s ease;
+		/* padding: 0; */
 	}
 	
 	/* Augmenter l'espacement entre les lignes du menu */
 	.frame__links .contact-container ul {
 		gap: 1.5rem; /* Augmentation de l'espacement */
-		padding: 1rem 0; /* Ajout de padding vertical */
+		padding: 0rem 0; /* Ajout de padding vertical */
 	}
 	
 	.frame__links .contact-container li {
-		padding: 0.5rem 0; /* Ajout de padding sur chaque élément */
-		margin: 0.5rem 0; /* Ajout de margin pour plus d'espace */
+		padding: 0.25rem 0; /* Ajout de padding sur chaque élément */
+		margin: 0.25rem 0; /* Ajout de margin pour plus d'espace */
 	}
 }
 

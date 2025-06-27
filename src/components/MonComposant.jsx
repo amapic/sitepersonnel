@@ -123,7 +123,7 @@ export default function MonComposant() {
               <span
                 id="contact_mail"
                 className="absolute left-0 right-0 w-full text-center pointer-events-auto text-2xl xl:text-4xl "
-                style={{ top: 0,whiteSpace: "nowrap",textOverflow: "ellipsis"}}
+                style={{ whiteSpace: "nowrap",textOverflow: "ellipsis"}}
               >
                 
                 amo@dev2site.com
@@ -159,6 +159,8 @@ export default function MonComposant() {
                   </a>
                   </span>
             </span>
+            <div id="wcb" class="carbonbadge">carbonbadge</div>
+<script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
           </div>
 
           <div className="absolute -top-[50vh] xl:-top-[75vh] right-0  h-[25vh] z-[1000] flex flex-col items-center justify-left pr-8">

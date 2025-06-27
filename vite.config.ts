@@ -28,7 +28,8 @@ export default defineConfig({
           gsap: ['gsap'],
         }
       }
-    }
+    },
+    sourcemap: true
   },
   publicDir: 'public'
 })
