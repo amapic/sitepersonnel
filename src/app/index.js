@@ -304,20 +304,12 @@ class ScrollStage {
       width: window.innerWidth,
       height: window.innerHeight,
     };
-    // console.log("ee",this.tanFOV);
     // if (this.tanFOV!="init"){
       console.log(( 360 / Math.PI ) * Math.atan( this.tanFOV * ( window.innerHeight / this.windowHeight ) ));
       this.camera.fov = ( 360 / Math.PI ) * Math.atan( this.tanFOV * ( window.innerHeight / this.windowHeight ) );
     // }
 
-    // this.camera.lookAt( new THREE.Vector3(0, 0, 0) );
-    // this.camera.updateProjectionMatrix();
-
-    // Calcul du facteur d'échelle pour maintenir le ratio
-    // const widthRatio = this.viewport.width / previousWidth;
-    // const heightRatio = this.viewport.height / previousHeight;
-    // const scaleFactor = Math.min(widthRatio, -1);
-    // const scaleFactor = heightRatio;
+ 
     const scaleFactor = 1;
 
     // if (isHeightOnlyResize) {
@@ -359,7 +351,6 @@ class ScrollStage {
    * RENDER
    */
   render() {
-    // if (!this.isMobile) {
     // if (1==0) {
     this.renderer.render(this.scene, this.camera);
     this.canvasHasRendered = true;
