@@ -156,6 +156,9 @@ class ScrollStage {
    */
   addCanvas() {
     this.canvas.classList.add("webgl");
+    // Masquer le canvas dès le début
+    this.canvas.style.opacity = "0";
+    this.canvas.style.transition = "opacity 0.5s ease";
     document.body.appendChild(this.canvas);
   }
 
@@ -312,9 +315,9 @@ class ScrollStage {
  
     const scaleFactor = 1;
 
-    // if (isHeightOnlyResize) {
+    // if (isHeightOnlyResize) {  
       // console.log('Redimensionnement de la hauteur uniquement');
-      if (isMobile) {
+      if (this.isMobile) {
         this.mesh.scale.set(0.75 * scaleFactor, 0.75 * scaleFactor, 0.75 * scaleFactor);
       } else {
         this.mesh.scale.set(1 * scaleFactor, 1 * scaleFactor, 1 * scaleFactor);

@@ -10,6 +10,15 @@
 	letter-spacing: 0.1ch;
   }
 
+/* Masquer les éléments de la première section hero par défaut */
+body.loading .section:first-of-type .section__title-number,
+body.loading .section:first-of-type .section__title-text,
+body.loading .section:first-of-type .section__title-arrow,
+body.loading .section:first-of-type .section__paragraph {
+	opacity: 0 !important;
+	transform: translateY(-100px) !important;
+}
+
 *,
 *::after,
 *::before {
