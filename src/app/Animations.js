@@ -32,7 +32,7 @@ export default class {
     animateIn
       .from(this.camera.position, {
         z: 4,
-        duration: 2.5,
+        duration: 2.0,
         ease: 'power3.out'
       })
       
@@ -42,7 +42,7 @@ export default class {
         opacity: 0,
         duration: 1.2,
         ease: 'power2.out'
-      }, '-=1.5')
+      }, '0')
       
       .from(this.elements.title, {
         y: -50,
@@ -50,7 +50,7 @@ export default class {
         opacity: 0,
         duration: 1.2,
         ease: 'power2.out'
-      }, '-=0.8')
+      }, '0.5')
       
       .from(this.elements.paragraph, {
         y: -30,
@@ -58,7 +58,7 @@ export default class {
         opacity: 0,
         duration: 1.0,
         ease: 'power2.out'
-      }, '-=0.6')
+      }, '0.7')
       
       .from(this.elements.arrows, {
         y: -20,
@@ -67,13 +67,13 @@ export default class {
         stagger: 0.1,
         duration: 0.8,
         ease: 'power2.out'
-      }, '-=0.4')
+      }, '0.9')
       
       .to(canvas, {
         opacity: 1,
-        duration: 1.5,
+        duration: 1,
         ease: 'power2.out'
-      }, '-=1.0')
+      }, '-=3.0')
       
       .to(cursor, {
         opacity: 1,

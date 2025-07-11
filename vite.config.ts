@@ -1,13 +1,46 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import glslify from "vite-plugin-glslify";
-// import compression from 'vite-plugin-compression'
+import glslify from "vite-plugin-glslify"
 import { resolve } from 'path'
-
+// import { createHtmlPlugin } from 'vite-plugin-html'
+// import Critters from 'critters'
+import { beasties } from 'vite-plugin-beasties'
 export default defineConfig({
   plugins: [
     react(),
-    glslify()
+    glslify(),
+    // beasties({
+    //   // optional beasties configuration
+    //   options: {
+    //     preload: 'swap',
+    //   }
+    // })
+  
+    // Plugin pour générer le HTML et éventuellement injecter des variables (si besoin)
+    // createHtmlPlugin({
+    //   inject: {
+    //     // Ajoute ici uniquement les propriétés valides pour InjectOptions
+    //   },
+    //   minify: true,
+    // }),
+    // Plugin pour inline le CSS critique avec Critters
+    // {
+    //   name: 'vite-plugin-inline-critical-css',
+    //   enforce: 'post',
+    //   apply: 'build',
+    //   transformIndexHtml: {
+    //     enforce: 'post',
+    //     async transform(html, { bundle }) {
+    //       const critters = new Critters({
+    //         // Options de Critters selon tes besoins
+    //         preload: 'swap',
+    //         pruneSource: true,
+    //         logLevel: 'info'
+    //       })
+    //       return await critters.process(html)
+    //     }
+    //   }
+    // }
   ],
   server: {
     port: 3000,
@@ -25,7 +58,7 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           three: ['three'],
-          gsap: ['gsap'],
+          gsap: ['gsap']
         }
       }
     },

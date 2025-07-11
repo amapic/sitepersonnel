@@ -11,6 +11,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Studio Web Lyon, Création de site internet sur-mesure et personnalisé</title>
+	<!-- <link rel="preload" as="image" href="/image/hero_optimized/salledeclasse.webp"> -->
 	<meta id="" property="og:url" content="https://dev2site.net">
 	<html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 	<meta id="" property="og:locale" content="fr_fr">
@@ -20,6 +21,11 @@
 		content="https://cdn.sanity.io/images/nm4wf2ua/production/bce3b5cbd5640d4599a87813e87305b88218bbc4-1920x912.png">
 	<meta name="url" content="https://dev2site.net">
 	<meta property="og:url" content="https://dev2site.net">
+	<link rel="preload" as="style" href="./src/styles/base.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="./src/styles/base.css"></noscript>
+
+<link rel="preload" as="style" href="./src/styles/shaders-on-scroll.sass" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="./src/styles/shaders-on-scroll.sass"></noscript>
 	<meta property="og:title" content="Studio web lyon : Création de site internet sur-mesure et personnalisé.">
 	<meta name="twitter:title" content="Studio web lyon : Création de site internet sur-mesure et personnalisé.">
 	<meta property="og:site_name" content="Dev2site">
@@ -32,7 +38,7 @@
 	<meta name="theme-color" content="#000">
 
 	<meta name="viewport"
-		content="height=device-height, width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+		content="width=device-width, initial-scale=1.0">
 	
 	<!-- Balises Apple pour iOS -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -89,8 +95,8 @@
 	</script>
 
 	<link rel="shortcut icon" href="favicon.svg?v=3">
-	<link rel="stylesheet" type="text/css" href="./src/styles/base.css" />
-	<link rel="stylesheet" type="text/css" href="./src/styles/shaders-on-scroll.sass" />
+	<!-- <link rel="stylesheet" type="text/css" href="./src/styles/base.css" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="./src/styles/shaders-on-scroll.sass" /> -->
 	<style>
 		#fps-counter {
 			position: fixed;
@@ -124,7 +130,7 @@
 </head>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790"></script>
+<script crossorigin="anonymous" async src="https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
