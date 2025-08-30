@@ -154,7 +154,7 @@ export default function MonComposant() {
             </span>
             <span className="pointer-events-auto w-full text-center">
               <span className="pointer-events-auto border-b-2 border-dotted border-current inline-block leading-none cursor-pointer">
-              <a href="/mentions-legales.html" target="_blank" rel="noopener noreferrer pointer-events-auto">
+              <a href="/confidentialite.html" target="_blank" rel="noopener noreferrer pointer-events-auto">
                   politique de confidentialité
                   </a>
                   </span>

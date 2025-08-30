@@ -97,9 +97,15 @@ canvas.webgl
   height: 100vh
   padding: 8rem 
   // min-height: calc(100vh)
-  &:nth-child(even)
-    @media (max-width: 64em)
+  
+  @media (max-width: 768px)
+    &:nth-child(even)
       background: $color-1
+
+  @media (max-width: 768px)    
+    &:nth-child(3)
+      background: black !important;
+    
 
   
   
@@ -113,7 +119,7 @@ canvas.webgl
     &:first-of-type
         gap: 0
 
-  &:not(:first-of-type)
+  &:not(:first-of-type):not(:last-of-type)
     .section__title
       padding-bottom: calc(min(9vw, 6rem))
 
@@ -123,9 +129,9 @@ canvas.webgl
 
       .section__title
         position: relative
-        left:15vw;
+        //left:0vw;
         height: 100%
-        padding:0
+        //padding:0
         display: flex
         flex-direction: column
         justify-content: space-around
@@ -133,14 +139,14 @@ canvas.webgl
 
       .section__title-text  
         
-        font-size: 10vh
-        @media (max-width: 750px)
+        font-size: 7vh
+        @media (max-width: 768px)
           font-size: 5vh
     
 
       .section__title-number
-        font-size: 25vh
-        @media (max-width: 750px)
+        font-size: min(15vw, 24rem)
+        @media (max-width: 768px)
           font-size: 5vh
 
 
@@ -179,8 +185,7 @@ canvas.webgl
     .section__title
       text-align: right
 
-    @media (max-width: 64em)
-      // flex-direction: column
+   
 
   &__title
     // text-align: left
@@ -188,9 +193,8 @@ canvas.webgl
     opacity: .9
 
 
-    @media (max-width: 64em)
-      width: 100%
-      text-align: right
+    @media (max-width: 1024px)
+     // width: 100%
     
     &-number
       font-size: min(15vw, 24rem)

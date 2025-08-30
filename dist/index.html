@@ -8,10 +8,10 @@
  |_____/ \___| \_/|____|_____/|_|\__\___|
                                          
 --->
+
 <head>
 	<meta charset="UTF-8" />
 	<title>Studio Web Lyon, Création de site internet sur-mesure et personnalisé</title>
-	<!-- <link rel="preload" as="image" href="/image/hero_optimized/salledeclasse.webp"> -->
 	<meta id="" property="og:url" content="https://dev2site.net">
 	<html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 	<meta id="" property="og:locale" content="fr_fr">
@@ -22,10 +22,14 @@
 	<meta name="url" content="https://dev2site.net">
 	<meta property="og:url" content="https://dev2site.net">
 	
-<noscript></noscript>
+	<noscript>
+		
+	</noscript>
 
-
-<noscript></noscript>
+	
+	<noscript>
+		
+	</noscript>
 	<meta property="og:title" content="Studio web lyon : Création de site internet sur-mesure et personnalisé.">
 	<meta name="twitter:title" content="Studio web lyon : Création de site internet sur-mesure et personnalisé.">
 	<meta property="og:site_name" content="Dev2site">
@@ -37,11 +41,10 @@
 	<meta name="twitter:card" content="summary_large_image"> -->
 	<meta name="theme-color" content="#000">
 
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0">
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<!-- Balises Apple pour iOS -->
-	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="apple-mobile-web-app-title" content="Dev2site">
 	<link rel="apple-touch-icon" href="/apple/favicon.svg">
@@ -54,7 +57,7 @@
 	<link rel="apple-touch-icon" sizes="72x72" href="/apple/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="/apple/apple-touch-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="57x57" href="/apple/apple-touch-icon-57x57.png">
-	
+
 	<!-- Script de consentement RGPD -->
 	<script>
 		// Fonction pour vérifier le consentement
@@ -90,11 +93,11 @@
 		if ('scrollRestoration' in history) {
 			history.scrollRestoration = 'manual';
 		}
-		
-		
+
+
 	</script>
 
-	<link rel="shortcut icon" href="favicon.svg?v=3">
+	<link rel="shortcut icon" href="gg.PNG?v=5">
 	<!-- <link rel="stylesheet" type="text/css" href="./src/styles/base.css" /> -->
 	<!-- <link rel="stylesheet" type="text/css" href="./src/styles/shaders-on-scroll.sass" /> -->
 	<style>
@@ -111,450 +114,37 @@
 		}
 	</style>
 	<style>
-		/* CSS CRITIQUE - Above the fold */
-		@font-face {
-			font-family: 'DegularDisplay-Regular';
-			src: url('/font/DegularDisplay-Regular.otf') format('opentype');
-			font-weight: 400;
-			font-style: normal;
-			letter-spacing: 0.1ch;
-			font-display: swap;
-		}
 
-		*,
-		*::after,
-		*::before {
-			box-sizing: border-box;
-		}
-
-		:root {
-			font-size: 15px;
-		}
-
-		body {
-			margin: 0;
-			--color-text: white;
-			--color-bg: black;
-			--color-1: blue;
-			--color-2: purple;
-			--color-link: white;
-			--color-link-hover: white;
-			color: var(--color-text);
-			background-color: var(--color-bg);
-			font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
-			cursor: none;
-			width: 100%;
-			height: 100vh;
-			overscroll-behavior: none;
-			line-height: 1.2;
-		}
-
-		body::-webkit-scrollbar {
-			display: none;
-		}
-
-		html {
-			scrollbar-width: none;
-		}
-
-		body {
-			-ms-overflow-style: none;
-		}
-
-		/* Page Loader */
-		.js .loading::before,
-		.js .loading::after {
-			content: '';
-			position: fixed;
-			z-index: 1000;
-		}
-
-		.js .loading::before {
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: var(--color-bg);
-		}
-
-		.js .loading::after {
-			top: 50%;
-			left: 50%;
-			width: 60px;
-			height: 60px;
-			margin: -30px 0 0 -30px;
-			border-radius: 50%;
-			opacity: 0.4;
-			background: var(--color-1);
-			animation: loaderAnim 0.7s linear infinite alternate forwards;
-		}
-
-		@keyframes loaderAnim {
-			to {
-				opacity: 1;
-				transform: scale3d(0.5,0.5,1);
-			}
-		}
-
-		/* Masquer les éléments de la première section hero par défaut */
-		body.loading .section:first-of-type .section__title-number,
-		body.loading .section:first-of-type .section__title-text,
-		body.loading .section:first-of-type .section__title-arrow,
-		body.loading .section:first-of-type .section__paragraph {
-			opacity: 0 !important;
-			transform: translateY(-100px) !important;
-		}
-
-		/* Frame et navigation */
-		.frame {
-			padding: 3rem 5vw;
-			text-align: center;
-			position: relative;
-			z-index: 1000;
-		}
-
-		.frame__links {
-			display: inline-block;
-			position: relative;
-			cursor: pointer;
-		}
-
-		.frame__links::before {
-			content: '';
-			position: absolute;
-			top: -2rem;
-			right: -2rem;
-			bottom: -2rem;
-			left: -2rem;
-		}
-
-		/* Contact container */
-		.contact-container {
-			display: grid;
-			grid-template-rows: 0fr;
-			transition: grid-template-rows 0.4s ease-in-out;
-			position: absolute;
-			top: 100%;
-			right: 0;
-			z-index: 10;
-			background: var(--color-bg);
-			text-align: right;
-			border-radius: 4px;
-			width: 200px;
-		}
-
-		.frame__links:hover .contact-container {
-			grid-template-rows: 1fr;
-		}
-
-		.contact-container > ul {
-			overflow: hidden;
-			margin: 0;
-			padding: 0;
-			width: 100%;
-			list-style: none;
-		}
-
-		.contact-container > ul > li {
-			white-space: nowrap;
-			width: 100%;
-		}
-
-		/* Content et sections */
-		.content {
-			width: 100%;
-			height: calc(100vh - 13rem);
-		}
-
-		.scroll__stage {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100vh;
-		}
-
-		.scroll__content {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			will-change: transform;
-		}
-
-		.section {
-			display: flex;
-			justify-content: space-evenly;
-			align-items: center;
-			width: 100%;
-			position: relative;
-			height: 100vh;
-			padding: 8rem;
-		}
-
-		.section__title {
-			text-transform: uppercase;
-			opacity: 0.9;
-		}
-
-		.section__title-number {
-			font-size: min(15vw, 24rem);
-			font-weight: 500;
-			line-height: 0.75;
-		}
-
-		.section__title-text {
-			font-size: min(10vw, 12rem);
-			padding-left: 0.1ch;
-			font-weight: 500;
-			line-height: 0.75;
-		}
-
-		.section__title-arrow {
-			font-size: min(9vw, 6rem);
-			color: var(--color-1);
-			margin-top: 1ch;
-			line-height: 1;
-		}
-
-		.section__title-arrow span {
-			display: inline-block;
-			transform: rotate(90deg);
-		}
-
-		.section__paragraph {
-			align-self: flex-end;
-			max-width: 20ch;
-			font-size: 1.4rem;
-		}
-
-		/* Layout line */
-		.layout__line {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 5px;
-			background-color: white;
-			transform: scaleX(0);
-			z-index: 1000;
-		}
-
-		/* Custom cursor */
-		.custom-cursor {
-			width: 80px;
-			height: 80px;
-			position: fixed;
-			pointer-events: none;
-			z-index: 9999;
-			transition: transform 0.3s ease;
-		}
-
-		.cursor-hover-area,
-		.cursor-hover-area * {
-			cursor: none;
-		}
-
-		.cursor-circle {
-			fill: rgba(0, 123, 255, 0.2);
-			stroke: #007bff;
-			stroke-width: 1;
-			transition: fill 0.3s ease, stroke 0.3s ease;
-		}
-
-		.cursor-text {
-			fill: #007bff;
-			font-size: 8px;
-			font-family: Arial, sans-serif;
-			transition: fill 0.3s ease;
-		}
-
-		.rotating-text {
-			animation: rotate 8s linear infinite;
-			transform-origin: center;
-		}
-
-		@keyframes rotate {
-			from { transform: rotate(0deg); }
-			to { transform: rotate(360deg); }
-		}
-
-		/* Highlight */
-		.highlight-2 {
-			font-size: 0.8em;
-			background: linear-gradient(45deg, var(--color-1), var(--color-2));
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			background-clip: text;
-			color: transparent;
-		}
-
-		/* Responsive */
-		@media (max-width: 760px) {
-			.frame {
-				position: absolute;
-				top: 0;
-				right: 0;
-				text-align: left;
-				z-index: 100;
-				padding: 1.75rem;
-			}
-			.content {
-				height: 100vh;
-			}
-			.section {
-				flex-direction: column;
-				justify-content: top;
-				height: 100vh;
-				padding: 2vh 2rem;
-			}
-			.section__title {
-				width: 100%;
-				text-align: right;
-			}
-			.section__paragraph {
-				font-size: 1.2rem;
-			}
-			.frame__links:hover .contact-container {
-				grid-template-rows: 0fr;
-			}
-		}
-
-		@media screen and (min-width: 760px) {
-			.frame {
-				position: absolute;
-				top: 0;
-				right: 0;
-				text-align: left;
-				z-index: 100;
-				padding: 1.75rem;
-			}
-			.content {
-				height: 100vh;
-			}
-		}
-
-		/* Canvas WebGL */
-		canvas.webgl {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			pointer-events: none;
-			mix-blend-mode: screen;
-		}
-
-		@media (max-width: 64em) {
-			canvas.webgl {
-				opacity: 0.7;
-			}
-		}
-
-		/* Utility classes */
-		.hidden { display: none; }
-		.block { display: block; }
-		.flex { display: flex; }
-		.absolute { position: absolute; }
-		.relative { position: relative; }
-		.fixed { position: fixed; }
-		.top-0 { top: 0; }
-		.left-0 { left: 0; }
-		.right-0 { right: 0; }
-		.w-full { width: 100%; }
-		.h-full { height: 100%; }
-		.h-screen { height: 100vh; }
-		.w-screen { width: 100vw; }
-		.z-\[1000\] { z-index: 1000; }
-		.bg-cover { background-size: cover; }
-		.bg-center { background-position: center; }
-		.text-center { text-align: center; }
-		.text-right { text-align: right; }
-		.text-white { color: white; }
-		.opacity-0 { opacity: 0; }
-		.opacity-1 { opacity: 1; }
-		.pl-2 { padding-left: 0.5rem; }
-		.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
-		.px-10 { padding-left: 2.5rem; padding-right: 2.5rem; }
-		.px-12 { padding-left: 3rem; padding-right: 3rem; }
-		.pt-12 { padding-top: 3rem; }
-		.mr-4 { margin-right: 1rem; }
-		.gap-4 { gap: 1rem; }
-		.items-center { align-items: center; }
-		.justify-center { justify-content: center; }
-		.justify-around { justify-content: space-around; }
-		.flex-col { flex-direction: column; }
-		.flex-row { flex-direction: row; }
-		.justify-end { justify-content: flex-end; }
-		.items-end { align-items: flex-end; }
-		.font-bold { font-weight: 700; }
-		.text-2xl { font-size: 1.5rem; }
-		.text-4xl { font-size: 2.25rem; }
-		.text-6xl { font-size: 3.75rem; }
-		.max-h-\[50\%\] { max-height: 50%; }
-		.max-h-\[30\%\] { max-height: 30%; }
-		.w-\[60\%\] { width: 60%; }
-		.w-\[50vw\] { width: 50vw; }
-		.w-\[20vw\] { width: 20vw; }
-		.h-\[80vh\] { height: 80vh; }
-		.h-\[2px\] { height: 2px; }
-		.bg-white { background-color: white; }
-		.bg-blue-500 { background-color: rgb(59 130 246); }
-		.object-contain { -o-object-fit: contain; object-fit: contain; }
-		.object-cover { -o-object-fit: cover; object-fit: cover; }
-		.center { margin: 0 auto; }
-		.premier-texte { font-size: 1.4rem; }
-
-		@media (min-width: 768px) {
-			.md\:block { display: block; }
-			.md\:hidden { display: none; }
-			.md\:px-0 { padding-left: 0; padding-right: 0; }
-			.md\:pt-0 { padding-top: 0; }
-			.lg\:pt-0 { padding-top: 0; }
-			.lg\:px-0 { padding-left: 0; padding-right: 0; }
-			.lg\:h-full { height: 100%; }
-			.lg\:text-4xl { font-size: 2.25rem; }
-			.lg\:max-h-\[50\%\] { max-height: 50%; }
-			.lg\:right-\[25vw\] { right: 25vw; }
-			.lg\:text-6xl { font-size: 3.75rem; }
-			.xl\:text-6xl { font-size: 3.75rem; }
-		}
-
-		@media (max-width: 768px) {
-			.md\:block { display: none; }
-			.md\:hidden { display: block; }
-		}
 	</style>
-		
+
 	<meta name="keywords" content="développeur web, Lyon, sites web, studio web, dev2site">
 	<meta name="author" content="Amaury Pichat">
 	<meta name="robots" content="index, follow">
-	
+
 	<!-- Améliorer les meta Open Graph -->
 	<meta property="og:type" content="website">
 	<meta property="og:site_name" content="Dev2site - Studio web Lyon">
-	
+
 	<!-- Preconnect pour Google Analytics -->
-	<link rel="preconnect" href="https://www.googletagmanager.com">
+	<link rel="preconnect" href="https://www.googletagmanager.com"> 
 	<link rel="preconnect" href="https://www.google-analytics.com">
-	<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-	
-  <script type="module" crossorigin src="/assets/main-a7d71a71.js"></script>
+	 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+  <script type="module" crossorigin src="/assets/main-a676ec51.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/three-f1d6f93c.js">
   <link rel="modulepreload" crossorigin href="/assets/gsap-cf87e9ff.js">
   <link rel="modulepreload" crossorigin href="/assets/vendor-8a332d8f.js">
-  <link rel="stylesheet" href="/assets/shaders-on-scroll-e0f03c5c.css">
+  <link rel="stylesheet" href="/assets/shaders-on-scroll-32ad711b.css">
 </head>
 
 <!-- Google tag (gtag.js) -->
 <script crossorigin="anonymous" async src="https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
 
-  gtag('config', 'G-LTCXHF5790');
+	gtag('config', 'G-LTCXHF5790');
 </script>
 
 <body class="loading">
@@ -587,33 +177,34 @@
 		</svg>
 
 	</div>
-	
+
 	<main id="main-content">
 
-		
+
 		<div class="layout__line z-[1000]"></div>
 		<div class="content hidden md:block">
 			<div class="scroll__stage bg-cover bg-center">
 				<!-- bg-[url('/images/fond2.png')] -->
 				<div class="scroll__content">
-					
+
 					<section id="sectionprojet0" class="section">
 						<div class="frame">
-		
+
 							<nav class="frame__links" aria-label="Navigation principale">
 								<span id="contact" class="contact">Contact</span>
 								<div class="contact-container">
 									<ul>
-									  <li>06 88 91 80 19</li>
-									  <li>amo@dev2site.net</li>
+										<li>06 88 91 80 19</li>
+										<li>amo@dev2site.net</li>
 									</ul>
-								  </div>
+								</div>
 							</nav>
 						</div>
 						<div class="section__title">
-						<h1 class="section__title-number pl-2 text-center">&lt;  dev<span class="highlight-2">2</span>site /></h1>
+							<h1 class="section__title-number pl-2 text-center">&lt; dev<span
+									class="highlight-2">2</span>site /></h1>
 							<h2 class="section__title-text text-right">Studio web</h2>
-							 <p class="section__title-arrow" aria-hidden="true"> 
+							<p class="section__title-arrow" aria-hidden="true">
 								<span>➤</span><br>
 								<span>➤</span>
 							</p>
@@ -624,10 +215,10 @@
 					<section id="sectionprojet1" class="section relative h-screen cursor-hover-area">
 						<div id="movingsquareprojet1" class="moving-square" aria-hidden="true"></div>
 						<div
-							class="section__title absolute top-0 right-[20vw] lg:right-[25vw] h-full flex flex-col justify-center items-center">
+							class="section__title absolute top-0 right-[25vw] lg:right-[25vw] h-full flex flex-col justify-center items-center">
 
-							<h2 class="section__title-text">Avril</h2>
-							<h2 class="section__title-number">25</h2>
+							<h2 class="section__title-text text-right">Avril</h2>
+							<h2 class="section__title-number text-right">25</h2>
 						</div>
 						<p id="voici" class="section__paragraph opacity-1 premier-texte">
 							Voici différents projets réalisés
@@ -650,12 +241,13 @@
 									</div>
 								</div>
 							</h2>
-							<span id="texteprojet1" class="opacity-0 lg:text-4xl text-2xl px-2 text-center">Des couleurs douces
+							<span id="texteprojet1" class="opacity-0 lg:text-4xl text-2xl px-2 text-center">Des couleurs
+								douces
 								illustrent le site
 								du groupe
 								Leonie<br></span>
 							</p>
-						
+
 							<div id="image1"
 								class="opacity-0 grid-mask max-h-[50%] w-[60%] flex flex-col justify-center items-center">
 								<img loading="lazy" src="/images/groupeleonie.webp"
@@ -664,8 +256,8 @@
 							</div>
 							<div id="ensembletexteetfleche1"
 								class="text-white opacity-0 text-4xl flex items-center gap-4 px-12">
-							
-									<span class="lg:text-4xl text-2xl" id="visitezleprojet1">Visitez le site</span>
+
+								<span class="lg:text-4xl text-2xl" id="visitezleprojet1">Visitez le site</span>
 								<a href="https://groupeleonie.vercel.app/"
 									class="text-white text-4xl flex items-center gap-4 px-12"
 									aria-label="Visiter le site du groupe Léonie - ouvre dans un nouvel onglet"
@@ -696,7 +288,7 @@
 
 
 						<div
-							class="section__title absolute top-0 right-[20vw]  lg:right-[25vw] h-full flex flex-col justify-center items-center">
+							class="section__title absolute top-0 right-[25vw]  lg:right-[25vw] h-full flex flex-col justify-center items-center">
 
 							<h2 class="section__title-text text-right">Mai</h2>
 							<h2 class="section__title-number text-right">25</h2>
@@ -719,12 +311,13 @@
 									</div>
 								</div>
 							</h2>
-							<span id="texteprojet2" class="lg:text-4xl text-2xl opacity-0 px-2 text-center">Des particules s'animent au
+							<span id="texteprojet2" class="lg:text-4xl text-2xl opacity-0 px-2 text-center">Des
+								particules s'animent au
 								fur et à
 								mesure que
 								l'utilisateur parcoure le site<br></span>
 							</p>
-			
+
 							<div id="image2"
 								class="opacity-0 max-h-[30%] lg:max-h-[50%] w-[60%] flex justify-center items-center">
 								<img loading="lazy" src="/images/uconsulting.webp"
@@ -735,7 +328,7 @@
 							</div>
 							<div id="ensembletexteetfleche2"
 								class="text-white opacity-0  text-4xl flex items-center gap-4 px-12">
-									<span class="lg:text-4xl text-2xl" id="visitezleprojet2">Visitez le site</span>
+								<span class="lg:text-4xl text-2xl" id="visitezleprojet2">Visitez le site</span>
 								<a href="https://u-consulting.vercel.app/"
 									class="text-white text-4xl flex items-center gap-4 px-12"
 									aria-label="Visiter le site du groupe U-Consulting - ouvre dans un nouvel onglet"
@@ -762,11 +355,11 @@
 						</div>
 					</section>
 					<section id="sectionprojet3"
-						class="section relative flex flex-row justify-end items-end cursor-hover-area">
+						class="section relative w-full flex flex-row justify-end items-end cursor-hover-area">
 						<!-- justify-end items-end -->
 						<div id="movingsquareprojet3" class="moving-square" aria-hidden="true"></div>
 
-						<div class="section__title w-[20vw] ">
+						<div class="section__title absolute h-screen w-full py-2 pr-[25vw] lg:pr-[25vw] ">
 							<div class="flex flex-col">
 								<h2 class="section__title-text ">Janvier</h2>
 								<h2 class="section__title-number">25</h2>
@@ -780,7 +373,7 @@
 								<h2 class="section__title-number">24</h2>
 							</div>
 						</div>
-						
+
 
 						<div id="sectiondroite3"
 							class="absolute flex flex-col items-center justify-around top-0 left-[100vw] h-full w-[50vw]">
@@ -806,10 +399,10 @@
 								<a href="https://site-perso-exemple.vercel.app/" class="w-1/2"
 									aria-label="Visiter le site du groupe Unclick - ouvre dans un nouvel onglet"
 									target="_blank" rel="noopener noreferrer">
-								<img loading="lazy" id="image4" style="clip-path: ellipse(50% 35% at 50% 50%)"
-									src="/images/sitePersoAutomatique.webp"
-									alt="Canevas de site web personnalisable avec interface intuitive"
-									class="object-cover" srcset="/images/sitePersoAutomatique-300.webp 300w, /images/sitePersoAutomatique-600.webp 600w, /images/sitePersoAutomatique-900.webp 900w, /images/sitePersoAutomatique-1200.webp 1200w, /images/sitePersoAutomatique-1800.webp 1800w" sizes="(max-width: 768px) 50vw, 25vw">
+									<img loading="lazy" id="image4" style="clip-path: ellipse(50% 35% at 50% 50%)"
+										src="/images/sitePersoAutomatique.webp"
+										alt="Canevas de site web personnalisable avec interface intuitive"
+										class="object-cover" srcset="/images/sitePersoAutomatique-300.webp 300w, /images/sitePersoAutomatique-600.webp 600w, /images/sitePersoAutomatique-900.webp 900w, /images/sitePersoAutomatique-1200.webp 1200w, /images/sitePersoAutomatique-1800.webp 1800w" sizes="(max-width: 768px) 50vw, 25vw">
 								</a>
 							</div>
 
@@ -817,12 +410,12 @@
 								class="w-full h-1/3 flex items-center justify-around flex-row relative custom-left opacity-0">
 								<div class="text-2xl mr-4 lg:text-4xl w-1/2 text-left">Création d'un effet de profondeur
 									original en 3D</div>
-									<a href="https://dev2site.net/slide/index.html" class="w-1/2"
+								<a href="https://dev2site.net/slide/index.html" class="w-1/2"
 									aria-label="Visiter le site du groupe Unclick - ouvre dans un nouvel onglet"
 									target="_blank" rel="noopener noreferrer">
-								<img loading="lazy" id="image5" src="/images/sunflower.webp"
-									alt="Effet 3D de profondeur avec animation sunflower"
-									style="clip-path: ellipse(50% 35% at 50% 50%)" srcset="/images/sunflower-300.webp 300w, /images/sunflower-600.webp 600w, /images/sunflower-900.webp 900w, /images/sunflower-1200.webp 1200w, /images/sunflower-1800.webp 1800w" sizes="(max-width: 768px) 50vw, 25vw">
+									<img loading="lazy" id="image5" src="/images/sunflower.webp"
+										alt="Effet 3D de profondeur avec animation sunflower"
+										style="clip-path: ellipse(50% 35% at 50% 50%)" srcset="/images/sunflower-300.webp 300w, /images/sunflower-600.webp 600w, /images/sunflower-900.webp 900w, /images/sunflower-1200.webp 1200w, /images/sunflower-1800.webp 1800w" sizes="(max-width: 768px) 50vw, 25vw">
 								</a>
 							</div>
 						</div>
@@ -839,19 +432,19 @@
 				<div class="scroll__content">
 					<section class="section">
 						<div class="frame">
-		
+
 							<nav class="frame__links" aria-label="Navigation principale">
 								<span id="contact2" class="contact2">Contact</span>
 								<div class="contact-container">
 									<ul>
-									  <li><a href="tel:0688918019">06 88 91 80 19</a></li>
-									  <li><a href="mailto:amo@dev2site.com">amo@dev2site.net</a></li>
+										<li><a href="tel:0688918019">06 88 91 80 19</a></li>
+										<li><a href="mailto:amo@dev2site.com">amo@dev2site.net</a></li>
 									</ul>
-								  </div>
+								</div>
 							</nav>
 						</div>
 						<div class="section__title">
-							<h1 class="section__title-number">&lt; dev<span class="highlight-2">2</span>site/></h1>
+							<h1 class="section__title-number text-center">&lt; dev<span class="highlight-2">2</span>site/></h1>
 							<h2 class="section__title-text">studio web</h2>
 							<p class="section__title-arrow" aria-hidden="true">
 								<span>➤</span><br>
@@ -910,25 +503,28 @@
 
 		</div>
 		</div>
-		
+
 		</div>
 
 	</main>
 
 	<!-- Bannière de consentement -->
-	<div id="consent-banner" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 z-[9999] transform translate-y-full transition-transform duration-300">
+	<div id="consent-banner"
+		class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 z-[9999] transform translate-y-full transition-transform duration-300">
 		<div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
 			<div class="flex-1">
 				<p class="text-sm">
-					Nous utilisons des cookies pour analyser le trafic et améliorer votre expérience. 
+					Nous utilisons des cookies pour analyser le trafic et améliorer votre expérience.
 					En continuant à naviguer, vous acceptez notre utilisation des cookies.
 				</p>
 			</div>
 			<div class="flex gap-2">
-				<button id="accept-cookies" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
+				<button id="accept-cookies"
+					class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
 					Accepter
 				</button>
-				<button id="reject-cookies" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors">
+				<button id="reject-cookies"
+					class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors">
 					Refuser
 				</button>
 			</div>
@@ -937,12 +533,12 @@
 
 	
 
-	
+
 	
 	<script>
-		
+
 		// Gestion du consentement
-		document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', function () {
 			const consentBanner = document.getElementById('consent-banner');
 			const acceptBtn = document.getElementById('accept-cookies');
 			const rejectBtn = document.getElementById('reject-cookies');
@@ -955,14 +551,14 @@
 			}
 
 			// Accepter les cookies
-			acceptBtn.addEventListener('click', function() {
+			acceptBtn.addEventListener('click', function () {
 				localStorage.setItem('analytics-consent', 'true');
 				consentBanner.classList.add('translate-y-full');
 				loadGoogleAnalytics();
 			});
 
 			// Refuser les cookies
-			rejectBtn.addEventListener('click', function() {
+			rejectBtn.addEventListener('click', function () {
 				localStorage.setItem('analytics-rejected', 'true');
 				consentBanner.classList.add('translate-y-full');
 			});
@@ -970,22 +566,22 @@
 			// Gestion du menu contact sur mobile (seulement la seconde instance)
 			const mobileFrameLinks = document.querySelectorAll('.frame__links')[1]; // Index 1 = version mobile
 			const contact2Element = document.getElementById('contact2');
-			
+
 			if (mobileFrameLinks && contact2Element) {
-				
+
 				// Fermer le menu si on clique ailleurs
-				document.addEventListener('click', function(e) {
+				document.addEventListener('click', function (e) {
 					if (!mobileFrameLinks.contains(e.target)) {
 						mobileFrameLinks.classList.remove('active');
-					}else{
+					} else {
 						mobileFrameLinks.classList.toggle('active');
 					}
 				});
-				
+
 				// Fermer le menu après avoir cliqué sur un lien
 				const contactLinks = mobileFrameLinks.querySelectorAll('a');
 				contactLinks.forEach(link => {
-					link.addEventListener('click', function() {
+					link.addEventListener('click', function () {
 						setTimeout(() => {
 							mobileFrameLinks.classList.remove('active');
 						}, 300);

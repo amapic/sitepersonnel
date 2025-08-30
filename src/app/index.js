@@ -354,10 +354,10 @@ class ScrollStage {
    * RENDER
    */
   render() {
-    // if (1==0) {
+    if (1==0) {
     this.renderer.render(this.scene, this.camera);
     this.canvasHasRendered = true;
-    // }
+    }
   }
 
   debounce(func, wait) {

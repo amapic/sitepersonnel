@@ -14,7 +14,7 @@ function App() {
   const [show, setShow] = useState(false)
   useEffect(() => {
     const onScroll = () => {
-      if (window.scrollY > window.innerHeight) {
+      if (window.scrollY > window.innerHeight*3) {
         setShow(true)
         window.removeEventListener('scroll', onScroll)
       }

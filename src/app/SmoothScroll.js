@@ -39,142 +39,38 @@ export default class {
       reactRoot:window.innerWidth <= 768?document.querySelector("#react-root2"):document.querySelector("#react-root1")
     };
 
-    const sectionDroite1 = document.getElementById("sectiondroite1");
-    const circle = sectionDroite1.querySelector(".arrow-circle");
-    const fillCircle = sectionDroite1.querySelector(".fill-circle");
-    const arrow = sectionDroite1.querySelector(".arrow-path");
+    // const sectionDroite1 = document.getElementById("sectiondroite1");
+    // const circle = sectionDroite1.querySelector(".arrow-circle");
+    // const fillCircle = sectionDroite1.querySelector(".fill-circle");
+    // const arrow = sectionDroite1.querySelector(".arrow-path");
 
-    // Animation au hover
-    // sectionDroite1.addEventListener("mouseenter", () => {
-      // GSAP.to(fillCircle, {
-        // attr: { r: 19 },
-        // duration: 0.3,
-        // ease: "power2.out",
-      // });
-      // GSAP.to(arrow, {
-        // scale: 0,
-        // fill: "black",
-        // transformOrigin: "center",
-        // duration: 0.3,
-        // ease: "power2.out",
-      // })
-        // .then(() => {
-          // GSAP.to(arrow, {
-            // x: -10,
-            // y: 10,
-            // scale: 1,
-            // duration: 0.0,
-            // ease: "power2.out",
-          // });
-        // })
-        // .then(() => {
-          // GSAP.to(arrow, {
-            // x: 0,
-            // y: 0,
-            // duration: 0.3,
-            // ease: "power2.out",
-          // });
-        // });
-    // });
 
-    // Animation au unhover
-    // sectionDroite1.addEventListener("mouseleave", () => {
-      // GSAP.to(fillCircle, {
-        // attr: { r: 0 },
-        // duration: 0.5,
-        // ease: "power2.in",
-      // });
-
-      // GSAP.to(arrow, {
-        // scale: 1,
-        // transformOrigin: "center",
-        // fill: "white",
-        // duration: 0.3,
-        // ease: "power2.in",
-      // });
-    // });
-
-    // const sectionDroite2 = document.getElementById("sectiondroite2");
-    // const circle2 = sectionDroite2.querySelector(".arrow-circle");
-    // const fillCircle2 = sectionDroite2.querySelector(".fill-circle");
-    // const arrow2 = sectionDroite2.querySelector(".arrow-path");
-
-    // Animation au hover
-    // sectionDroite2.addEventListener("mouseenter", () => {
-      // GSAP.to(fillCircle2, {
-        // attr: { r: 19 },
-        // duration: 0.3,
-        // ease: "power2.out",
-      // });
-      // GSAP.to(arrow2, {
-        // scale: 0,
-        // fill: "black",
-        // transformOrigin: "center",
-        // duration: 0.3,
-        // ease: "power2.out",
-      // })
-        // .then(() => {
-          // GSAP.to(arrow2, {
-            // x: -10,
-            // y: 10,
-            // scale: 1,
-            // duration: 0.0,
-            // ease: "power2.out",
-          // });
-        // })
-        // .then(() => {
-          // GSAP.to(arrow2, {
-            // x: 0,
-            // y: 0,
-            // duration: 0.3,
-            // ease: "power2.out",
-          // });
-        // });
-    // });
-
-    // Animation au unhover
-    // sectionDroite2.addEventListener("mouseleave", () => {
-      // GSAP.to(fillCircle2, {
-        // attr: { r: 0 },
-        // duration: 0.5,
-        // ease: "power2.in",
-      // });
-
-      // GSAP.to(arrow2, {
-        // scale: 1,
-        // transformOrigin: "center",
-        // fill: "white",
-        // duration: 0.3,
-        // ease: "power2.in",
-      // });
-    // });
-
-    const image = document.querySelector(".grid-image");
+    // const image = document.querySelector(".grid-image");
 
     // Attendre que l'image soit chargée pour avoir ses dimensions réelles
-    image.addEventListener("load", () => {
-      const imageWidth = image.offsetWidth;
-      const imageHeight = image.offsetHeight;
+    // image.addEventListener("load", () => {
+    //   const imageWidth = image.offsetWidth;
+    //   const imageHeight = image.offsetHeight;
 
-      // Taille des points et espacement
-      const pointSize = 15;
-      const spacing = 30;
+    //   // Taille des points et espacement
+    //   const pointSize = 15;
+    //   const spacing = 30;
 
-      // Calculer le décalage pour centrer le motif
-      const offsetX = (imageWidth % spacing) / 2;
-      const offsetY = (imageHeight % spacing) / 2;
+    //   // Calculer le décalage pour centrer le motif
+    //   const offsetX = (imageWidth % spacing) / 2;
+    //   const offsetY = (imageHeight % spacing) / 2;
 
-      // Appliquer le masque avec le décalage calculé
-      // image.style.webkitMaskImage = `repeating-linear-gradient(0deg, #000, #000 ${pointSize}px, transparent ${pointSize}px, transparent ${spacing}px),
-      //                               repeating-linear-gradient(90deg, #000, #000 ${pointSize}px, transparent ${pointSize}px, transparent ${spacing}px)`;
-      // image.style.webkitMaskSize = `${spacing}px ${spacing}px`;
-      // image.style.webkitMaskPosition = `${offsetX}px ${offsetY}px`;
+    //   // Appliquer le masque avec le décalage calculé
+    //   // image.style.webkitMaskImage = `repeating-linear-gradient(0deg, #000, #000 ${pointSize}px, transparent ${pointSize}px, transparent ${spacing}px),
+    //   //                               repeating-linear-gradient(90deg, #000, #000 ${pointSize}px, transparent ${pointSize}px, transparent ${spacing}px)`;
+    //   // image.style.webkitMaskSize = `${spacing}px ${spacing}px`;
+    //   // image.style.webkitMaskPosition = `${offsetX}px ${offsetY}px`;
 
-      // // Pour les navigateurs non-webkit
-      // image.style.maskImage = image.style.webkitMaskImage;
-      // image.style.maskSize = image.style.webkitMaskSize;
-      // image.style.maskPosition = image.style.webkitMaskPosition;
-    });
+    //   // // Pour les navigateurs non-webkit
+    //   // image.style.maskImage = image.style.webkitMaskImage;
+    //   // image.style.maskSize = image.style.webkitMaskSize;
+    //   // image.style.maskPosition = image.style.webkitMaskPosition;
+    // });
 
     // Pré-calcul des valeurs fréquemment utilisées
     this.constants = {
@@ -277,7 +173,7 @@ export default class {
           const div = this.cachedElements.reactRoot;
 
           if (div) {
-            const position = window.getComputedStyle(div).position;
+            // const position = window.getComputedStyle(div).position;
             // console.log(4 * this.viewport.height,-this.scroll.soft)
             // if (position !== "absolute") {
               // div.style.position = "fixed";
