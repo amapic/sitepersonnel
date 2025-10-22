@@ -126,7 +126,7 @@ export default function MonComposant() {
                 style={{ whiteSpace: "nowrap",textOverflow: "ellipsis"}}
               >
                 
-                amo@dev2site.com
+                amo@dev2site.net
                 
               </span>
               {/* Texte statique, toujours visible */}
@@ -136,12 +136,12 @@ export default function MonComposant() {
                 aria-hidden="true"
               >
                 <a 
-                  href="mailto:amo@dev2site.com"
-                  aria-label="Envoyez-nous un email à amo@dev2site.com"
+                  href="mailto:amo@dev2site.net"
+                  aria-label="Envoyez-nous un email à amo@dev2site.net"
                   className="text-center pointer-events-auto text-2xl xl:text-4xl"
                   style={{ display: 'inline-block' }}
                 >
-                  amo@dev2site.com
+                  amo@dev2site.net
                 </a>
               </span>
             </div>

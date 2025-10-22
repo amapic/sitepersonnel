@@ -68,23 +68,23 @@
 		}
 
 		// Fonction pour charger Google Analytics
-		// function loadGoogleAnalytics() {
-		// 	// Charger le script Google Analytics
-		// 	const script = document.createElement('script');
-		// 	script.async = true;
-		// 	script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790';
-		// 	document.head.appendChild(script);
+		function loadGoogleAnalytics() {
+			// Charger le script Google Analytics
+			const script = document.createElement('script');
+			script.async = true;
+			script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LTCXHF5790';
+			document.head.appendChild(script);
 
-		// 	// Configuration Google Analytics
-		// 	window.dataLayer = window.dataLayer || [];
-		// 	function gtag(){dataLayer.push(arguments);}
-		// 	gtag('js', new Date());
-		// 	gtag('config', 'G-LTCXHF5790');
-		// }
+			// Configuration Google Analytics
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-LTCXHF5790');
+		}
 
 		// Charger Google Analytics si consentement déjà donné
 		if (hasConsent()) {
-			// loadGoogleAnalytics();
+			loadGoogleAnalytics();
 		}
 	</script>
 
@@ -178,6 +178,11 @@
 
 
 		<div class="layout__line z-[1000]"></div>
+		<!-- <div class="layout__line2 fixed top-[15px] z-[1000] border-white w-full flex flex-row items-center justify-evenly border-b pb-[5px]">
+			<span class="mr-4 flex items-center gap-2 whitespace-nowrap "><img src="images/mail.png" alt="Email icon" class="inline-block pb-1"> amo@dev2site.net</span>
+			<span class="mr-4 flex items-center gap-2 whitespace-nowrap "><img src="images/phone.png" alt="Phone icon" class="inline-block pb-1"> 0688918019</span>
+
+		</div> -->
 		<div class="content hidden md:block">
 			<div class="scroll__stage bg-cover bg-center">
 				<!-- bg-[url('/images/fond2.png')] -->
@@ -464,7 +469,7 @@
 								<div class="contact-container">
 									<ul>
 										<li><a href="tel:0688918019">06 88 91 80 19</a></li>
-										<li><a href="mailto:amo@dev2site.com">amo@dev2site.net</a></li>
+										<li><a href="mailto:amo@dev2site.net">amo@dev2site.net</a></li>
 									</ul>
 								</div>
 							</nav>

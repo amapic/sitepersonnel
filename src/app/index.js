@@ -308,7 +308,7 @@ class ScrollStage {
       height: window.innerHeight,
     };
     // if (this.tanFOV!="init"){
-      console.log(( 360 / Math.PI ) * Math.atan( this.tanFOV * ( window.innerHeight / this.windowHeight ) ));
+      // console.log(( 360 / Math.PI ) * Math.atan( this.tanFOV * ( window.innerHeight / this.windowHeight ) ));
       this.camera.fov = ( 360 / Math.PI ) * Math.atan( this.tanFOV * ( window.innerHeight / this.windowHeight ) );
     // }
 
@@ -354,10 +354,10 @@ class ScrollStage {
    * RENDER
    */
   render() {
-    if (1==0) {
+    // if (1==0) {
     this.renderer.render(this.scene, this.camera);
     this.canvasHasRendered = true;
-    }
+    // }
   }
 
   debounce(func, wait) {
