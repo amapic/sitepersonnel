@@ -95,7 +95,50 @@
 			history.scrollRestoration = 'manual';
 		}
 
+		// Configuration pour l'animation du texte du curseur
+		const TEXT_SCROLL_CONFIG = {
+			// Décalage en millisecondes après la fin du chargement (modifiez cette valeur)
+			delayAfterLoad: 1000, // 1 seconde par défaut
+			// Durée de l'animation en millisecondes
+			animationDuration: 3000, // 3 secondes
+			// Nombre de tours complets
+			numberOfLoops: 1
+		};
 
+		// Fonction pour animer le texte du curseur
+		function animateCursorText() {
+			const textElement = document.querySelector('#textcursor1 textPath');
+			if (!textElement) return;
+
+			let progress = 0;
+			const startTime = performance.now();
+			const duration = TEXT_SCROLL_CONFIG.animationDuration;
+
+			function updateAnimation() {
+				const elapsed = performance.now() - startTime;
+				progress = Math.min(elapsed / duration, 1);
+				
+				// Calcul du décalage basé sur le progrès
+				const offset = (progress * 100 * TEXT_SCROLL_CONFIG.numberOfLoops) % 100;
+				textElement.setAttribute('startOffset', `${offset}%`);
+
+				if (progress < 1) {
+					requestAnimationFrame(updateAnimation);
+				} else {
+					// Remettre à 0% à la fin
+					textElement.setAttribute('startOffset', '0%');
+				}
+			}
+
+			requestAnimationFrame(updateAnimation);
+		}
+
+		// Démarrer l'animation après le chargement
+		window.addEventListener('load', function() {
+			setTimeout(() => {
+				animateCursorText();
+			}, TEXT_SCROLL_CONFIG.delayAfterLoad);
+		});
 	</script>
 
 	<link rel="shortcut icon" href="gg.PNG?v=5">
@@ -113,6 +156,20 @@
 			font-family: monospace;
 			z-index: 9999;
 		}
+
+		/* Animation pour le texte du curseur au chargement */
+		/* @keyframes scrollTextBonjour {
+			0% {
+				startOffset: 0%;
+			}
+			100% {
+				startOffset: 100%;
+			}
+		}
+
+		.text-scroll-animation-bonjour {
+			animation: scrollTextBonjour 3s ease-in-out;
+		} */
 	</style>
 	<style>
 
@@ -147,28 +204,36 @@
 
 
 	<div class="custom-cursor">
-		<svg id="svgcursor1" width="80" height="80" viewBox="0 0 80 80" aria-hidden="true">
+		<svg id="svgcursor1" width="100" height="100" viewBox="0 0 100 100" aria-hidden="true">
 			<defs>
 				<mask id="circleMask">
-					<rect width="80" height="80" fill="black" />
+					<rect width="80" height="80" fill="red" />
 					<circle cx="40" cy="40" r="20" fill="white" />
 				</mask>
 			</defs>
-			<circle class="cursor-circle" cx="40" cy="40" r="30" />
-			<path id="curvedPath" fill="none" d="M40,10 A30,30 0 1,1 39.999,10" />
+			<circle class="cursor-circle" cx="50" cy="50" r="30" />
+			<!-- <circle class="cursor-circle-large" cx="40" cy="40" r="35" /> -->
+			<path id="curvedPath" fill="none" d="M50,20 A30,30 0 1,1 49.999,20" />
+			<path id="curvedPathLarge" fill="none" d="M50,20 A30,30 0 1,1 49.999,20" />
+			<!-- <path id="curvedPathLarge" fill="none" d="M80,50 A31,31 0 1 0 70,50 A31,31 0 1 0 70,50" /> -->
+			<!-- <circle id="curvedPathLarge" fill="none" cx="40" cy="40" r="25" /> -->
+
 			<text id="textcursor1" class="cursor-text rotating-text" aria-hidden="true">
 				<textPath href="#curvedPath" startOffset="0%">LETS GO • LETS GO • LETS GO •</textPath>
 			</text>
+			<text id="textcursor2" class="cursor-text2 rotating-text" aria-hidden="true">
+				<textPath href="#curvedPathLarge" startOffset="0%">BONJOUR !</textPath>
+			</text>
 			<g id="arrowcursor1" class="cursor-arrow" aria-hidden="true">
 				<g transform="translate(0 -10)">
-					<path id="arrowcursor12" d="M40,30 L45,40 L35,40 Z" />
+					<path id="arrowcursor12" d="M50,40 L55,50 L45,50 Z" />
 
 				</g>
-				<path d="M40,30 L45,40 L35,40 Z" />
+				<path d="M50,40 L55,50 L45,50 Z" />
 			</g>
 
 			<g mask="url(#circleMask)">
-				<text class="cursor-go-text" x="40" y="40" aria-hidden="true">GO!!</text>
+				<text class="cursor-go-text" x="50" y="50" aria-hidden="true">GO!!</text>
 			</g>
 		</svg>
 
@@ -177,12 +242,12 @@
 	<main id="main-content">
 
 
-		<div class="layout__line z-[1000]"></div>
-		<!-- <div class="layout__line2 fixed top-[15px] z-[1000] border-white w-full flex flex-row items-center justify-evenly border-b pb-[5px]">
+		<div id="layout__line" class="layout__line z-[1000]"></div>
+		<div id="layout__contact" class="layout__contact fixed top-[15px] z-[1000] border-white w-full flex flex-row items-center justify-evenly border-b pb-[5px]">
 			<span class="mr-4 flex items-center gap-2 whitespace-nowrap "><img src="images/mail.png" alt="Email icon" class="inline-block pb-1"> amo@dev2site.net</span>
 			<span class="mr-4 flex items-center gap-2 whitespace-nowrap "><img src="images/phone.png" alt="Phone icon" class="inline-block pb-1"> 0688918019</span>
 
-		</div> -->
+		</div>
 		<div class="content hidden md:block">
 			<div class="scroll__stage bg-cover bg-center">
 				<!-- bg-[url('/images/fond2.png')] -->
@@ -192,7 +257,7 @@
 						<div class="frame">
 
 							<nav class="frame__links" aria-label="Navigation principale">
-								<span id="contact" class="contact">Contact</span>
+								<!-- <span id="contact" class="contact">Contact</span> -->
 								<div class="contact-container">
 									<ul>
 										<li>06 88 91 80 19</li>

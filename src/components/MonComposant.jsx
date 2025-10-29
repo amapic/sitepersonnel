@@ -31,8 +31,8 @@ export default function MonComposant() {
       charsClass: "char",
     });
 
-    const tl = gsap.timeline({repeat: -1});
-  
+    const tl = gsap.timeline({ repeat: -1 });
+
     tl.to(text.chars, {
       scale: 2,
       opacity: 0,
@@ -40,14 +40,14 @@ export default function MonComposant() {
       ease: "power4.out",
     });
 
-    
+
     const text2 = new SplitText(document.getElementById("contact_mail"), {
       type: "chars",
       charsClass: "char",
     });
 
-    const tl2 = gsap.timeline({repeat: -1});
-  
+    const tl2 = gsap.timeline({ repeat: -1 });
+
     tl2.to(text2.chars, {
       scale: 2,
       opacity: 0,
@@ -114,7 +114,7 @@ export default function MonComposant() {
                 <a name="contact telephone" href="tel:+33688918019" style={{ color: "inherit", textDecoration: "inherit" }}>
                   06 88 91 80 19
                 </a>
-              
+
               </span>
             </div>
             <span className="w-full text-center">Lyon 6 </span>
@@ -123,19 +123,19 @@ export default function MonComposant() {
               <span
                 id="contact_mail"
                 className="absolute left-0 right-0 w-full text-center pointer-events-auto text-2xl xl:text-4xl "
-                style={{ whiteSpace: "nowrap",textOverflow: "ellipsis"}}
+                style={{ whiteSpace: "nowrap", textOverflow: "ellipsis" }}
               >
-                
+
                 amo@dev2site.net
-                
+
               </span>
               {/* Texte statique, toujours visible */}
               <span
                 className="absolute left-0 right-0 w-full text-center pointer-events-none text-4xl"
-                style={{ top: 0,whiteSpace: "nowrap",textOverflow: "ellipsis"}}
+                style={{ top: 0, whiteSpace: "nowrap", textOverflow: "ellipsis" }}
                 aria-hidden="true"
               >
-                <a 
+                <a
                   href="mailto:amo@dev2site.net"
                   aria-label="Envoyez-nous un email à amo@dev2site.net"
                   className="text-center pointer-events-auto text-2xl xl:text-4xl"
@@ -150,17 +150,17 @@ export default function MonComposant() {
                 <a href="/mentions-legales.html" target="_blank" rel="noopener noreferrer pointer-events-auto">
                   mentions-legales
                 </a>
-                </span>
+              </span>
             </span>
             <span className="pointer-events-auto w-full text-center">
               <span className="pointer-events-auto border-b-2 border-dotted border-current inline-block leading-none cursor-pointer">
-              <a href="/confidentialite.html" target="_blank" rel="noopener noreferrer pointer-events-auto">
+                <a href="/confidentialite.html" target="_blank" rel="noopener noreferrer pointer-events-auto">
                   politique de confidentialité
-                  </a>
-                  </span>
+                </a>
+              </span>
             </span>
             {/* <div id="wcb" class="carbonbadge">carbonbadge</div> */}
-{/* <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script> */}
+            {/* <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script> */}
           </div>
 
           <div className="absolute -top-[50vh] xl:-top-[75vh] right-0  h-[25vh] z-[1000] flex flex-col items-center justify-left pr-8">
@@ -188,7 +188,7 @@ const useDomToCanvas = (domEl) => {
   useEffect(() => {
     if (!domEl) return;
     const convertDomToCanvas = async () => {
-      const canvas = await html2canvas(domEl, { backgroundColor: null,scale: 4 });
+      const canvas = await html2canvas(domEl, { backgroundColor: null, scale: 4 });
       setTexture(new THREE.CanvasTexture(canvas));
     };
 
@@ -228,9 +228,9 @@ function Scene() {
   const [domEl, setDomEl] = useState(null);
   const [containerRatio, setContainerRatio] = useState(1);
 
-  const cursor = document.querySelector('.custom-cursor');
-    const contactTel = document.querySelector('#contact_tel');
-    const contactMail = document.querySelector('#contact_mail');
+  // const cursor = document.querySelector('.custom-cursor');
+  // const contactTel = document.querySelector('#contact_tel');
+  // const contactMail = document.querySelector('#contact_mail');
 
   useEffect(() => {
     const container = document.getElementById("canvas-container2");
@@ -277,7 +277,7 @@ function Scene() {
     materialRef.current.uniforms.uMouse.value.y = mouseLerped.current.y;
 
 
-    
+
   });
 
   return (
@@ -289,7 +289,7 @@ function Scene() {
             QUAND <br />
             M'APPELEZ <br />
             VOUS ? <br />
-            
+
             {/* MEET ?<br /> */}
           </p>
         </div>
@@ -303,7 +303,7 @@ function Scene() {
           fragmentShader={fragmentShader}
           uniforms={uniforms}
           flatShading
-          // silent
+        // silent
         />
         <Lights />
       </mesh>

@@ -110,15 +110,8 @@ document.getElementById("fleche1").addEventListener("mouseleave", (event) => {
 });
 
 document.getElementById("fleche2").addEventListener("mouseenter", (event) => {
-  // const cursor = document.querySelector(".custom-cursor");
-  // cursorArrow.style.opacity = 0;
+
   gsap.killTweensOf(cursor);
-  // const tl = gsap.timeline();
-  // tl.to(cursor, { scale: 10, duration: 10 })
-  // .to(cursor, { scale: 0.5, duration: 3 }, "+=0");
-  // tl.fromTo(cursor, { scale: 1 }, { scale: 10, duration: 1,immediateRender:true })
-  // .fromTo(cursor, { scale: 10,immediateRender:false }, { scale: 0.5, duration: 3,immediateRender:false })
-  // .fromTo(cursor, { scale: 0.5,immediateRender:false }, { scale: 3, duration: 3,immediateRender:false });
 
   gsap.to(cursor, {
     scale: 3,
@@ -163,10 +156,8 @@ document.getElementById("fleche2").addEventListener("mouseenter", (event) => {
 });
 
 document.getElementById("fleche2").addEventListener("mouseleave", (event) => {
-  // const cursor = document.querySelector(".custom-cursor");
-  // cursorArrow.style.opacity = 1;
+
   gsap.killTweensOf(cursor);
-  // gsap.killTweensOf(cursorGoText);
   gsap.to(cursorGoText, {
     scaleX: 1,
     scaleY: 10,
@@ -184,10 +175,8 @@ document.getElementById("fleche2").addEventListener("mouseleave", (event) => {
 document
   .getElementById("react-root1")
   .addEventListener("mouseenter", (event) => {
-    // const cursor = document.querySelector(".custom-cursor");
     const circle = document.querySelector(".cursor-circle");
 
-    // alert(circle.getAttribute("fill"));
 
     gsap.to(cursor, { scale: 0.1, duration: 0.5 });
     gsap.to(circle, { fill: "white", duration: 0.5 });
@@ -211,7 +200,6 @@ document
 document
   .getElementById("sectionprojet3")
   .addEventListener("mouseenter", (event) => {
-    // const cursor = document.querySelector(".custom-cursor");
     const circle = document.querySelector(".cursor-circle");
     gsap.to(cursor, { scale: 1.5, duration: 0.3 });
     gsap.to(circle, { fill: null, duration: 0.5 });
@@ -220,43 +208,21 @@ document
 document
   .getElementById("sectionprojet1")
   .addEventListener("mouseenter", (event) => {
-    // alert("ok");
-    // const cursor = document.querySelector(".custom-cursor");
     const circle = document.querySelector(".cursor-circle");
     gsap.to(cursor, { scale: 1.5, duration: 0.3 });
     gsap.to(circle, { fill: null, duration: 0.5 });
   });
 
-  document
+document
   .getElementById("sectionprojet1")
   .addEventListener("mouseleave", (event) => {
-    // alert(window.scrollX/window.innerWidth);
     if (window.scrollY > 0 && window.scrollY < window.innerHeight) {
-      // alert(window.scrollX);
       gsap.to(cursor, { scale: 1.0, duration: 0.3 });
     }
-    // alert("ok");
-    // const cursor = document.querySelector(".custom-cursor");
-    // const circle = document.querySelector(".cursor-circle");
-    
-    // gsap.to(circle, { fill: null, duration: 0.5 });
+
   });
 
-// document
-//   .getElementById("sectionprojet0")
-//   .addEventListener("mouseleave", (event) => {
-//     // alert(cursor.getBoundingClientRect().top);
-//     if (cursor.getBoundingClientRect().top < window.innerHeight / 10) {
-//       // cursor.style.left=screen.width/2+"px";
-//       // cursor.style.top=window.innerHeight/2+"px";
 
-//       // gsap.to(cursor, {
-//       //   left: screen.width / 2,
-//       //   top: window.innerHeight / 2,
-//       //   duration: 0.6,
-//       // });
-//     }
-//   });
 
 class CustomCursor {
   constructor() {
@@ -286,14 +252,7 @@ class CustomCursor {
       return;
     }
 
-    // Set viewport height
-    // document.documentElement.style.setProperty(
-    //   "--real-viewport-height",
-    //   `${window.innerHeight}px`
-    // );
 
-    // Hide default cursor
-    // document.body.style.cursor = 'none';
 
     // Initialize elements
     this.cursor = document.querySelector(".custom-cursor");
@@ -303,10 +262,13 @@ class CustomCursor {
     this.firstSection = document.querySelector(".section:first-child");
     this.reactRoot = document.querySelector("#react-root1");
     this.textcursor1 = document.querySelector("#textcursor1");
+    this.textcursor2 = document.querySelector("#textcursor2");
     this.arrowcursor1 = document.querySelector("#arrowcursor1");
     this.fpsCounter = document.getElementById("fps-counter");
 
-    // this.cursor.classList.remove("opacity-0");
+    this.layoutContact = document.getElementById("layout__contact");
+    this.layoutLine = document.getElementById("layout__line");
+
 
     // Initialize sections
     this.sections = {
@@ -335,7 +297,7 @@ class CustomCursor {
   bindEvents() {
     document.addEventListener("mousemove", this.handleMouseMove.bind(this));
     // this.hoverAreas.forEach((area) => {
-      // area.addEventListener("mouseenter", this.handleHoverEnter.bind(this));
+    // area.addEventListener("mouseenter", this.handleHoverEnter.bind(this));
     // });
   }
 
@@ -348,39 +310,31 @@ class CustomCursor {
   updateCursorPosition(e) {
     this.cursor.style.left = e.clientX - this.cursor.offsetWidth / 2 + "px";
     this.cursor.style.top = e.clientY - this.cursor.offsetHeight / 2 + "px";
-    // const left = parseFloat(this.cursor.style.left) || 0;
-    // const top = parseFloat(this.cursor.style.top) || 0;
-    // let targetLeft, targetTop;
 
-    // if (targetCenterX !== undefined && targetCenterY !== undefined) {
-    //   // Toujours viser le centre du target si défini
-    //   targetLeft = targetCenterX - this.cursor.offsetWidth / 2;
-    //   targetTop = targetCenterY - this.cursor.offsetHeight / 2;
-    // } else {
-    //   // Mouvement fluide vers la souris
-    //   const targetLeft = e.clientX - this.cursor.offsetWidth / 2;
-    //   const targetTop = e.clientY - this.cursor.offsetHeight / 2;
-    //   const dxMouse = targetLeft - left;
-    //   const dyMouse = targetTop - top;
-    //   const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-    //   const lerp = Math.min(0.1 + distMouse / 300, 1);
-    //   const newLeft = left + dxMouse * lerp;
-    //   const newTop = top + dyMouse * lerp;
-
-    // }
   }
 
   updateCursorVisibility(e) {
+    if (this.firstSection && this.layoutLine &&
+      this.layoutContact && this.layoutContact) {
+      console.log(this.firstSection.contains(e.target) + " " + this.layoutLine.contains(e.target) + " " + this.layoutContact.contains(e.target) + " " +
+        (this.reactRoot && this.reactRoot.contains(e.target))
+      );
+    }
+
     if (
-      this.firstSection.contains(e.target) ||
+      this.firstSection.contains(e.target) || this.layoutLine.contains(e.target) ||
+      this.layoutContact.contains(e.target) ||
       (this.reactRoot && this.reactRoot.contains(e.target))
     ) {
       this.textcursor1.style.opacity = "0";
       this.arrowcursor1.style.opacity = "0";
+      // this.textcursor2.style.opacity = "1";
       this.cursor.classList.add("blend-mode");
     } else {
       this.textcursor1.style.opacity = "1";
       this.arrowcursor1.style.opacity = "1";
+
+      this.textcursor2.style.opacity = "0";
       this.cursor.classList.remove("blend-mode");
     }
   }
@@ -501,7 +455,7 @@ class CustomCursor {
   }
 
   // handleHoverEnter() {
-    // Implement hover effect if needed
+  // Implement hover effect if needed
   // }
 }
 
