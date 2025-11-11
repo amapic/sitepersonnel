@@ -1,7 +1,7 @@
 $color-1: #0101ec
 $color-2: #dd51b1
-$color-black: black
-$color-white: white
+$color-black: white
+$color-white: black
 
 // Import de la police
 @font-face
@@ -9,7 +9,7 @@ $color-white: white
   src: url('/font/DegularDisplay-Regular.otf') format('opentype')
   font-weight: 400
   font-style: normal
-  font-display: swap;
+  font-display: swap
   letter-spacing: 0.1ch
 
 // Placeholder pour la police
@@ -17,7 +17,7 @@ $color-white: white
   font-family: 'DegularDisplay-Regular', sans-serif
   font-weight: 400
   font-style: normal
-  font-display: swap;
+  font-display: swap
 
 %font-title
   font-weight: 500
@@ -27,21 +27,24 @@ $color-white: white
   top: 0
   left: 0
   width: 100%
-  
+
 %fixed
   @extend %top
-  
+
   position: fixed
-  
+
 %absolute
   @extend %top
-  
+
   position: absolute
-  
+
 *
   margin: 0
   padding: 0
   box-sizing: border-box
+
+html
+  background-color: transparent
 
 body
   @extend %font-regular
@@ -50,39 +53,62 @@ body
   height: 100vh
   overscroll-behavior: none
   color: $color-white
-  background-color: $color-black
+  background-color: transparent
+  // opacity: 0.5
+  // background-color: $color-black
   line-height: 1.2
-  
+
   &::-webkit-scrollbar
     display: none
 
 h1,
 h2
   @extend %font-title
-     
+
 canvas.webgl
   @extend %fixed
 
   pointer-events: none
-  mix-blend-mode: screen
+  z-index: -1
+  // mix-blend-mode: screen
+  // mix-blend-mode: normal
+  // mix-blend-mode: multiply
+  // mix-blend-mode: screen
+  // mix-blend-mode: overlay
+  // mix-blend-mode: darken
+  // mix-blend-mode: lighten
+  // mix-blend-mode: color-dodge
+  // mix-blend-mode: color-burn
+  // mix-blend-mode: hard-light
+  // mix-blend-mode: soft-light
+  // mix-blend-mode: difference
+  // mix-blend-mode: exclusion
+  // mix-blend-mode: hue
+  // mix-blend-mode: saturation
+  // mix-blend-mode: color
+  // mix-blend-mode: luminosity
 
   @media (max-width: 64em)
-      opacity: .7
+    opacity: .7
+
+#main-content
+  mix-blend-mode: exclusion
 
 .scroll
   &__stage
     @extend %fixed
 
     height: 100vh
+    z-index: 10
 
     &.js-mobile
       @extend %absolute
-      
+
       height: auto
 
       .scroll__content
         position: relative
-  
+
   &__content
     @extend %absolute
 
@@ -95,20 +121,20 @@ canvas.webgl
   width: 100%
   position: relative
   height: 100vh
-  padding: 8rem 
+  padding: 8rem
+  background: transparent
+  // mix-blend-screen: multiply
+  mix-blend-mode: exclusion
   // min-height: calc(100vh)
-  
+
   @media (max-width: 768px)
     &:nth-child(even)
       background: $color-1
 
-  @media (max-width: 768px)    
+  @media (max-width: 768px)
     &:nth-child(3)
-      background: black !important;
-    
+      background: black !important
 
-  
-  
   @media (max-width: 64em)
     flex-direction: column
     justify-content: top
@@ -117,14 +143,14 @@ canvas.webgl
     padding: 2vh 2rem
 
     &:first-of-type
-        gap: 0
+      gap: 0
 
   &:not(:first-of-type):not(:last-of-type)
     .section__title
       padding-bottom: calc(min(9vw, 6rem))
 
   &:nth-child(4)
-    padding:0
+    padding: 0
     @media (min-width: 768px)
 
       .section__title
@@ -137,18 +163,16 @@ canvas.webgl
         justify-content: space-around
         align-items: flex-end
 
-      .section__title-text  
-        
+      .section__title-text
+
         font-size: 7vh
         @media (max-width: 768px)
           font-size: 5vh
-    
 
       .section__title-number
         font-size: min(15vw, 24rem)
         @media (max-width: 768px)
           font-size: 5vh
-
 
     @media (min-width: 768px)
       flex-direction: row-reverse
@@ -162,14 +186,11 @@ canvas.webgl
         height: 100%
         z-index: -1
         opacity: 0.9
-      
+
       .section__title
         text-align: right
 
-
-    
-
-  &:nth-child(2), &:nth-child(3) 
+  &:nth-child(2), &:nth-child(3)
     flex-direction: row-reverse
 
     .moving-square
@@ -181,32 +202,28 @@ canvas.webgl
       height: 100%
       z-index: -1
       opacity: 0.9
-    
+
     .section__title
       text-align: right
-
-   
 
   &__title
     // text-align: left
     text-transform: uppercase
     opacity: .9
 
-
     @media (max-width: 1024px)
      // width: 100%
-    
+
     &-number
       font-size: min(15vw, 24rem)
-    
-      
+
     &-text
       font-size: min(10vw, 12rem)
       padding-left: .1ch
 
     &-arrow-mentions
       font-size: min(9vw, 6rem)
-      
+
       color: $color-1
       margin-top: 1ch
       // line-height: 1
@@ -214,23 +231,18 @@ canvas.webgl
       span
         display: inline-block
         transform: rotate(180deg)
-        
+
     &-arrow
       font-size: min(9vw, 6rem)
-      
+
       color: $color-1
       margin-top: 1ch
       line-height: 1
-      
+
       span
         display: inline-block
         transform: rotate(90deg)
 
-
-
-
-
-    
   &__paragraph
     align-self: flex-end
     max-width: 20ch
@@ -238,7 +250,7 @@ canvas.webgl
 
     @media (max-width: 64em)
       font-size: 1.2rem
-    
+
   &__button
     @extend %font-regular
 
@@ -256,16 +268,16 @@ canvas.webgl
     &:hover,
     &:focus
       border: 2px solid $color-2
-     
+
 .layout
   &__line
     @extend %fixed
-    
+
     height: 5px
     width: 100%
     background-color: $color-white
     transform: scaleX(0)
-  
+
   &__faboolea
     position: fixed
     bottom: 3rem
@@ -275,7 +287,6 @@ canvas.webgl
 
 .grid-mask
   position: relative
- 
 
 // .grid-image
 //   mask-image: repeating-linear-gradient(0deg, #000, #000 15px, transparent 15px, transparent 30px), repeating-linear-gradient(90deg, #000, #000 15px, transparent 15px, transparent 30px)
@@ -292,7 +303,3 @@ canvas.webgl
   -webkit-text-fill-color: transparent
   background-clip: text
   color: transparent
-
-
-
-

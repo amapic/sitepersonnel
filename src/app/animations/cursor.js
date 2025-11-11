@@ -1,5 +1,6 @@
-// On exécute la détection au chargement
 import gsap from "gsap";
+
+// On exécute la détection au chargement
 const cursor = document.querySelector(".custom-cursor");
 const cursorGoText = document.querySelector(".cursor-go-text");
 const cursorArrow = document.querySelector(".cursor-arrow");
@@ -314,13 +315,14 @@ class CustomCursor {
   }
 
   updateCursorVisibility(e) {
-    if (this.firstSection && this.layoutLine &&
-      this.layoutContact && this.layoutContact) {
+    if (this.firstSection.contains(e.target) && this.layoutLine.contains(e.target) &&
+      this.layoutContact.contains(e.target) &&
+      (this.reactRoot && this.reactRoot.contains(e.target))) {
       console.log(this.firstSection.contains(e.target) + " " + this.layoutLine.contains(e.target) + " " + this.layoutContact.contains(e.target) + " " +
         (this.reactRoot && this.reactRoot.contains(e.target))
       );
     }
-
+    
     if (
       this.firstSection.contains(e.target) || this.layoutLine.contains(e.target) ||
       this.layoutContact.contains(e.target) ||

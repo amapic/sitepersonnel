@@ -36,10 +36,13 @@ class ScrollStage {
     // }
     this.index = this.isMobile ? 1 : 0;
     this.element = document.querySelectorAll(".content")[this.index];
+    this.reactroot1 = document.querySelector("#react-root1");
     this.contaienrcanvas2 = document.querySelector("#canvas-container2");
     this.elements = {
       line: document.querySelector(".layout__line"),
+      scroll__content:document.querySelector(".scroll__content"),
     };
+    this.scrollTimeout = null;
     this.canvasHasRendered = false;
     this.tanFOV = "init";
     this.windowHeight = 0;
@@ -93,6 +96,10 @@ class ScrollStage {
         start: 0.1,
         end: 0.66,
       },
+      uCaca:{
+        start: 0,
+        end: 5,
+      }
     };
 
     this.scene = new THREE.Scene();
@@ -171,7 +178,7 @@ class ScrollStage {
    * OBJECT
    */
   addMesh() {
-    this.geometry = new THREE.IcosahedronGeometry(1, 64);
+    this.geometry = new THREE.IcosahedronGeometry(1, 2);
 
     this.material = new THREE.ShaderMaterial({
       wireframe: true,
@@ -186,6 +193,7 @@ class ScrollStage {
         uStrength: { value: this.settings.uStrength.start },
         uDeepPurple: { value: this.settings.uDeepPurple.start },
         uOpacity: { value: this.settings.uOpacity.start },
+        uCaca: { value: this.settings.uCaca.start },
       },
     });
 
@@ -225,14 +233,35 @@ class ScrollStage {
       x: this.scroll.normalized * Math.PI,
     });
 
+    // console.log("caca",this.settings.uCaca.start +
+    //         (this.scroll.hard / window.innerHeight) *
+    //           (this.settings.uCaca.end - this.settings.uCaca.start))
+
     for (const key in this.settings) {
-      if (this.settings[key].start !== this.settings[key].end) {
+      if (this.settings[key].start !== this.settings[key].end ) {
+        if (key !== "uCaca") {
         GSAP.to(this.mesh.material.uniforms[key], {
           value:
             this.settings[key].start +
             this.scroll.normalized *
               (this.settings[key].end - this.settings[key].start),
         });
+      }else{
+        // Extraire la valeur translateY de la string transform
+        const transform = window.getComputedStyle(this.reactroot1).top;
+        const topValue = parseFloat(transform);
+        // const match = transform.match(/translateY\(([^)]+)\)/);
+        // const translateYValue = match ? parseFloat(match[1]) : 0;
+        
+        GSAP.to(this.mesh.material.uniforms[key], {
+          value:  4-topValue/window.innerHeight
+        });
+        
+        // console.log("transform", transform);
+        console.log("topValue", 4-topValue/window.innerHeight);  
+        // console.log("translateY", translateYValue);
+        // console.log("uCaca value", Math.abs(translateYValue) / window.innerHeight);
+      }
       }
     }
     // }
@@ -290,6 +319,23 @@ class ScrollStage {
 
       this.scroll.running = true;
     }
+    
+    // Détecter la fin du scroll avec un debounce
+    clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => {
+      this.onStopScroll();
+    }, 150);
+  }
+
+  onStopScroll() {
+    console.log("Le scroll est terminé");
+    // Mettre à jour uCaca une dernière fois avec la valeur finale
+    // const transform = this.elements.scroll__content.style.transform;
+    // const match = transform.match(/translateY\(([^)]+)\)/);
+    // const translateYValue = match ? parseFloat(match[1]) : 0;
+    
+    // this.mesh.material.uniforms.uCaca.value = Math.abs(translateYValue) / window.innerHeight;
+    // console.log("uCaca final value", this.mesh.material.uniforms.uCaca.value);
   }
 
   onResize() {

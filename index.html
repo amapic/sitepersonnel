@@ -97,37 +97,30 @@
 
 		// Configuration pour l'animation du texte du curseur
 		const TEXT_SCROLL_CONFIG = {
-			// Décalage en millisecondes après la fin du chargement (modifiez cette valeur)
-			delayAfterLoad: 1000, // 1 seconde par défaut
-			// Durée de l'animation en millisecondes
-			animationDuration: 3000, // 3 secondes
-			// Nombre de tours complets
-			numberOfLoops: 1
+			scrollSpeed: 8,          // Durée d'un tour complet pour textElement1 en secondes
+			scrollSpeed1b: 10,        // Durée d'un tour complet pour textElement1b en secondes (texte plus court)
+			pauseDuration: 1,        // Pause entre chaque cycle en secondes
+			text1bDelay: 2.5,          // Délai avant l'apparition de textElement1b en secondes
+			text1bFadeDuration: 0.5  // Durée du fade in/out de textElement1b en secondes
 		};
 
-		// Fonction pour animer le texte du curseur
+		// Fonction pour animer le texte du curseur en continu
 		function animateCursorText() {
-			const textElement = document.querySelector('#textcursor1 textPath');
-			if (!textElement) return;
+			const textElement1 = document.querySelector('#textcursor1 textPath');
+			const textElement2 = document.querySelector('#textcursor2 textPath');
+			if (!textElement1 || !textElement2) return;
 
-			let progress = 0;
-			const startTime = performance.now();
-			const duration = TEXT_SCROLL_CONFIG.animationDuration;
+			let startTime = performance.now();
 
 			function updateAnimation() {
 				const elapsed = performance.now() - startTime;
-				progress = Math.min(elapsed / duration, 1);
+				const progress = (elapsed / (TEXT_SCROLL_CONFIG.scrollSpeed * 1000)) % 1;
 				
-				// Calcul du décalage basé sur le progrès
-				const offset = (progress * 100 * TEXT_SCROLL_CONFIG.numberOfLoops) % 100;
-				textElement.setAttribute('startOffset', `${offset}%`);
+				const offset = progress * 100;
+				textElement1.setAttribute('startOffset', `${offset}%`);
+				textElement2.setAttribute('startOffset', `${offset}%`);
 
-				if (progress < 1) {
-					requestAnimationFrame(updateAnimation);
-				} else {
-					// Remettre à 0% à la fin
-					textElement.setAttribute('startOffset', '0%');
-				}
+				requestAnimationFrame(updateAnimation);
 			}
 
 			requestAnimationFrame(updateAnimation);
@@ -135,9 +128,7 @@
 
 		// Démarrer l'animation après le chargement
 		window.addEventListener('load', function() {
-			setTimeout(() => {
-				animateCursorText();
-			}, TEXT_SCROLL_CONFIG.delayAfterLoad);
+			animateCursorText();
 		});
 	</script>
 
@@ -200,7 +191,7 @@
 	gtag('config', 'G-LTCXHF5790');
 </script>
 
-<body class="loading">
+<body class="loading ">
 
 
 	<div class="custom-cursor">
@@ -211,17 +202,20 @@
 					<circle cx="40" cy="40" r="20" fill="white" />
 				</mask>
 			</defs>
-			<circle class="cursor-circle" cx="50" cy="50" r="30" />
+			<!-- <circle class="cursor-circle" cx="50" cy="50" r="30" /> -->
 			<!-- <circle class="cursor-circle-large" cx="40" cy="40" r="35" /> -->
-			<path id="curvedPath" fill="none" d="M50,20 A30,30 0 1,1 49.999,20" />
-			<path id="curvedPathLarge" fill="none" d="M50,20 A30,30 0 1,1 49.999,20" />
+			<path class="cursor-circle" id="curvedPath" fill="none" d="M80,50 C78,55 72,70 65,76 C58,78 42,78 35,76 C28,70 22,55 20,50 C22,45 28,30 35,24 C42,22 58,22 65,24 C72,30 78,45 80,50 Z" />
+			<path id="curvedPathLarge" fill="none" d="M80,50 C78,55 72,70 65,76 C58,78 42,78 35,76 C28,70 22,55 20,50 C22,45 28,30 35,24 C42,22 58,22 65,24 C72,30 78,45 80,50 Z" />
 			<!-- <path id="curvedPathLarge" fill="none" d="M80,50 A31,31 0 1 0 70,50 A31,31 0 1 0 70,50" /> -->
 			<!-- <circle id="curvedPathLarge" fill="none" cx="40" cy="40" r="25" /> -->
 
-			<text id="textcursor1" class="cursor-text rotating-text" aria-hidden="true">
-				<textPath href="#curvedPath" startOffset="0%">LETS GO • LETS GO • LETS GO •</textPath>
+			<text id="textcursor1" class="cursor-text" aria-hidden="true">
+				<textPath href="#curvedPath" startOffset="0%">LETS GO • LETS GO </textPath>
 			</text>
-			<text id="textcursor2" class="cursor-text2 rotating-text" aria-hidden="true">
+			<!-- <text id="textcursor1b" class="cursor-text hidden" aria-hidden="true">
+				<textPath href="#curvedPath" startOffset="0%">LETS GO • </textPath>
+			</text> -->
+			<text id="textcursor2" class="cursor-text2" aria-hidden="true">
 				<textPath href="#curvedPathLarge" startOffset="0%">BONJOUR !</textPath>
 			</text>
 			<g id="arrowcursor1" class="cursor-arrow" aria-hidden="true">
@@ -239,17 +233,17 @@
 
 	</div>
 
-	<main id="main-content">
+	<main id="main-content ">
 
 
 		<div id="layout__line" class="layout__line z-[1000]"></div>
-		<div id="layout__contact" class="layout__contact fixed top-[15px] z-[1000] border-white w-full flex flex-row items-center justify-evenly border-b pb-[5px]">
+		<div id="layout__contact" class="layout__contact fixed bg-white pt-[16px] z-[999] border-black w-full flex flex-row items-center justify-evenly border-b pb-[8px]">
 			<span class="mr-4 flex items-center gap-2 whitespace-nowrap "><img src="images/mail.png" alt="Email icon" class="inline-block pb-1"> amo@dev2site.net</span>
 			<span class="mr-4 flex items-center gap-2 whitespace-nowrap "><img src="images/phone.png" alt="Phone icon" class="inline-block pb-1"> 0688918019</span>
 
 		</div>
-		<div class="content hidden md:block">
-			<div class="scroll__stage bg-cover bg-center">
+		<div class="content hidden md:block ">
+			<div class="scroll__stage bg-cover bg-center mix-blend-hard-light">
 				<!-- bg-[url('/images/fond2.png')] -->
 				<div class="scroll__content">
 

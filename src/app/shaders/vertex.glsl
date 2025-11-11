@@ -128,6 +128,7 @@ uniform float uDensity;
 uniform float uStrength;
 
 varying float vDistortion;
+varying vec2 vScreenPosition;
 
 void main() {  
   float distortion = pnoise(normal * uDensity, vec3(10.)) * uStrength;
@@ -138,5 +139,9 @@ void main() {
     
   vDistortion = distortion;
 
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
+  vec4 mvPosition = modelViewMatrix * vec4(pos, 1.);
+  gl_Position = projectionMatrix * mvPosition;
+  
+  // Position normalisée de l'écran (-1 à 1, puis convertie en 0 à 1)
+  vScreenPosition = (gl_Position.xy / gl_Position.w) * 0.5 + 0.5;
 }

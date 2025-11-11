@@ -1,14 +1,20 @@
 import GSAP from "gsap";
 import { SplitText } from "gsap/SplitText";
 import {
-
   animateIn1,
   animateIn2,
-  animateIn3
+  animateIn3,
 } from "./animations/projectAnimations";
 GSAP.registerPlugin(SplitText);
 export default class {
   constructor({ element, viewport, scroll }) {
+    // Configuration des paramètres de scroll
+    this.config = {
+      maxScrollHeight: 8,           // Hauteur maximale de scroll (en multiples de viewport.height)
+      totalScrollHeight: 6.1,       // Hauteur totale du scroll pour mobile
+      scrollLimit: 5.1              // Limite de scroll
+    };
+    
     this.element = element;
     this.viewport = viewport;
     this.scroll = scroll;
@@ -34,16 +40,18 @@ export default class {
       movingSquares: {
         square1: document.querySelector("#movingsquareprojet1"),
         square2: document.querySelector("#movingsquareprojet2"),
-        square3: document.querySelector("#movingsquareprojet3")
+        square3: document.querySelector("#movingsquareprojet3"),
       },
-      reactRoot:window.innerWidth <= 768?document.querySelector("#react-root2"):document.querySelector("#react-root1")
+      reactRoot:
+        window.innerWidth <= 768
+          ? document.querySelector("#react-root2")
+          : document.querySelector("#react-root1"),
     };
 
     // const sectionDroite1 = document.getElementById("sectiondroite1");
     // const circle = sectionDroite1.querySelector(".arrow-circle");
     // const fillCircle = sectionDroite1.querySelector(".fill-circle");
     // const arrow = sectionDroite1.querySelector(".arrow-path");
-
 
     // const image = document.querySelector(".grid-image");
 
@@ -79,8 +87,8 @@ export default class {
       viewportMultipliers: {
         height2x: this.viewport.height * 2,
         height3x: this.viewport.height * 3,
-        height4x: this.viewport.height * 4
-      }
+        height4x: this.viewport.height * 4,
+      },
     };
 
     // Définition des plages de scroll et leurs actions associées
@@ -89,16 +97,26 @@ export default class {
         min: 0,
         max: this.viewport.height,
         action: () => {
+          // console.log("1");
           const progress = (this.scroll.soft - 0) / (1 * this.viewport.height);
-          return `translateY(${-this.scroll.soft}px)`;
+          return `translateY(${-this.scroll.soft}px) translateX(0px)`;
         },
       },
       {
         min: this.viewport.height,
         max: 1.5 * this.viewport.height,
         action: () => {
-          const progress = (this.scroll.soft - this.viewport.height) / (0.5 * this.viewport.height);
-          return `translateX(${-progress * this.constants.halfWidth}px) translateY(${-this.viewport.height}px)`;
+          const div = this.cachedElements.movingSquares.square1;
+          if (div) {
+            div.style.left = `0px`;
+          }
+          const progress =
+            (this.scroll.soft - this.viewport.height) /
+            (0.5 * this.viewport.height);
+            // if (progress < 0.1) progress = 0;
+          return `translateX(${
+            -progress * this.constants.halfWidth
+          }px) translateY(${-this.viewport.height}px)`;
         },
       },
       {
@@ -110,7 +128,6 @@ export default class {
             (scrollValue - 1.5 * this.viewport.height) /
             (0.5 * this.viewport.height);
           const decalMax = this.constants.decalMax;
-          // console.log(decalMax)
           const backgroundX = progress * decalMax;
 
           if (div) {
@@ -121,6 +138,7 @@ export default class {
           // const translateX = 0;
           const translateY = -this.viewport.height;
           // console.log("2",div.style.left)
+          // console.log("3",translateX,backgroundX)
           return `translateX(${translateX}px) translateY(${translateY}px)`;
         },
       },
@@ -128,7 +146,10 @@ export default class {
         min: 2 * this.viewport.height,
         max: 3 * this.viewport.height,
         action: () => {
-          this.updateMovingSquares([this.cachedElements.movingSquares.square1, this.cachedElements.movingSquares.square2]);
+          this.updateMovingSquares([
+            this.cachedElements.movingSquares.square1,
+            this.cachedElements.movingSquares.square2,
+          ]);
           return this.getTransform(
             -this.constants.halfWidth,
             -this.viewport.height - this.scroll.soft + 2 * this.viewport.height
@@ -142,18 +163,19 @@ export default class {
           this.updateMovingSquares([
             this.cachedElements.movingSquares.square1,
             this.cachedElements.movingSquares.square2,
-            this.cachedElements.movingSquares.square3
+            this.cachedElements.movingSquares.square3,
           ]);
-          
+
           const translateX = -this.constants.halfWidth;
           // const translateX = 0;
-          const translateY = -this.viewport.height - this.scroll.soft + 2 * this.viewport.height;
+          const translateY =
+            -this.viewport.height - this.scroll.soft + 2 * this.viewport.height;
           return `translateX(${translateX}px) translateY(${translateY}px)`;
         },
       },
       {
         min: 4 * this.viewport.height,
-        max:Infinity,
+        max: Infinity,
         // max: 5.1 * this.viewport.height,
         action: () => {
           const decalMax = this.constants.decalMax;
@@ -176,39 +198,42 @@ export default class {
             // const position = window.getComputedStyle(div).position;
             // console.log(4 * this.viewport.height,-this.scroll.soft)
             // if (position !== "absolute") {
-              // div.style.position = "fixed";
-              div.style.top = `${8 * this.viewport.height - this.scroll.soft}px`;
-              div.style.left = `${this.viewport.width/2}px`;
-              div.style.width = `${this.viewport.width}px`;
-              div.style.height = `${this.viewport.height}px`;
+            // div.style.position = "fixed";
+            //hauteur max
+            div.style.top = `${this.config.maxScrollHeight * this.viewport.height - this.scroll.soft}px`;
+            div.style.left = `${this.viewport.width / 2}px`;
+            div.style.width = `${this.viewport.width}px`;
+            div.style.height = `${this.viewport.height}px`;
             // }
           }
           // console.log("5",-this.viewport.height,this.viewport.height-this.scroll.soft)
           // absolute top-0 left-0 w-full h-full
           return `translateX(${-this.constants.halfWidth}px) translateY(${
             // -this.viewport.height - this.scroll.soft + 2 * this.viewport.height
-            -3 * this.viewport.height 
+            -3 * this.viewport.height
           }px)`;
         },
       },
     ];
 
     // Optimisation des calculs de scroll
-    this.scrollRanges = this.scrollRanges.map(range => ({
+    this.scrollRanges = this.scrollRanges.map((range) => ({
       ...range,
       heightMin: range.min * this.viewport.height,
-      heightMax: range.max * this.viewport.height
+      heightMax: range.max * this.viewport.height,
     }));
   }
 
   setSizes() {
-	
-	  this.scroll.height =this.isMobile?6.1* this.viewport.height:
-	  this.cachedElements.scrollContent.getBoundingClientRect().height +
-      4 * this.viewport.height +
-      0.1 * this.viewport.height;
-    this.scroll.limit =this.isMobile?5.1* this.viewport.height:5.1 * this.viewport.height;
- 
+    this.scroll.height = this.isMobile
+      ? this.config.totalScrollHeight * this.viewport.height
+      : this.cachedElements.scrollContent.getBoundingClientRect().height +
+        4 * this.viewport.height +
+        0.1 * this.viewport.height;
+    this.scroll.limit = this.isMobile
+      ? this.config.scrollLimit * this.viewport.height
+      : this.config.scrollLimit * this.viewport.height;
+
     document.body.style.height = `${this.scroll.height}px`;
   }
 
@@ -219,10 +244,16 @@ export default class {
 
   update() {
     const now = Date.now();
-    if (!this.ticking && (now - this.lastScrollTime) >= this.scrollThreshold) {
+    if (!this.ticking && now - this.lastScrollTime >= this.scrollThreshold) {
       requestAnimationFrame(() => {
+        // console.log("scroll", this.cachedElements.scrollContent.style.transform);
+        // console.log("left", window.getComputedStyle(this.cachedElements.scrollContent).left);
         this.scroll.hard = window.scrollY;
-        this.scroll.hard = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.hard);
+        this.scroll.hard = GSAP.utils.clamp(
+          0,
+          this.scroll.limit,
+          this.scroll.hard
+        );
         this.scroll.soft = GSAP.utils.interpolate(
           this.scroll.soft,
           this.scroll.hard,
@@ -235,15 +266,19 @@ export default class {
 
         // Trouve la plage correspondante
         const currentRange = this.scrollRanges.find(
-          (range) => this.scroll.soft > range.min && this.scroll.soft <= range.max
+          (range) =>
+            this.scroll.soft > range.min && this.scroll.soft <= range.max
         );
 
         // Applique la transformation correspondante
         if (currentRange && !this.isMobile) {
           const action = currentRange.action.bind(this);
-          this.cachedElements.scrollContent.style.transform = action(this.scroll.soft);
-        }else{
-          this.cachedElements.scrollContent.style.transform = `translateY(${-this.scroll.soft}px)`
+          this.cachedElements.scrollContent.style.transform = action(
+            this.scroll.soft
+          );
+        } else {
+          this.cachedElements.scrollContent.style.transform = `translateY(${-this
+            .scroll.soft}px)`;
         }
 
         //ajout perso
@@ -266,19 +301,27 @@ export default class {
           });
         }
 
-        if (this.scroll.soft > 1.2 * this.viewport.height && !this.animationPlayed) {
+        if (
+          this.scroll.soft > 1.2 * this.viewport.height &&
+          !this.animationPlayed
+        ) {
           this.animationPlayed = true;
           animateIn1();
-		  
         }
 
-        if (this.scroll.soft > 2.2 * this.viewport.height && !this.animationPlayed2) {
+        if (
+          this.scroll.soft > 2.2 * this.viewport.height &&
+          !this.animationPlayed2
+        ) {
           this.animationPlayed2 = true;
           // playProjectAnimation2();
           animateIn2();
         }
 
-        if (this.scroll.soft > 3.2 * this.viewport.height && !this.animationPlayed3) {
+        if (
+          this.scroll.soft > 3.2 * this.viewport.height &&
+          !this.animationPlayed3
+        ) {
           this.animationPlayed3 = true;
           // playProjectAnimation2();
           animateIn3();
@@ -299,7 +342,7 @@ export default class {
 
     this.constants = {
       decalMax: this.viewport.width <= 360 ? 10 : this.viewport.width / 5,
-      halfWidth: this.viewport.width / 2
+      halfWidth: this.viewport.width / 2,
     };
 
     this.setSizes();
@@ -308,7 +351,7 @@ export default class {
   // Créer une fonction utilitaire pour les carrés mobiles
   updateMovingSquares(squares) {
     const decalMax = this.constants.decalMax;
-    squares.forEach(square => {
+    squares.forEach((square) => {
       if (square) square.style.left = `${-decalMax}px`;
     });
   }
