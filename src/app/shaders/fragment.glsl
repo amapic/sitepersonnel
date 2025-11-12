@@ -35,7 +35,7 @@ void main() {
   
   // Si la position du point est inférieure au scroll progress, il devient blanc
   if (posY > 1.-uCaca) {
-   finalColor = vec3(1., 0., 0.); // Blanc
+   finalColor = vec3(1., 1., 1.); // Blanc
   }
    //finalColor = vec3(1., 1., 1.); // Blanc
 

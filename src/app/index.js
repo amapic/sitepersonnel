@@ -238,30 +238,13 @@ class ScrollStage {
     //           (this.settings.uCaca.end - this.settings.uCaca.start))
 
     for (const key in this.settings) {
-      if (this.settings[key].start !== this.settings[key].end ) {
-        if (key !== "uCaca") {
+      if (this.settings[key].start !== this.settings[key].end && key !== "uCaca") {
         GSAP.to(this.mesh.material.uniforms[key], {
           value:
             this.settings[key].start +
             this.scroll.normalized *
               (this.settings[key].end - this.settings[key].start),
         });
-      }else{
-        // Extraire la valeur translateY de la string transform
-        const transform = window.getComputedStyle(this.reactroot1).top;
-        const topValue = parseFloat(transform);
-        // const match = transform.match(/translateY\(([^)]+)\)/);
-        // const translateYValue = match ? parseFloat(match[1]) : 0;
-        
-        GSAP.to(this.mesh.material.uniforms[key], {
-          value:  4-topValue/window.innerHeight
-        });
-        
-        // console.log("transform", transform);
-        console.log("topValue", 4-topValue/window.innerHeight);  
-        // console.log("translateY", translateYValue);
-        // console.log("uCaca value", Math.abs(translateYValue) / window.innerHeight);
-      }
       }
     }
     // }
@@ -386,6 +369,19 @@ class ScrollStage {
 
     if (!(this.isMobile && elapsedTime > 2)) {
       this.mesh.rotation.y = elapsedTime * 0.05;
+    }
+
+    // Mise à jour de uCaca basée sur la position absolue de reactroot1
+    if (this.reactroot1) {
+      const rect = this.reactroot1.getBoundingClientRect();
+      const distanceFromTop = rect.top;
+      const normalizedDistance = (window.innerHeight - distanceFromTop) / window.innerHeight;
+      
+      GSAP.to(this.mesh.material.uniforms.uCaca, {
+        value: normalizedDistance,
+        duration: 0.0,
+        esae:"none"
+      });
     }
 
     this.smoothScroll.update();
