@@ -1,0 +1,542 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'DegularDisplay-Regular';
+	src: url('/font/DegularDisplay-Regular.otf') format('opentype');
+	font-weight: 400;
+	font-style: normal;
+	letter-spacing: 0.1ch;
+	font-display: swap;
+  }
+
+/* Masquer les éléments de la première section hero par défaut */
+body.loading .section:first-of-type .section__title-number,
+body.loading .section:first-of-type .section__title-text,
+body.loading .section:first-of-type .section__title-arrow,
+body.loading .section:first-of-type .section__paragraph {
+	opacity: 0 !important;
+	transform: translateY(-100px) !important;
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+:root {
+	font-size: 15px;
+}
+
+body {
+	margin: 0;
+	--color-text: white;
+	--color-bg: black;
+	--color-1: blue;
+	--color-2: purple;
+	--color-link: white;
+	--color-link-hover: white;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	cursor: none;
+}
+body {
+  
+  
+}
+
+/* Chrome, Edge, Safari */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none; /* Masque la barre de défilement */
+}
+
+/* Internet Explorer et Edge */
+body {
+  -ms-overflow-style: none; /* Masque la barre de défilement */
+}
+
+/* Page Loader */
+.js .loading::before,
+.js .loading::after {
+	content: '';
+	position: fixed;
+	z-index: 1000;
+}
+
+.js .loading::before {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-bg);
+}
+
+.js .loading::after {
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin: -30px 0 0 -30px;
+	border-radius: 50%;
+	opacity: 0.4;
+	background: var(--color-1);
+	animation: loaderAnim 0.7s linear infinite alternate forwards;
+
+}
+
+@keyframes loaderAnim {
+	to {
+		opacity: 1;
+		transform: scale3d(0.5,0.5,1);
+	}
+}
+#consent-banner, #accept-cookies, #reject-cookies {
+	cursor: pointer;
+}
+/* a {
+	text-decoration: none;
+	color: var(--color-link);
+	outline: none;
+	border-bottom: 1px dashed var(--color-2);
+	cursor: none;
+} */
+
+a:hover {
+	color: var(--color-link-hover);
+	outline: none;
+	border-bottom: 1px solid white;
+}
+
+/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+a:focus {
+	/* Provide a fallback style for browsers
+	 that don't support :focus-visible */
+	outline: none;
+	background: lightgrey;
+}
+
+a:focus:not(:focus-visible) {
+	/* Remove the focus indicator on mouse-focus for browsers
+	 that do support :focus-visible */
+	background: transparent;
+}
+
+a:focus-visible {
+	/* Draw a very noticeable focus style for
+	 keyboard-focus on browsers that do support
+	 :focus-visible */
+	outline: 2px solid red;
+	background: transparent;
+}
+
+/* Masquer le curseur sur tous les éléments interactifs */
+button, input, textarea, select {
+	cursor: none;
+}
+
+/* Masquer le curseur sur les éléments avec la classe cursor-hover-area */
+.cursor-hover-area,
+.cursor-hover-area * {
+	cursor: none;
+}
+
+.frame {
+	padding: 3rem 5vw;
+	text-align: center;
+	position: relative;
+	z-index: 1000;
+}
+
+.frame__title {
+	font-size: 1rem;
+	margin: 0 0 1rem;
+	font-weight: 500;
+}
+
+.frame__links {
+	display: inline-block;
+	position: relative;
+}
+
+.frame__links::before {
+	content: '';
+	position: absolute;
+	top: -2rem;
+	right: -2rem;
+	bottom: -2rem;
+	left: -2rem;
+}
+
+
+
+.frame__links a:not(:last-child),
+.frame__demos a:not(:last-child) {
+	margin-right: 1rem;
+}
+
+.frame__demos {
+	margin: 1rem 0;
+}
+
+.frame__demo--current,
+.frame__demo--current:hover {
+	color: var(--color-text);
+}
+
+.content {
+	width: 100%;
+	height: calc(100vh - 13rem);
+}
+@media (max-width: 760px) {
+	.frame {
+		position: absolute;
+		top: 0;
+		right: 0;
+		text-align: left;
+		z-index: 100;
+		padding: 1.75rem;
+		/* background-color: white; */
+	}
+	.frame__title-wrap {
+		display: none;
+	}
+	.frame__title {
+		margin: 0;
+	}
+	.frame__tagline {
+		display: none;
+	}
+	.frame__demos {
+		display: none;
+	}
+	.frame__links {
+		padding: 0;
+		pointer-events: auto;
+	}
+	.frame a {
+		pointer-events: auto;
+	}
+	.content {
+		height: 100vh;
+	}
+}
+
+@media screen and (min-width: 760px) {
+	.frame {
+		position: absolute;
+		top: 0;
+		right: 0;
+		text-align: left;
+		z-index: 100;
+		padding: 1.75rem;
+		/* background-color: white; */
+	}
+	.frame__title-wrap {
+		display: none;
+	}
+	.frame__title {
+		margin: 0;
+	}
+	.frame__tagline {
+		display: none;
+	}
+	.frame__demos {
+		display: none;
+	}
+	.frame__links {
+		padding: 0;
+		pointer-events: auto;
+	}
+	.frame a {
+		pointer-events: auto;
+	}
+	.content {
+		height: 100vh;
+	}
+}
+
+.dom-element {
+    width: 100%;
+    height: 100vh;
+    padding-top: 10vh;
+
+    /* font-size: clamp(100px, 17vw, 200px); */
+    /* background-color: #000; */
+    display: flex;
+    color: white;
+    /* align-items: top; */
+    /* justify-content: center; */
+    padding-left: 3vw;
+    line-height: 0.8;
+    font-weight: 700;
+  }
+
+  @media (max-width: 760px) {
+    .dom-element {
+		/* padding-top */
+      font-size: 64px;
+    }
+  }
+
+  @media (min-width: 760px) and (max-height: 512px) {
+    .dom-element {
+		font-size: 100px;
+      /* font-size: clamp(100px, 17vw, 200px); */
+    }
+  }
+
+  @media (min-width: 760px) and (min-height: 512px) {
+    .dom-element {
+		font-size: 120px;
+      /* font-size: clamp(100px, 17vw, 200px); */
+    }
+  }
+
+  /* .content {
+	overflow: hidden;
+  }
+  
+  .scroll__stage {
+	overflow: hidden;
+  }
+
+  .section {
+	overflow: hidden;
+  } */
+
+  html, body {
+	/* overflow-x: hidden; */
+	position: relative;
+	width: 100%;
+  }
+
+  #sectiondroite1, #sectiondroite2, #sectiondroite3 {
+	/* overflow: hidden; */
+  }
+  
+
+  /* .bg-blue-perso{
+	background-color: #0000ff;
+
+  } */
+
+  /* .bg-purple-perso{
+	background-color: #800080;
+  } */
+/* .section__paragraph2{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	top: 25vh;
+	width: 50vw;
+	height: 75vh;
+	position: absolute;
+	bottom: 50vh;
+	left: 100vw;
+	/* background-color: red; */
+
+
+	.custom-left {
+		left: calc(-1 * (100vw/5));
+		margin-left: calc(2 * (100vw/10));
+
+		@media (max-width: 360px) {
+			left: 10px;
+		}
+	}
+
+/* Styles du curseur personnalisé */
+.custom-cursor {
+	width: 80px;
+	height: 80px;
+	position: fixed;
+	pointer-events: none;
+	z-index: 9999;
+	transition: transform 0.3s ease;
+}
+
+.cursor-hover-area {
+	cursor: none;
+}
+
+.cursor-hover-area * {
+	cursor: none;
+}
+
+.cursor-circle {
+	fill: rgba(0, 123, 255, 0.2);
+	stroke: #007bff;
+	stroke-width: 1;
+	transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.cursor-text {
+	fill: #007bff;
+	font-size: 8px;
+	font-family: Arial, sans-serif;
+	transition: fill 0.3s ease;
+}
+
+/* Styles pour le curseur en blanc */
+.custom-cursor.white-mode .cursor-circle {
+	fill: rgba(255, 255, 255, 0.2);
+	stroke: #ffffff;
+}
+
+.custom-cursor.white-mode .cursor-text {
+	fill: #ffffff;
+}
+
+.custom-cursor.white-mode .cursor-arrow {
+	fill: #ffffff;
+}
+
+.custom-cursor.white-mode .cursor-go-text {
+	fill: #ffffff;
+}
+
+.rotating-text {
+	animation: rotate 8s linear infinite;
+	transform-origin: center;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.cursor-arrow {
+	fill: #007bff;
+	opacity: 0;
+	transition: opacity 0.0s ease, transform 0.3s ease;
+	transform-origin: center;
+}
+
+.cursor-arrow.pointing {
+	transform: rotate(var(--arrow-rotation));
+}
+
+.cursor-go-text {
+	fill: #007bff;
+	font-size: 16px;
+	font-family: Arial, sans-serif;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	text-anchor: middle;
+	dominant-baseline: middle;
+}
+
+.cursor-go-text.active {
+	opacity: 1;
+	animation: scrollText 2s linear infinite;
+}
+
+.cursor-arrow.active {
+	opacity: 1;
+}
+
+@keyframes scrollText {
+	0% {
+		transform: translateX(-20px);
+		opacity: 0;
+	}
+	15% {
+		opacity: 1;
+	}
+	85% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(20px);
+		opacity: 0;
+	}
+}
+
+/* Styles for the contact dropdown container */
+.frame__links{
+	cursor: pointer;
+}
+
+.contact-container {
+	
+	display: grid;
+	grid-template-rows: 0fr; /* Start collapsed */
+	transition: grid-template-rows 0.4s ease-in-out;
+	position: absolute;
+	top: 100%; /* Position below the "Contact" text */
+	right: 0;
+	z-index: 10;
+	background: var(--color-bg);
+	/* padding: 0 1rem; */
+	text-align: right;
+	border-radius: 4px;
+	width:200px;
+}
+  
+/* On hover of the nav link, expand the dropdown */
+.frame__links:hover .contact-container {
+	grid-template-rows: 1fr;
+	/* padding: 1rem; */
+}
+  
+/* Désactiver le hover sur mobile pour éviter les conflits */
+@media (max-width: 768px) {
+	.frame__links:hover .contact-container {
+		grid-template-rows: 0fr; /* Désactiver le hover sur mobile */
+	}
+}
+  
+/* Styling for the list inside */
+.contact-container > ul {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	list-style: none;
+}
+
+.contact-container > ul > li {
+    white-space: nowrap;
+	width: 100%;
+}
+
+/* Déploiement au clic - fonctionne sur tous les écrans */
+.frame__links.active .contact-container {
+	grid-template-rows: 1fr;
+}
+
+/* Ajout pour mobile - déploiement au clic */
+@media (max-width: 768px) {
+	.frame__links .contact-container {
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 0.3s ease;
+		/* padding: 0; */
+	}
+	
+	/* Augmenter l'espacement entre les lignes du menu */
+	.frame__links .contact-container ul {
+		gap: 1.5rem; /* Augmentation de l'espacement */
+		padding: 0rem 0; /* Ajout de padding vertical */
+	}
+	
+	.frame__links .contact-container li {
+		padding: 0.25rem 0; /* Ajout de padding sur chaque élément */
+		margin: 0.25rem 0; /* Ajout de margin pour plus d'espace */
+	}
+}
+

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:serif="http://www.serif.com/" width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <style>
+      .square { fill: #0101ec; stroke: #0101ec; }
+      .frame { fill: #FFFFFF; stroke-width: 2px; stroke: #CCC; }
+
+      @media (prefers-color-scheme: dark) {
+        .square { fill: #0101ec; }
+        .frame { fill: none; stroke: #DDD; }
+      }
+    </style>
+    <rect class="frame" x="0" y="0" width="32" height="32"/>
+    <rect class="square" x="5" y="5" width="22" height="22"/>
+</svg>

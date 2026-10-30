@@ -1,0 +1,92 @@
+import GSAP from 'gsap'
+
+
+
+export default class {
+  constructor(element, camera) {
+    this.element = element
+
+    this.elements = {
+      number: element.querySelector('.section__title-number'),
+      title: element.querySelector('.section__title-text'),
+      arrows: element.querySelectorAll('.section__title-arrow span'),
+      paragraph: element.querySelector('.section__paragraph'),
+      button: element.querySelector('.section__button'),
+    }
+
+    this.camera = camera
+
+    this.animateIn()
+  }
+
+  animateIn() {
+    const animateIn = GSAP.timeline({ 
+      defaults: {
+        ease: 'power2.out'
+      }
+    })
+
+    const cursor = document.querySelector(".custom-cursor");
+    const canvas = document.querySelector(".webgl");
+    
+    if (this.camera && this.camera.position) {
+      animateIn.from(this.camera.position, {
+        z: 4,
+        duration: 2.0,
+        ease: 'power3.out'
+      })
+    }
+
+    animateIn
+      
+      .from(this.elements.number, {
+        y: -50,
+        autoAlpha: 0,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power2.out'
+      }, '0')
+      
+      .from(this.elements.title, {
+        y: -50,
+        autoAlpha: 0,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power2.out'
+      }, '0.5')
+      
+      .from(this.elements.paragraph, {
+        y: -30,
+        autoAlpha: 0,
+        opacity: 0,
+        duration: 1.0,
+        ease: 'power2.out'
+      }, '0.7')
+      
+      .from(this.elements.arrows, {
+        y: -20,
+        autoAlpha: 0,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power2.out'
+      }, '0.9')
+
+    if (canvas) {
+      animateIn.to(canvas, {
+        opacity: 1,
+        duration: 1,
+        ease: 'power2.out'
+      }, '-=3.0')
+    }
+
+    if (cursor) {
+      animateIn.to(cursor, {
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out'
+      }, '-=0.5')
+    }
+  }
+}
+
